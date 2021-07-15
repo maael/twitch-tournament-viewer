@@ -5,7 +5,6 @@ import useFathom from '../components/hooks/useFathom'
 import TwitchContext from '../components/context/Twitch'
 import ErrorBoundary from '../components/primitives/ErrorBoundary'
 import { VERSION } from '../util/constants'
-import 'react-tippy/dist/tippy.css'
 
 try {
   Sentry.init({

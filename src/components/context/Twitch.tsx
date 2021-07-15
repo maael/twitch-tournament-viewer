@@ -32,8 +32,9 @@ const TwitchContextWrapper: React.FC = ({ children }) => {
     const twitch = (window as any).Twitch.ext
     if (!twitch) return
     setTwitch((window as any).Twitch.ext)
+    console.info('loading', twitch.configuration)
     setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{}') })
-    twitch.configuration.onChanged((e) => {
+    twitch.configuration.onChanged((_e) => {
       setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{}') })
     })
     twitch.onAuthorized((e: TwitchAuth) => {
