@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
 import { TwitchContext } from '../components/context/Twitch'
+import DoubleEliminationBracket from '../components/primitives/DoubleEliminationBracket'
 
 const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
   headers: {
@@ -103,7 +104,7 @@ export default function Index() {
     })()
   }, [phaseGroupId])
   return (
-    <div>
+    <div style={{ maxHeight: '100vh', overflowY: 'auto' }}>
       <h2>{pool?.phaseGroup?.phase?.event?.tournament?.name}</h2>
       <h3>{pool?.phaseGroup?.phase?.event?.name}</h3>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -116,6 +117,7 @@ export default function Index() {
           ))}
         </select>
       </div>
+      <DoubleEliminationBracket />
       {pool?.phaseGroup?.sets?.nodes?.map((n) => {
         return (
           <div key={n.identifier}>
