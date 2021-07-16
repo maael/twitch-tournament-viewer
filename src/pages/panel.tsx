@@ -2,6 +2,7 @@ import * as React from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
 import { TwitchContext } from '../components/context/Twitch'
 import DoubleEliminationBracket from '../components/primitives/DoubleEliminationBracket'
+import { PhaseData, PhaseGroupData } from '../types'
 
 const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
   headers: {
@@ -11,9 +12,9 @@ const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
 
 export default function Index() {
   const { config } = React.useContext(TwitchContext)
-  const [phaseGroupOptions, setPhaseGroupOptions] = React.useState<{ id: string; displayIdentifier: string }[]>([])
+  const [phaseGroupOptions, setPhaseGroupOptions] = React.useState<{ id: number; displayIdentifier: string }[]>([])
   const [phaseGroupId, setPhaseGroupId] = React.useState<string | undefined>(undefined)
-  const [pool, setPool] = React.useState<any>(undefined)
+  const [pool, setPool] = React.useState<PhaseGroupData | undefined>(undefined)
   React.useEffect(() => {
     ;(async () => {
       if (!config.broadcaster.phase) return
@@ -31,11 +32,14 @@ export default function Index() {
           }
         }
       `
-      const result = await client.request(query, { phaseId: config.broadcaster.phase })
-      const options = result.phase.phaseGroups.nodes
+      const result = await client.request<PhaseData>(query, { phaseId: config.broadcaster.phase })
+      const options = (result.phase.phaseGroups.nodes || []).map((n) => ({
+        id: n.id,
+        displayIdentifier: n.displayIdentifier,
+      }))
       setPhaseGroupOptions(options)
       if (options.length === 1) {
-        setPhaseGroupId(options[0].id)
+        setPhaseGroupId(`${options[0].id}`)
       }
     })()
   }, [config.broadcaster.phase])
@@ -99,7 +103,7 @@ export default function Index() {
           }
         }
       `
-      const result = await client.request(query, { phaseGroupId: phaseGroupId })
+      const result = await client.request<PhaseGroupData>(query, { phaseGroupId: phaseGroupId })
       setPool(result)
     })()
   }, [phaseGroupId])
@@ -122,7 +126,7 @@ export default function Index() {
         return (
           <div key={n.identifier}>
             ({n.identifier}) Round: {n.round} -{' '}
-            {n.slots
+            {(n.slots || [])
               .map((s) => s?.entrant?.name)
               .filter(Boolean)
               .join(' vs ')}
