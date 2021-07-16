@@ -1,24 +1,17 @@
 import * as React from 'react'
-import DoubleEliminationBracket from '../components/primitives/DoubleEliminationBracket'
 import usePhaseData from '../components/hooks/usePhaseData'
+import DoubleEliminationBracket from '../components/primitives/DoubleEliminationBracket'
 
-export default function Index() {
-  const [phaseGroupId, setPhaseGroupId] = React.useState<number | undefined>(undefined)
+export default function VideoComponent() {
+  const [phaseGroupId, setPhaseGroupId] = React.useState<number | undefined>()
   const { phaseGroupOptions, pool } = usePhaseData(phaseGroupId)
   React.useEffect(() => {
     if (phaseGroupOptions.length === 1) {
       setPhaseGroupId(phaseGroupOptions[0].id)
     }
   }, [phaseGroupOptions])
-  const mappedPool = pool
-  console.info(
-    'p',
-    mappedPool!.phaseGroup.sets.nodes?.reduce((acc, v) => {
-      return { ...acc, [v.round]: (acc[v.round] || []).concat(v) }
-    }, {})
-  )
   return (
-    <div style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+    <div>
       <h2>{pool?.phaseGroup?.phase?.event?.tournament?.name}</h2>
       <h3>{pool?.phaseGroup?.phase?.event?.name}</h3>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -31,18 +24,7 @@ export default function Index() {
           ))}
         </select>
       </div>
-      <DoubleEliminationBracket />
-      {pool?.phaseGroup?.sets?.nodes?.map((n) => {
-        return (
-          <div key={n.identifier}>
-            ({n.identifier}) Round: {n.round} -{' '}
-            {(n.slots || [])
-              .map((s) => s?.entrant?.name)
-              .filter(Boolean)
-              .join(' vs ')}
-          </div>
-        )
-      })}
+      <DoubleEliminationBracket data={pool} />
     </div>
   )
 }

@@ -57,8 +57,8 @@ function App({ Component, pageProps }) {
         }
 
         body {
-          background-color: var(--color-background);
-          color: var(--color-text);
+          background-color: rgba(38, 38, 44, 0.5);
+          color: #ffffff;
           font-family: 'Open Sans', Arial, Helvetica, sans-serif;
           overflow: hidden;
         }

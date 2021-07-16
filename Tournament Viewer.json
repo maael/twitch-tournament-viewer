@@ -1,0 +1,133 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "",
+  "backendFolderName": "",
+  "certificateExceptions": [],
+  "extensionViews": [
+    {
+      "channelId": "69496551",
+      "configurationAnchor": "component",
+      "displayChannelName": "odialo",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "1",
+      "isPopout": false,
+      "label": "Component Config",
+      "linked": true,
+      "linkedUserId": "265737932",
+      "orientation": "Portrait",
+      "type": "config",
+      "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "69496551",
+      "configurationAnchor": "panel",
+      "displayChannelName": "odialo",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1600,
+        "height": 900
+      },
+      "id": "2",
+      "isPopout": false,
+      "label": "Component",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "component",
+      "viewerType": "Logged-In Viewer"
+    }
+  ],
+  "manifest": {
+    "anchor": "panel",
+    "assetUrls": [],
+    "authorName": "Matt Elphick",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "http://localhost:3000/config.html",
+    "configurationLocation": "hosted",
+    "description": "Show tournament information from smash.gg without leaving the twitch stream.",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "jv9fzturqt8rb3y5a84w19n4has36t",
+    "installationCount": -42,
+    "liveConfigUrl": "http://localhost:3000/config.html",
+    "name": "Tournament Viewer",
+    "panelHeight": 300,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "Show tournament information from smash.gg without leaving the twitch stream.",
+    "supportEmail": "odialo.help@gmail.com",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "http://localhost:3000/panel.html",
+    "viewerUrls": {
+      "mobile": "http://localhost:3000/mobile.html",
+      "panel": "http://localhost:3000/panel.html",
+      "videoOverlay": "http://localhost:3000/video_overlay.html",
+      "component": "http://localhost:3000/video_component.html"
+    },
+    "views": {
+      "mobile": {
+        "viewerUrl": "http://localhost:3000/mobile.html"
+      },
+      "panel": {
+        "viewerUrl": "http://localhost:3000/panel.html",
+        "height": 300,
+        "canLinkExternalContent": false
+      },
+      "videoOverlay": {
+        "viewerUrl": "http://localhost:3000/video_overlay.html",
+        "canLinkExternalContent": false
+      },
+      "component": {
+        "viewerUrl": "http://localhost:3000/video_component.html",
+        "aspectWidth": 0,
+        "aspectHeight": 0,
+        "aspectRatioX": 300,
+        "aspectRatioY": 200,
+        "scalePixels": 1024,
+        "targetHeight": 8000,
+        "size": 0,
+        "zoom": false,
+        "zoomPixels": 0,
+        "canLinkExternalContent": false,
+        "autoScale": true
+      },
+      "config": {
+        "viewerUrl": "http://localhost:3000/config.html",
+        "canLinkExternalContent": false
+      },
+      "liveConfig": {
+        "viewerUrl": "http://localhost:3000/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "yarn dev",
+  "frontendFolderName": "",
+  "name": "Tournament Viewer",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

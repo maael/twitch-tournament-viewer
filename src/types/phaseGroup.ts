@@ -28,6 +28,7 @@ export interface Sets {
   nodes?: NodesEntity[] | null
 }
 export interface NodesEntity {
+  completedAt: number
   identifier: string
   winnerId?: null
   round: number

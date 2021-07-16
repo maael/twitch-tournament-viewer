@@ -33,14 +33,14 @@ const TwitchContextWrapper: React.FC = ({ children }) => {
     if (!twitch) return
     setTwitch((window as any).Twitch.ext)
     console.info('loading', twitch.configuration)
-    setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{}') })
+    setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{"phase":"966950"}') })
     twitch.configuration.onChanged((_e) => {
-      setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{}') })
+      setConfig({ broadcaster: JSON.parse(twitch.configuration.broadcaster?.content || '{"phase":"966950"}') })
     })
     twitch.onAuthorized((e: TwitchAuth) => {
       setAuth(e)
       if (!twitch.configuration.broadcaster) {
-        twitch.configuration.set('broadcaster', '1.0', '{}')
+        twitch.configuration.set('broadcaster', '1.0', '{"phase":"966950"}')
       }
     })
     twitch.onContext((e: TwitchContext) => {

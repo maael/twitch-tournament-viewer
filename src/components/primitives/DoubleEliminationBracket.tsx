@@ -1,6 +1,7 @@
 import { Bracket, RoundProps } from 'react-brackets'
+import { PhaseGroupData } from '../../types'
 
-const data: RoundProps[] = [
+const initialData: RoundProps[] = [
   {
     title: 'Round One',
     id: 2,
@@ -29,6 +30,28 @@ const data: RoundProps[] = [
   },
 ]
 
-export default function DoubleEliminationBracket() {
-  return <Bracket rounds={data} />
+function mapData(data?: PhaseGroupData) {
+  if (!data) return initialData
+  return Object.values(
+    data?.phaseGroup.sets.nodes?.reduce((acc, s) => {
+      return { ...acc, [s.round]: (acc[s.round] || []).concat(s) }
+    }, {}) || {}
+  ).map((v: any) => ({
+    title: v[0].fullRoundText,
+    id: v[0].round,
+    seeds: v.map((i) => ({
+      id: i.identifier,
+      date: i.completedAt ? new Date(i.completedAt * 1000).toLocaleString() : undefined,
+      teams: i.slots.map((s) => s.entrant),
+    })),
+  }))
+}
+
+export default function DoubleEliminationBracket({ data }: { data?: PhaseGroupData }) {
+  const mappedData = mapData(data)
+  return (
+    <div style={{ justifyContent: 'center' }}>
+      <Bracket rounds={mappedData} mobileBreakpoint={0} />
+    </div>
+  )
 }

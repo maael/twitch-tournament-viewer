@@ -13,6 +13,10 @@ module.exports = {
             source: '/panel.html',
             destination: '/panel',
           },
+          {
+            source: '/video_component.html',
+            destination: '/video_component',
+          },
         ]
   },
 }
