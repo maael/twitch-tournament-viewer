@@ -572,7 +572,7 @@
             }
             return element
           }
-          function createElement3(type, config, children) {
+          function createElement4(type, config, children) {
             var propName
             var props = {}
             var key = null
@@ -1762,7 +1762,7 @@
                 )
               }
             }
-            var element = createElement3.apply(this, arguments)
+            var element = createElement4.apply(this, arguments)
             if (element == null) {
               return element
             }
@@ -9429,7 +9429,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement)
             var domElement
@@ -10461,7 +10461,7 @@
               }
               parentNamespace = hostContextDev.namespace
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace)
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace)
             precacheFiberNode(internalInstanceHandle, domElement)
             updateFiberProps(domElement, props)
             return domElement
@@ -32432,8 +32432,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // node_modules/@sentry/react/esm/errorboundary.js
   var import_hoist_non_react_statics = __toModule(require_hoist_non_react_statics_cjs())
-  var React2 = __toModule(require_react())
-  var reactVersion = parseSemver(React2.version)
+  var React = __toModule(require_react())
+  var reactVersion = parseSemver(React.version)
   var INITIAL_STATE = {
     componentStack: null,
     error: null,
@@ -32530,7 +32530,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         componentStack = _a.componentStack,
         eventId = _a.eventId
       if (error) {
-        if (React2.isValidElement(fallback)) {
+        if (React.isValidElement(fallback)) {
           return fallback
         }
         if (typeof fallback === 'function') {
@@ -32541,7 +32541,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       return this.props.children
     }
     return ErrorBoundary3
-  })(React2.Component)
+  })(React.Component)
 
   // node_modules/@sentry/tracing/esm/spanstatus.js
   var SpanStatus
@@ -34590,6 +34590,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // src/pages/panel.tsx
   var React6 = __toModule(require_react())
+
+  // src/components/primitives/DoubleEliminationBracket.tsx
+  var React3 = __toModule(require_react())
 
   // node_modules/react-brackets/dist/index.modern.js
   var import_react2 = __toModule(require_react())
@@ -36685,12 +36688,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function DoubleEliminationBracket({ data, mobileBreakpoint = 0 }) {
     const mappedData = mapData(data)
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React3.createElement(
       'div',
       {
         style: { justifyContent: 'center' },
       },
-      /* @__PURE__ */ React.createElement(SingleElimination, {
+      /* @__PURE__ */ React3.createElement(SingleElimination, {
         rounds: mappedData,
         mobileBreakpoint,
       })

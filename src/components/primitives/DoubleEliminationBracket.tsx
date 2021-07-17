@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Bracket, RoundProps } from 'react-brackets'
 import { PhaseGroupData } from '../../types'
 

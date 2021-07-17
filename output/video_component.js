@@ -572,7 +572,7 @@
             }
             return element
           }
-          function createElement3(type, config, children) {
+          function createElement4(type, config, children) {
             var propName
             var props = {}
             var key = null
@@ -1762,7 +1762,7 @@
                 )
               }
             }
-            var element = createElement3.apply(this, arguments)
+            var element = createElement4.apply(this, arguments)
             if (element == null) {
               return element
             }
@@ -9429,7 +9429,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement)
             var domElement
@@ -10461,7 +10461,7 @@
               }
               parentNamespace = hostContextDev.namespace
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace)
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace)
             precacheFiberNode(internalInstanceHandle, domElement)
             updateFiberProps(domElement, props)
             return domElement
@@ -32432,8 +32432,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // node_modules/@sentry/react/esm/errorboundary.js
   var import_hoist_non_react_statics = __toModule(require_hoist_non_react_statics_cjs())
-  var React2 = __toModule(require_react())
-  var reactVersion = parseSemver(React2.version)
+  var React = __toModule(require_react())
+  var reactVersion = parseSemver(React.version)
   var INITIAL_STATE = {
     componentStack: null,
     error: null,
@@ -32530,7 +32530,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         componentStack = _a.componentStack,
         eventId = _a.eventId
       if (error) {
-        if (React2.isValidElement(fallback)) {
+        if (React.isValidElement(fallback)) {
           return fallback
         }
         if (typeof fallback === 'function') {
@@ -32541,7 +32541,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       return this.props.children
     }
     return ErrorBoundary3
-  })(React2.Component)
+  })(React.Component)
 
   // node_modules/@sentry/tracing/esm/spanstatus.js
   var SpanStatus
@@ -34592,7 +34592,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var React6 = __toModule(require_react())
 
   // src/components/hooks/usePhaseData.ts
-  var React4 = __toModule(require_react())
+  var React3 = __toModule(require_react())
   var import_graphql_request = __toModule(require_dist())
 
   // src/components/context/Twitch.tsx
@@ -34651,9 +34651,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   })
   function usePhaseData(phaseGroupId) {
     var _a, _b
-    const { config } = React4.useContext(TwitchContext)
-    const [phaseGroupOptions, setPhaseGroupOptions] = React4.useState([])
-    const [pool, setPool] = React4.useState(void 0)
+    const { config } = React3.useContext(TwitchContext)
+    const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
+    const [pool, setPool] = React3.useState(void 0)
     const mappedPool = pool
     console.info(
       'p',
@@ -34663,7 +34663,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             return __spreadProps(__spreadValues({}, acc), { [v2.round]: (acc[v2.round] || []).concat(v2) })
           }, {})
     )
-    React4.useEffect(() => {
+    React3.useEffect(() => {
       ;(async () => {
         var _a2
         if (!config.broadcaster.phase) {
@@ -34694,7 +34694,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         setPhaseGroupOptions(options)
       })()
     }, [config.broadcaster, (_b = config.broadcaster) == null ? void 0 : _b.phase])
-    React4.useEffect(() => {
+    React3.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
@@ -34764,6 +34764,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       pool,
     }
   }
+
+  // src/components/primitives/DoubleEliminationBracket.tsx
+  var React5 = __toModule(require_react())
 
   // node_modules/react-brackets/dist/index.modern.js
   var import_react3 = __toModule(require_react())
@@ -36859,12 +36862,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function DoubleEliminationBracket({ data, mobileBreakpoint = 0 }) {
     const mappedData = mapData(data)
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React5.createElement(
       'div',
       {
         style: { justifyContent: 'center' },
       },
-      /* @__PURE__ */ React.createElement(SingleElimination, {
+      /* @__PURE__ */ React5.createElement(SingleElimination, {
         rounds: mappedData,
         mobileBreakpoint,
       })
