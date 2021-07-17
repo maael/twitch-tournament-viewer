@@ -65,6 +65,7 @@ export default function Index() {
           e.preventDefault()
           const phase = (e.currentTarget.elements as any).phase.value
           twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase }))
+          twitch.rig.log('saved', { phase })
         }}
       >
         {tournamentData?.event?.phases ? (

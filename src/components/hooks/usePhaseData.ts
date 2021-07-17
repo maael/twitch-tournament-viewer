@@ -99,9 +99,16 @@ export default function usePhaseData(phaseGroupId?: number) {
                 displayScore
                 slots {
                   id
+                  prereqId
+                  prereqType
+                  prereqPlacement
                   entrant {
                     id
                     name
+                    participants {
+                      gamerTag
+                      prefix
+                    }
                   }
                 }
               }

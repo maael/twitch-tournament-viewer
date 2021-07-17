@@ -1,3 +1,5 @@
+import { ActivityState } from './common'
+
 export interface PhaseGroupData {
   phaseGroup: PhaseGroup
 }
@@ -30,20 +32,28 @@ export interface Sets {
 export interface NodesEntity {
   completedAt: number
   identifier: string
-  winnerId?: null
+  winnerId?: number | null
   round: number
   fullRoundText: string
   vodUrl?: null
-  state: number
+  state: ActivityState
   games?: null
   displayScore?: null
   slots?: SlotsEntity[] | null
 }
 export interface SlotsEntity {
   id: string
+  prereqId?: string
+  prereqType?: string
+  prereqPlacement?: number
   entrant?: Entrant | null
 }
 export interface Entrant {
   id: number
   name: string
+  participants?: Participant[]
+}
+export interface Participant {
+  gamerTag: string
+  prefix: string
 }

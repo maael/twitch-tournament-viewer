@@ -32547,6 +32547,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
+  var defaultConfig = '{"phase":"940768"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -32557,24 +32558,23 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       const twitch2 = window.Twitch.ext
       if (!twitch2) return
       setTwitch(window.Twitch.ext)
-      console.info('loading', twitch2.configuration)
       setConfig({
         broadcaster: JSON.parse(
-          ((_a = twitch2.configuration.broadcaster) == null ? void 0 : _a.content) || '{"phase":"966950"}'
+          ((_a = twitch2.configuration.broadcaster) == null ? void 0 : _a.content) || defaultConfig
         ),
       })
       twitch2.configuration.onChanged((_e) => {
         var _a2
         setConfig({
           broadcaster: JSON.parse(
-            ((_a2 = twitch2.configuration.broadcaster) == null ? void 0 : _a2.content) || '{"phase":"966950"}'
+            ((_a2 = twitch2.configuration.broadcaster) == null ? void 0 : _a2.content) || defaultConfig
           ),
         })
       })
       twitch2.onAuthorized((e) => {
         setAuth(e)
         if (!twitch2.configuration.broadcaster) {
-          twitch2.configuration.set('broadcaster', '1.0', '{"phase":"966950"}')
+          twitch2.configuration.set('broadcaster', '1.0', defaultConfig)
         }
       })
       twitch2.onContext((e) => {
@@ -32695,6 +32695,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             e.preventDefault()
             const phase = e.currentTarget.elements.phase.value
             twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase }))
+            twitch.rig.log('saved', { phase })
           },
         },
         ((_b = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _b.phases)
