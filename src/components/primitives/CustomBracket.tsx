@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Xarrow from 'react-xarrows'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { PhaseGroupData } from '../../types'

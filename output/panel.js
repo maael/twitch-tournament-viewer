@@ -572,7 +572,7 @@
             }
             return element
           }
-          function createElement3(type, config, children) {
+          function createElement4(type, config, children) {
             var propName
             var props = {}
             var key = null
@@ -1762,7 +1762,7 @@
                 )
               }
             }
-            var element = createElement3.apply(this, arguments)
+            var element = createElement4.apply(this, arguments)
             if (element == null) {
               return element
             }
@@ -9419,7 +9419,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement)
             var domElement
@@ -10451,7 +10451,7 @@
               }
               parentNamespace = hostContextDev.namespace
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace)
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace)
             precacheFiberNode(internalInstanceHandle, domElement)
             updateFiberProps(domElement, props)
             return domElement
@@ -38750,8 +38750,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // node_modules/@sentry/react/esm/errorboundary.js
   var import_hoist_non_react_statics = __toModule(require_hoist_non_react_statics_cjs())
-  var React2 = __toModule(require_react())
-  var reactVersion = parseSemver(React2.version)
+  var React = __toModule(require_react())
+  var reactVersion = parseSemver(React.version)
   var INITIAL_STATE = {
     componentStack: null,
     error: null,
@@ -38848,7 +38848,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         componentStack = _a.componentStack,
         eventId = _a.eventId
       if (error) {
-        if (React2.isValidElement(fallback)) {
+        if (React.isValidElement(fallback)) {
           return fallback
         }
         if (typeof fallback === 'function') {
@@ -38859,7 +38859,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       return this.props.children
     }
     return ErrorBoundary3
-  })(React2.Component)
+  })(React.Component)
 
   // node_modules/@sentry/tracing/esm/spanstatus.js
   var SpanStatus
@@ -40910,7 +40910,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var React5 = __toModule(require_react())
 
   // src/components/hooks/usePhaseData.ts
-  var React4 = __toModule(require_react())
+  var React3 = __toModule(require_react())
   var import_graphql_request = __toModule(require_dist())
 
   // src/components/context/Twitch.tsx
@@ -40969,9 +40969,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   })
   function usePhaseData(phaseGroupId) {
     var _a, _b
-    const { config } = React4.useContext(TwitchContext)
-    const [phaseGroupOptions, setPhaseGroupOptions] = React4.useState([])
-    const [pool, setPool] = React4.useState(void 0)
+    const { config } = React3.useContext(TwitchContext)
+    const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
+    const [pool, setPool] = React3.useState(void 0)
     const mappedPool = pool
     console.info(
       'p',
@@ -40981,7 +40981,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             return __spreadProps(__spreadValues({}, acc), { [v.round]: (acc[v.round] || []).concat(v) })
           }, {})
     )
-    React4.useEffect(() => {
+    React3.useEffect(() => {
       ;(async () => {
         var _a2
         if (!config.broadcaster.phase) {
@@ -41012,7 +41012,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         setPhaseGroupOptions(options)
       })()
     }, [config.broadcaster, (_b = config.broadcaster) == null ? void 0 : _b.phase])
-    React4.useEffect(() => {
+    React3.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
@@ -41091,6 +41091,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
 
   // src/components/primitives/CustomBracket.tsx
+  var React4 = __toModule(require_react())
   var import_react_xarrows = __toModule(require_lib())
 
   // node_modules/react-indiana-drag-scroll/dist/index.es.js
@@ -41418,12 +41419,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         ? void 0
         : _b.filter((n2) => n2.round < 0).reduce(reduceRounds, {})
     return data
-      ? /* @__PURE__ */ React.createElement(
+      ? /* @__PURE__ */ React4.createElement(
           'div',
           {
             style: { position: 'relative', flex: 1 },
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React4.createElement(
             index_es_default,
             {
               style: {
@@ -41436,15 +41437,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                 bottom: 0,
               },
             },
-            /* @__PURE__ */ React.createElement(
+            /* @__PURE__ */ React4.createElement(
               'div',
               {
                 style: { display: 'flex', flexDirection: 'column', position: 'relative', userSelect: 'none' },
               },
-              /* @__PURE__ */ React.createElement(Rounds, {
+              /* @__PURE__ */ React4.createElement(Rounds, {
                 rounds: winnerRounds,
               }),
-              /* @__PURE__ */ React.createElement(Rounds, {
+              /* @__PURE__ */ React4.createElement(Rounds, {
                 rounds: loserRounds,
                 reverse: true,
               })
@@ -41456,26 +41457,26 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function Rounds({ rounds, reverse }) {
     const entries = Object.entries(rounds)
     if (reverse) entries.reverse()
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React4.createElement(
       'div',
       {
         style: { display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' },
       },
       entries.map(([k, roundItems]) =>
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ React4.createElement(
           'div',
           {
             key: k,
             style: { display: 'flex', flexDirection: 'column', gap: 10 },
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React4.createElement(
             'div',
             {
               style: { marginBottom: '0.1em' },
             },
             roundItems[0].fullRoundText
           ),
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React4.createElement(
             'div',
             {
               style: { display: 'flex', flexDirection: 'column', gap: 10, flex: 1, justifyContent: 'space-between' },
@@ -41483,7 +41484,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             roundItems
               .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
               .map((i2) =>
-                /* @__PURE__ */ React.createElement(Round, {
+                /* @__PURE__ */ React4.createElement(Round, {
                   key: i2.identifier,
                   item: i2,
                 })
@@ -41495,22 +41496,22 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function Round({ item }) {
     var _a
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React4.createElement(
       'div',
       {
         id: (item.slots || [])[0].id,
       },
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ React4.createElement(
         'div',
         {
           id: (item.slots || [])[1].id,
         },
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ React4.createElement(
           'div',
           {
             style: { display: 'flex', flexDirection: 'row', alignItems: 'center', zIndex: 9, position: 'relative' },
           },
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React4.createElement(
             'div',
             {
               style: {
@@ -41526,7 +41527,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             },
             item.identifier
           ),
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ React4.createElement(
             'div',
             {
               style: { display: 'flex', flexDirection: 'column', borderRadius: '0.3em', flex: 1 },
@@ -41535,7 +41536,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               ? void 0
               : _a.map((s2, i2) => {
                   var _a2
-                  return /* @__PURE__ */ React.createElement(Slot, {
+                  return /* @__PURE__ */ React4.createElement(Slot, {
                     key: s2.id,
                     slot: s2,
                     winner: item.winnerId || void 0,
@@ -41554,7 +41555,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     const prefix =
       (_b = (((_a = slot.entrant) == null ? void 0 : _a.participants) || [])[0]) == null ? void 0 : _b.prefix
     const isWinner = winner === ((_c = slot.entrant) == null ? void 0 : _c.id)
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React4.createElement(
       'div',
       {
         style: {
@@ -41571,7 +41572,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         },
       },
       prefix
-        ? /* @__PURE__ */ React.createElement(
+        ? /* @__PURE__ */ React4.createElement(
             'span',
             {
               style: { opacity: '0.7' },
@@ -41580,20 +41581,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             ' | '
           )
         : null,
-      /* @__PURE__ */ React.createElement(
+      /* @__PURE__ */ React4.createElement(
         'span',
         {
           style: { flex: 1 },
         },
         (_e = (((_d = slot.entrant) == null ? void 0 : _d.participants) || [])[0]) == null ? void 0 : _e.gamerTag
       ),
-      isWinner ? /* @__PURE__ */ React.createElement('span', null, '\u2713') : null,
-      /* @__PURE__ */ React.createElement(
+      isWinner ? /* @__PURE__ */ React4.createElement('span', null, '\u2713') : null,
+      /* @__PURE__ */ React4.createElement(
         'div',
         {
           style: { zIndex: -1, position: 'relative' },
         },
-        /* @__PURE__ */ React.createElement(import_react_xarrows.default, {
+        /* @__PURE__ */ React4.createElement(import_react_xarrows.default, {
           start: `${slot.prereqId}-${slot.prereqPlacement}`,
           end: slot.id,
           path: 'grid',
