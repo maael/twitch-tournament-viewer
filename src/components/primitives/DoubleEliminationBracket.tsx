@@ -47,11 +47,17 @@ function mapData(data?: PhaseGroupData) {
   }))
 }
 
-export default function DoubleEliminationBracket({ data }: { data?: PhaseGroupData }) {
+export default function DoubleEliminationBracket({
+  data,
+  mobileBreakpoint = 0,
+}: {
+  data?: PhaseGroupData
+  mobileBreakpoint?: number
+}) {
   const mappedData = mapData(data)
   return (
     <div style={{ justifyContent: 'center' }}>
-      <Bracket rounds={mappedData} mobileBreakpoint={0} />
+      <Bracket rounds={mappedData} mobileBreakpoint={mobileBreakpoint} />
     </div>
   )
 }

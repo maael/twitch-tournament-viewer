@@ -10,20 +10,13 @@ export default function Index() {
       setPhaseGroupId(phaseGroupOptions[0].id)
     }
   }, [phaseGroupOptions])
-  const mappedPool = pool
-  console.info(
-    'p',
-    mappedPool!.phaseGroup.sets.nodes?.reduce((acc, v) => {
-      return { ...acc, [v.round]: (acc[v.round] || []).concat(v) }
-    }, {})
-  )
   return (
-    <div style={{ maxHeight: '100vh', overflowY: 'auto' }}>
+    <div style={{ maxHeight: '100vh', overflow: 'auto', maxWidth: '100vw' }}>
       <h2>{pool?.phaseGroup?.phase?.event?.tournament?.name}</h2>
       <h3>{pool?.phaseGroup?.phase?.event?.name}</h3>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
         <h4>{pool?.phaseGroup?.phase?.name}</h4>
-        <select onChange={(e) => setPhaseGroupId(Number(e.target.value))} value={phaseGroupId}>
+        <select onChange={(e) => setPhaseGroupId(Number(e.target.value))} value={phaseGroupId} className="select-css">
           {phaseGroupOptions.map((o) => (
             <option key={o.id} value={o.id}>
               {o.displayIdentifier}
@@ -31,18 +24,7 @@ export default function Index() {
           ))}
         </select>
       </div>
-      <DoubleEliminationBracket />
-      {pool?.phaseGroup?.sets?.nodes?.map((n) => {
-        return (
-          <div key={n.identifier}>
-            ({n.identifier}) Round: {n.round} -{' '}
-            {(n.slots || [])
-              .map((s) => s?.entrant?.name)
-              .filter(Boolean)
-              .join(' vs ')}
-          </div>
-        )
-      })}
+      <DoubleEliminationBracket data={pool} mobileBreakpoint={992} />
     </div>
   )
 }

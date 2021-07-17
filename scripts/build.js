@@ -10,6 +10,7 @@ const options = {
   entryPoints: [
     path.join(__dirname, '..', 'src', 'mounts', 'panel.tsx'),
     path.join(__dirname, '..', 'src', 'mounts', 'config.tsx'),
+    path.join(__dirname, '..', 'src', 'mounts', 'video_component.tsx'),
   ],
   outdir: path.join(__dirname, '..', 'output'),
   bundle: true,

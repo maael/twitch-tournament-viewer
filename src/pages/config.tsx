@@ -19,8 +19,8 @@ export default function Index() {
           e.preventDefault()
           const link = (e.currentTarget.elements as any).eventLink.value.trim()
           const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
-          const tournament = match.groups.t
-          const event = match.groups.e
+          const tournament = match?.groups.t
+          const event = match?.groups.e
           const query = gql`
             query TournamentQuery($slug: String) {
               tournament(slug: $slug) {
@@ -38,21 +38,28 @@ export default function Index() {
               }
             }
           `
+          if (!tournament || !event) {
+            setTournamentData(undefined)
+            return
+          }
           const result = await client.request(query, { slug: tournament })
-          console.info(result)
           const foundEvent = result.tournament.events.find((e) => e.slug === `tournament/${tournament}/event/${event}`)
-          console.info(foundEvent)
           setTournamentData({
             name: result.tournament.name,
             event: foundEvent,
           })
         }}
       >
-        <input type="text" placeholder="Event link..." name="eventLink" />
-        <button type="submit">Fetch Brackets</button>
+        <div>
+          <input type="text" placeholder="Event link..." name="eventLink" />
+          <button type="submit">Fetch Brackets</button>
+        </div>
+        <small>
+          Please enter a link to an event or bracket on <a href="https://smash.gg">https://smash.gg</a>
+        </small>
       </form>
-      <h1>{tournamentData?.name}</h1>
-      <h2>{tournamentData?.event?.name}</h2>
+      <h1>Tournament: {tournamentData?.name || 'Please fetch brackets'}</h1>
+      <h2>Event: {tournamentData?.event?.name || 'Please fetch brackets'}</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -60,14 +67,21 @@ export default function Index() {
           twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase }))
         }}
       >
-        <select name="phase">
-          {(tournamentData?.event?.phases || []).map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Save</button>
+        {tournamentData?.event?.phases ? (
+          <div style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' }}>
+            Choose the phase to show:
+            <select name="phase" className="select-css">
+              {(tournamentData?.event?.phases || []).map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
+        <button disabled={!tournamentData?.event?.phases} type="submit">
+          Save
+        </button>
       </form>
     </div>
   )
