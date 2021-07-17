@@ -41454,6 +41454,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         )
       : null
   }
+  function getJustifyType(entries, i2) {
+    const previous = entries[i2 - 1]
+    if (!previous) return 'space-between'
+    return previous[1].length <= entries[i2][1].length ? 'space-between' : 'space-around'
+  }
   function Rounds({ rounds, reverse }) {
     const entries = Object.entries(rounds)
     if (reverse) entries.reverse()
@@ -41462,7 +41467,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       {
         style: { display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' },
       },
-      entries.map(([k, roundItems]) =>
+      entries.map(([k, roundItems], i2) =>
         /* @__PURE__ */ React4.createElement(
           'div',
           {
@@ -41479,14 +41484,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           /* @__PURE__ */ React4.createElement(
             'div',
             {
-              style: { display: 'flex', flexDirection: 'column', gap: 10, flex: 1, justifyContent: 'space-between' },
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10,
+                flex: 1,
+                justifyContent: getJustifyType(entries, i2),
+              },
             },
             roundItems
               .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
-              .map((i2) =>
+              .map((i3) =>
                 /* @__PURE__ */ React4.createElement(Round, {
-                  key: i2.identifier,
-                  item: i2,
+                  key: i3.identifier,
+                  item: i3,
                 })
               )
           )
@@ -41551,7 +41562,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function Slot({ slot, winner, cornerStyle }) {
     var _a, _b, _c, _d, _e
-    console.info(slot, winner)
     const prefix =
       (_b = (((_a = slot.entrant) == null ? void 0 : _a.participants) || [])[0]) == null ? void 0 : _b.prefix
     const isWinner = winner === ((_c = slot.entrant) == null ? void 0 : _c.id)

@@ -29,15 +29,29 @@ export default function CustomBracket({ data }: { data?: PhaseGroupData }) {
   ) : null
 }
 
+function getJustifyType(entries: [string, NodesEntity[]][], i: number) {
+  const previous = entries[i - 1]
+  if (!previous) return 'space-between'
+  return previous[1].length <= entries[i][1].length ? 'space-between' : 'space-around'
+}
+
 function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] }; reverse?: boolean }) {
   const entries = Object.entries(rounds)
   if (reverse) entries.reverse()
   return (
     <div style={{ display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' }}>
-      {entries.map(([k, roundItems]) => (
+      {entries.map(([k, roundItems], i) => (
         <div key={k} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ marginBottom: '0.1em' }}>{roundItems[0].fullRoundText}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1, justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+              flex: 1,
+              justifyContent: getJustifyType(entries, i),
+            }}
+          >
             {roundItems
               .sort((a, b) => a.identifier.localeCompare(b.identifier) && a.identifier.length - b.identifier.length)
               .map((i) => (
@@ -94,7 +108,6 @@ function Slot({
   winner?: number
   cornerStyle?: 'all' | 'top' | 'bottom'
 }) {
-  console.info(slot, winner)
   const prefix = (slot.entrant?.participants || [])[0]?.prefix
   const isWinner = winner === slot.entrant?.id
   return (
