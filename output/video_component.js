@@ -2717,7 +2717,7 @@
           var HostPortal = 4
           var HostComponent = 5
           var HostText = 6
-          var Fragment2 = 7
+          var Fragment3 = 7
           var Mode = 8
           var ContextConsumer = 9
           var ContextProvider = 10
@@ -13157,7 +13157,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment2) {
+              if (current2 === null || current2.tag !== Fragment3) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key)
                 created.return = returnFiber
                 return created
@@ -13532,7 +13532,7 @@
               while (child !== null) {
                 if (child.key === key) {
                   switch (child.tag) {
-                    case Fragment2: {
+                    case Fragment3: {
                       if (element.type === REACT_FRAGMENT_TYPE) {
                         deleteRemainingChildren(returnFiber, child.sibling)
                         var existing = useFiber(child, element.props.children)
@@ -17487,7 +17487,7 @@
                     : resolveDefaultProps(type, _unresolvedProps2)
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2)
               }
-              case Fragment2:
+              case Fragment3:
                 return updateFragment(current2, workInProgress2, renderLanes2)
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2)
@@ -17686,7 +17686,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment2:
+              case Fragment3:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -21660,7 +21660,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             return fiber
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment2, elements, key, mode)
+            var fiber = createFiber(Fragment3, elements, key, mode)
             fiber.lanes = lanes
             return fiber
           }
@@ -23191,7 +23191,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           var ContextProvider = REACT_PROVIDER_TYPE
           var Element2 = REACT_ELEMENT_TYPE
           var ForwardRef = REACT_FORWARD_REF_TYPE
-          var Fragment2 = REACT_FRAGMENT_TYPE
+          var Fragment3 = REACT_FRAGMENT_TYPE
           var Lazy = REACT_LAZY_TYPE
           var Memo2 = REACT_MEMO_TYPE
           var Portal = REACT_PORTAL_TYPE
@@ -23252,7 +23252,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           exports.ContextProvider = ContextProvider
           exports.Element = Element2
           exports.ForwardRef = ForwardRef
-          exports.Fragment = Fragment2
+          exports.Fragment = Fragment3
           exports.Lazy = Lazy
           exports.Memo = Memo2
           exports.Portal = Portal
@@ -36850,27 +36850,46 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         : _a.reduce((acc, s2) => {
             return __spreadProps(__spreadValues({}, acc), { [s2.round]: (acc[s2.round] || []).concat(s2) })
           }, {})) || {}
-    ).map((v2) => ({
-      title: v2[0].fullRoundText,
-      id: v2[0].round,
-      seeds: v2.map((i2) => ({
-        id: i2.identifier,
-        date: i2.completedAt ? new Date(i2.completedAt * 1e3).toLocaleString() : void 0,
-        teams: i2.slots.map((s2) => s2.entrant),
-      })),
-    }))
+    )
+      .map((v2) => ({
+        title: v2[0].fullRoundText,
+        id: v2[0].round,
+        seeds: v2.map((i2) => ({
+          id: i2.identifier,
+          date: i2.completedAt ? new Date(i2.completedAt * 1e3).toLocaleString() : void 0,
+          teams: i2.slots.map((s2) => s2.entrant),
+        })),
+      }))
+      .sort((a2, b2) => (a2.hasOwnProperty('id') && b2.hasOwnProperty('id') ? Math.abs(a2.id) - Math.abs(b2.id) : 0))
   }
   function DoubleEliminationBracket({ data, mobileBreakpoint = 0 }) {
     const mappedData = mapData(data)
+    const winners = mappedData.filter((d2) => !d2.hasOwnProperty('id') || d2.id > 0)
+    const losers = mappedData.filter((d2) => d2.hasOwnProperty('id') && d2.id < 0)
     return /* @__PURE__ */ React5.createElement(
       'div',
       {
         style: { justifyContent: 'center' },
       },
-      /* @__PURE__ */ React5.createElement(SingleElimination, {
-        rounds: mappedData,
-        mobileBreakpoint,
-      })
+      winners.length
+        ? /* @__PURE__ */ React5.createElement(SingleElimination, {
+            rounds: winners,
+            mobileBreakpoint,
+          })
+        : null,
+      losers.length
+        ? /* @__PURE__ */ React5.createElement(
+            React5.Fragment,
+            null,
+            /* @__PURE__ */ React5.createElement('div', {
+              style: { height: '2em' },
+            }),
+            /* @__PURE__ */ React5.createElement(SingleElimination, {
+              rounds: losers,
+              mobileBreakpoint,
+            })
+          )
+        : null
     )
   }
 
@@ -36886,7 +36905,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     }, [phaseGroupOptions])
     return /* @__PURE__ */ React6.createElement(
       'div',
-      null,
+      {
+        style: { maxHeight: '100vh', overflow: 'auto', maxWidth: '100vw', paddingBottom: '3em' },
+      },
       /* @__PURE__ */ React6.createElement(
         'style',
         null,

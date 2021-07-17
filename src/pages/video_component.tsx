@@ -11,7 +11,7 @@ export default function VideoComponent() {
     }
   }, [phaseGroupOptions])
   return (
-    <div>
+    <div style={{ maxHeight: '100vh', overflow: 'auto', maxWidth: '100vw', paddingBottom: '3em' }}>
       <style>{`:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`}</style>
       <div style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'flex-end' }}>
         <h2>{pool?.phaseGroup?.phase?.event?.tournament?.name}</h2>

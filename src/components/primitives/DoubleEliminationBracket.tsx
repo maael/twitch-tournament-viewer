@@ -31,21 +31,25 @@ const initialData: RoundProps[] = [
   },
 ]
 
-function mapData(data?: PhaseGroupData) {
-  if (!data) return initialData
+function mapData(
+  data?: PhaseGroupData
+): { title: string; id?: number; seeds: { id: number | string; date: string; teams: { name: string }[] } }[] {
+  if (!data) return initialData as any
   return Object.values(
     data?.phaseGroup.sets.nodes?.reduce((acc, s) => {
       return { ...acc, [s.round]: (acc[s.round] || []).concat(s) }
     }, {}) || {}
-  ).map((v: any) => ({
-    title: v[0].fullRoundText,
-    id: v[0].round,
-    seeds: v.map((i) => ({
-      id: i.identifier,
-      date: i.completedAt ? new Date(i.completedAt * 1000).toLocaleString() : undefined,
-      teams: i.slots.map((s) => s.entrant),
-    })),
-  }))
+  )
+    .map((v: any) => ({
+      title: v[0].fullRoundText,
+      id: v[0].round,
+      seeds: v.map((i) => ({
+        id: i.identifier,
+        date: i.completedAt ? new Date(i.completedAt * 1000).toLocaleString() : undefined,
+        teams: i.slots.map((s) => s.entrant),
+      })),
+    }))
+    .sort((a, b) => (a.hasOwnProperty('id') && b.hasOwnProperty('id') ? Math.abs(a.id) - Math.abs(b.id) : 0))
 }
 
 export default function DoubleEliminationBracket({
@@ -56,9 +60,19 @@ export default function DoubleEliminationBracket({
   mobileBreakpoint?: number
 }) {
   const mappedData = mapData(data)
+  const winners = mappedData.filter((d) => !d.hasOwnProperty('id') || d.id! > 0)
+  const losers = mappedData.filter((d) => d.hasOwnProperty('id') && d.id! < 0)
   return (
     <div style={{ justifyContent: 'center' }}>
-      <Bracket rounds={mappedData} mobileBreakpoint={mobileBreakpoint} />
+      {winners.length ? (
+        <Bracket rounds={winners as unknown as RoundProps[]} mobileBreakpoint={mobileBreakpoint} />
+      ) : null}
+      {losers.length ? (
+        <>
+          <div style={{ height: '2em' }} />
+          <Bracket rounds={losers as unknown as RoundProps[]} mobileBreakpoint={mobileBreakpoint} />
+        </>
+      ) : null}
     </div>
   )
 }

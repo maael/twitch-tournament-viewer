@@ -16,6 +16,7 @@
   },
   "ignorePatterns": ["^!(src)", "output/**.js"],
   "rules": {
+    "no-prototype-builtins": "off",
     // TypeScript
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": [
