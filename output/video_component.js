@@ -572,7 +572,7 @@
             }
             return element
           }
-          function createElement4(type, config, children) {
+          function createElement5(type, config, children) {
             var propName
             var props = {}
             var key = null
@@ -1762,7 +1762,7 @@
                 )
               }
             }
-            var element = createElement4.apply(this, arguments)
+            var element = createElement5.apply(this, arguments)
             if (element == null) {
               return element
             }
@@ -2659,11 +2659,11 @@
       if (true) {
         ;(function () {
           'use strict'
-          var React8 = require_react()
+          var React9 = require_react()
           var _assign = require_object_assign()
           var Scheduler = require_scheduler()
           var tracing = require_tracing()
-          var ReactSharedInternals = React8.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
           function warn(format) {
             {
               for (
@@ -2703,7 +2703,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat)
             }
           }
-          if (!React8) {
+          if (!React9) {
             {
               throw Error(
                 'ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.'
@@ -2717,7 +2717,7 @@
           var HostPortal = 4
           var HostComponent = 5
           var HostText = 6
-          var Fragment = 7
+          var Fragment2 = 7
           var Mode = 8
           var ContextConsumer = 9
           var ContextProvider = 10
@@ -4010,7 +4010,7 @@
           var didWarnInvalidChild = false
           function flattenChildren(children) {
             var content = ''
-            React8.Children.forEach(children, function (child) {
+            React9.Children.forEach(children, function (child) {
               if (child == null) {
                 return
               }
@@ -4021,7 +4021,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === 'object' && props.children !== null) {
-                React8.Children.forEach(props.children, function (child) {
+                React9.Children.forEach(props.children, function (child) {
                   if (child == null) {
                     return
                   }
@@ -9419,7 +9419,7 @@
               }
             }
           }
-          function createElement4(type, props, rootContainerElement, parentNamespace) {
+          function createElement5(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement)
             var domElement
@@ -10451,7 +10451,7 @@
               }
               parentNamespace = hostContextDev.namespace
             }
-            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace)
+            var domElement = createElement5(type, props, rootContainerInstance, parentNamespace)
             precacheFiberNode(internalInstanceHandle, domElement)
             updateFiberProps(domElement, props)
             return domElement
@@ -12149,7 +12149,7 @@
           }
           var fakeInternalInstance = {}
           var isArray = Array.isArray
-          var emptyRefsObject = new React8.Component().refs
+          var emptyRefsObject = new React9.Component().refs
           var didWarnAboutStateAssignmentForComponent
           var didWarnAboutUninitializedState
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate
@@ -13147,7 +13147,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment) {
+              if (current2 === null || current2.tag !== Fragment2) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key)
                 created.return = returnFiber
                 return created
@@ -13522,7 +13522,7 @@
               while (child !== null) {
                 if (child.key === key) {
                   switch (child.tag) {
-                    case Fragment: {
+                    case Fragment2: {
                       if (element.type === REACT_FRAGMENT_TYPE) {
                         deleteRemainingChildren(returnFiber, child.sibling)
                         var existing = useFiber(child, element.props.children)
@@ -17477,7 +17477,7 @@
                     : resolveDefaultProps(type, _unresolvedProps2)
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2)
               }
-              case Fragment:
+              case Fragment2:
                 return updateFragment(current2, workInProgress2, renderLanes2)
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2)
@@ -17676,7 +17676,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment:
+              case Fragment2:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -21650,7 +21650,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             return fiber
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment, elements, key, mode)
+            var fiber = createFiber(Fragment2, elements, key, mode)
             fiber.lanes = lanes
             return fiber
           }
@@ -23178,7 +23178,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           var ContextProvider = REACT_PROVIDER_TYPE
           var Element2 = REACT_ELEMENT_TYPE
           var ForwardRef = REACT_FORWARD_REF_TYPE
-          var Fragment = REACT_FRAGMENT_TYPE
+          var Fragment2 = REACT_FRAGMENT_TYPE
           var Lazy = REACT_LAZY_TYPE
           var Memo2 = REACT_MEMO_TYPE
           var Portal = REACT_PORTAL_TYPE
@@ -23239,7 +23239,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           exports.ContextProvider = ContextProvider
           exports.Element = Element2
           exports.ForwardRef = ForwardRef
-          exports.Fragment = Fragment
+          exports.Fragment = Fragment2
           exports.Lazy = Lazy
           exports.Memo = Memo2
           exports.Portal = Portal
@@ -30609,7 +30609,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             string = toString(string)
             return string && reHasUnescapedHtml.test(string) ? string.replace(reUnescapedHtml, escapeHtmlChar) : string
           }
-          function escapeRegExp(string) {
+          function escapeRegExp2(string) {
             string = toString(string)
             return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, '\\$&') : string
           }
@@ -31260,7 +31260,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           lodash.endsWith = endsWith
           lodash.eq = eq
           lodash.escape = escape
-          lodash.escapeRegExp = escapeRegExp
+          lodash.escapeRegExp = escapeRegExp2
           lodash.every = every
           lodash.find = find
           lodash.findIndex = findIndex
@@ -40907,16 +40907,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   addExtensionMethods()
 
   // src/pages/video_component.tsx
-  var React5 = __toModule(require_react())
+  var React6 = __toModule(require_react())
 
-  // src/components/hooks/usePhaseData.ts
+  // src/components/hooks/usePhaseData/index.ts
   var React3 = __toModule(require_react())
-  var import_graphql_request = __toModule(require_dist())
+  var import_graphql_request2 = __toModule(require_dist())
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
-  var defaultConfig = '{"phase":"940768"}'
+  var defaultConfig = '{"phase":"965154"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -40961,26 +40961,111 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   var Twitch_default = TwitchContextWrapper
 
-  // src/components/hooks/usePhaseData.ts
-  var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
+  // src/components/hooks/usePhaseData/queries.ts
+  var import_graphql_request = __toModule(require_dist())
+  var PHASE_INFO = import_graphql_request.gql`
+  query TournamentQuery($phaseId: ID) {
+    phase(id: $phaseId) {
+      name
+      phaseGroups {
+        nodes {
+          id
+          displayIdentifier
+        }
+      }
+    }
+  }
+`
+  var PHASE_GROUP_INFO = import_graphql_request.gql`
+  query TournamentQuery($phaseGroupId: ID) {
+    phaseGroup(id: $phaseGroupId) {
+      id
+      displayIdentifier
+      bracketType
+      phase {
+        id
+        name
+        bracketType
+        phaseOrder
+        groupCount
+        event {
+          name
+          tournament {
+            name
+          }
+        }
+      }
+    }
+  }
+`
+  var PHASE_GROUP_SETS = import_graphql_request.gql`
+  query TournamentQuery($phaseGroupId: ID, $page: Int) {
+    phaseGroup(id: $phaseGroupId) {
+      sets(page: $page, perPage: 30) {
+        pageInfo {
+          page
+          totalPages
+        }
+        nodes {
+          completedAt
+          identifier
+          winnerId
+          round
+          fullRoundText
+          vodUrl
+          state
+          displayScore
+          games {
+            stage {
+              name
+            }
+            selections {
+              selectionType
+              selectionValue
+            }
+          }
+          slots {
+            id
+            prereqId
+            prereqType
+            prereqPlacement
+            entrant {
+              id
+              name
+              isDisqualified
+              participants {
+                gamerTag
+                prefix
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+  // src/components/hooks/usePhaseData/index.ts
+  var client = new import_graphql_request2.GraphQLClient('https://api.smash.gg/gql/alpha', {
     headers: {
       Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
     },
   })
+  var DataState
+  ;(function (DataState2) {
+    DataState2['Default'] = 'DEFAULT'
+    DataState2['Loading'] = 'LOADING'
+    DataState2['Error'] = 'ERROR'
+  })(DataState || (DataState = {}))
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  }
   function usePhaseData(phaseGroupId) {
-    var _a, _b
+    var _a
     const { config } = React3.useContext(TwitchContext)
     const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
     const [pool, setPool] = React3.useState(void 0)
-    const mappedPool = pool
-    console.info(
-      'p',
-      (_a = mappedPool == null ? void 0 : mappedPool.phaseGroup.sets.nodes) == null
-        ? void 0
-        : _a.reduce((acc, v) => {
-            return __spreadProps(__spreadValues({}, acc), { [v.round]: (acc[v.round] || []).concat(v) })
-          }, {})
-    )
+    const [dataState, setDataState] = React3.useState(DataState.Default)
     React3.useEffect(() => {
       ;(async () => {
         var _a2
@@ -40988,105 +41073,77 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           console.warn('No phase set, please configure the extension', config.broadcaster)
           return
         }
-        console.info('1', config.broadcaster.phase)
-        const query = import_graphql_request.gql`
-        query TournamentQuery($phaseId: ID) {
-          phase(id: $phaseId) {
-            name
-            phaseGroups {
-              nodes {
-                id
-                displayIdentifier
-              }
-            }
-          }
+        try {
+          setDataState(DataState.Loading)
+          console.info('1', config.broadcaster.phase)
+          const result = await client.request(PHASE_INFO, { phaseId: config.broadcaster.phase })
+          const options = (
+            ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
+          ).map((n2) => ({
+            id: n2.id,
+            displayIdentifier: n2.displayIdentifier,
+          }))
+          setPhaseGroupOptions(options)
+          setDataState(DataState.Default)
+        } catch (e2) {
+          setDataState(DataState.Error)
+          throw e2
         }
-      `
-        const result = await client.request(query, { phaseId: config.broadcaster.phase })
-        const options = (
-          ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
-        ).map((n2) => ({
-          id: n2.id,
-          displayIdentifier: n2.displayIdentifier,
-        }))
-        setPhaseGroupOptions(options)
       })()
-    }, [config.broadcaster, (_b = config.broadcaster) == null ? void 0 : _b.phase])
+    }, [config.broadcaster, (_a = config.broadcaster) == null ? void 0 : _a.phase])
     React3.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
-        const query = import_graphql_request.gql`
-        query TournamentQuery($phaseGroupId: ID) {
-          phaseGroup(id: $phaseGroupId) {
-            id
-            displayIdentifier
-            bracketType
-            numRounds
-            phase {
-              id
-              name
-              bracketType
-              phaseOrder
-              groupCount
-              event {
-                name
-                tournament {
-                  name
-                }
-              }
+        try {
+          setDataState(DataState.Loading)
+          const result = await client.request(PHASE_GROUP_INFO, { phaseGroupId })
+          let page = 0
+          let lastPage = 0
+          let sets = []
+          do {
+            if (page <= lastPage) {
+              page = page + 1
             }
-            sets(page: 1, perPage: 100) {
-              nodes {
-                completedAt
-                identifier
-                winnerId
-                round
-                fullRoundText
-                vodUrl
-                state
-                games {
-                  orderNum
-                  stage {
-                    name
-                  }
-                  winnerId
-                  selections {
-                    participant {
-                      id
-                      gamerTag
-                    }
-                    selectionType
-                    selectionValue
-                  }
-                }
-                displayScore
-                slots {
-                  id
-                  prereqId
-                  prereqType
-                  prereqPlacement
-                  entrant {
-                    id
-                    name
-                    participants {
-                      gamerTag
-                      prefix
-                    }
-                  }
-                }
-              }
+            if (page > lastPage) {
+              lastPage = 0
             }
-          }
+            console.info(page, lastPage)
+            const setsResult = await client.request(PHASE_GROUP_SETS, {
+              phaseGroupId,
+              page,
+            })
+            sets = sets.concat(setsResult.phaseGroup.sets.nodes)
+            console.info({ sets })
+            lastPage = setsResult.phaseGroup.sets.pageInfo.totalPages
+          } while (lastPage && lastPage > page)
+          sets = sets.map((s2) => {
+            s2.slots = s2.slots.map((slot) => {
+              var _a2, _b
+              slot.score =
+                (_b =
+                  (_a2 = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
+                    ? void 0
+                    : _a2.groups) == null
+                  ? void 0
+                  : _b.score
+              return slot
+            })
+            return s2
+          })
+          result.phaseGroup.sets = { nodes: sets }
+          setPool(result)
+          setDataState(DataState.Default)
+        } catch (e2) {
+          setDataState(DataState.Error)
+          throw e2
         }
-      `
-        const result = await client.request(query, { phaseGroupId })
-        setPool(result)
       })()
     }, [phaseGroupId])
     return {
       phaseGroupOptions,
       pool,
+      dataState,
     }
   }
 
@@ -41408,16 +41465,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     })
   }
   function CustomBracket({ data }) {
-    var _a, _b
+    var _a, _b, _c, _d
     console.info({ data })
     const winnerRounds =
-      (_a = data == null ? void 0 : data.phaseGroup.sets.nodes) == null
+      ((_b = (_a = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _a.nodes) == null
         ? void 0
-        : _a.filter((n2) => n2.round >= 0).reduce(reduceRounds, {})
+        : _b.filter((n2) => n2.round >= 0).reduce(reduceRounds, {})) || {}
     const loserRounds =
-      (_b = data == null ? void 0 : data.phaseGroup.sets.nodes) == null
+      ((_d = (_c = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _c.nodes) == null
         ? void 0
-        : _b.filter((n2) => n2.round < 0).reduce(reduceRounds, {})
+        : _d.filter((n2) => n2.round < 0).reduce(reduceRounds, {})) || {}
     return data
       ? /* @__PURE__ */ React4.createElement(
           'div',
@@ -41457,7 +41514,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function getJustifyType(entries, i2) {
     const previous = entries[i2 - 1]
     if (!previous) return 'space-between'
-    return previous[1].length <= entries[i2][1].length ? 'space-between' : 'space-around'
+    return previous[1].length < entries[i2][1].length ? 'space-between' : 'space-around'
   }
   function Rounds({ rounds, reverse }) {
     const entries = Object.entries(rounds)
@@ -41477,7 +41534,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           /* @__PURE__ */ React4.createElement(
             'div',
             {
-              style: { marginBottom: '0.1em' },
+              style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em' },
             },
             roundItems[0].fullRoundText
           ),
@@ -41526,14 +41583,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             'div',
             {
               style: {
-                height: '2rem',
-                width: '2rem',
-                lineHeight: '2rem',
+                height: '2.2em',
+                width: '2.2em',
+                lineHeight: '2.3em',
                 background: 'rgb(30, 64, 175)',
                 borderRadius: '100%',
                 textAlign: 'center',
-                marginRight: '0.3rem',
-                fontSize: '0.9rem',
+                marginRight: '0.3em',
+                fontSize: '0.9em',
               },
             },
             item.identifier
@@ -41561,10 +41618,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     )
   }
   function Slot({ slot, winner, cornerStyle }) {
-    var _a, _b, _c, _d, _e
+    var _a, _b, _c, _d, _e, _f
     const prefix =
       (_b = (((_a = slot.entrant) == null ? void 0 : _a.participants) || [])[0]) == null ? void 0 : _b.prefix
-    const isWinner = winner === ((_c = slot.entrant) == null ? void 0 : _c.id)
+    const name =
+      (_d = (((_c = slot.entrant) == null ? void 0 : _c.participants) || [])[0]) == null ? void 0 : _d.gamerTag
+    const isWinner = winner === ((_e = slot.entrant) == null ? void 0 : _e.id)
     return /* @__PURE__ */ React4.createElement(
       'div',
       {
@@ -41580,25 +41639,51 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           borderBottomLeftRadius: cornerStyle !== 'top' ? '0.3em' : void 0,
           borderBottomRightRadius: cornerStyle !== 'top' ? '0.3em' : void 0,
         },
+        title: `${prefix || ''} ${prefix ? '|' : ''} ${name}`.trim(),
       },
       prefix
         ? /* @__PURE__ */ React4.createElement(
             'span',
             {
-              style: { opacity: '0.7' },
+              style: { opacity: '0.7', whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row' },
             },
-            prefix,
-            ' | '
+            /* @__PURE__ */ React4.createElement(
+              'span',
+              {
+                style: {
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  maxWidth: '5em',
+                  display: 'inline-block',
+                },
+              },
+              prefix
+            ),
+            /* @__PURE__ */ React4.createElement(
+              'span',
+              {
+                style: { display: 'inline-block', marginLeft: '0.4em' },
+              },
+              '|'
+            )
           )
         : null,
       /* @__PURE__ */ React4.createElement(
         'span',
         {
-          style: { flex: 1 },
+          style: { flex: 1, whiteSpace: 'nowrap' },
         },
-        (_e = (((_d = slot.entrant) == null ? void 0 : _d.participants) || [])[0]) == null ? void 0 : _e.gamerTag
+        name
       ),
-      isWinner ? /* @__PURE__ */ React4.createElement('span', null, '\u2713') : null,
+      slot.score
+        ? /* @__PURE__ */ React4.createElement('span', null, slot.score)
+        : isWinner
+        ? /* @__PURE__ */ React4.createElement('span', null, '\u2713')
+        : null,
+      ((_f = slot.entrant) == null ? void 0 : _f.isDisqualified)
+        ? /* @__PURE__ */ React4.createElement('span', null, 'DQ')
+        : null,
       /* @__PURE__ */ React4.createElement(
         'div',
         {
@@ -41617,93 +41702,286 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     )
   }
 
+  // src/components/primitives/Loading.tsx
+  var React5 = __toModule(require_react())
+  function Loading(props) {
+    return /* @__PURE__ */ React5.createElement(
+      'svg',
+      __spreadValues(
+        {
+          width: 105,
+          height: 105,
+          viewBox: '0 0 105 105',
+          xmlns: 'http://www.w3.org/2000/svg',
+          fill: '#1E40AF',
+        },
+        props
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 12.5,
+          cy: 12.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '0s',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 12.5,
+          cy: 52.5,
+          r: 12.5,
+          fillOpacity: 0.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '100ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 52.5,
+          cy: 12.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '300ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 52.5,
+          cy: 52.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '600ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 92.5,
+          cy: 12.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '800ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 92.5,
+          cy: 52.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '400ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 12.5,
+          cy: 92.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '700ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 52.5,
+          cy: 92.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '500ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      ),
+      /* @__PURE__ */ React5.createElement(
+        'circle',
+        {
+          cx: 92.5,
+          cy: 92.5,
+          r: 12.5,
+        },
+        /* @__PURE__ */ React5.createElement('animate', {
+          attributeName: 'fill-opacity',
+          begin: '200ms',
+          dur: '1s',
+          values: '1;.2;1',
+          calcMode: 'linear',
+          repeatCount: 'indefinite',
+        })
+      )
+    )
+  }
+
   // src/pages/video_component.tsx
   function VideoComponent() {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i
-    const [phaseGroupId, setPhaseGroupId] = React5.useState()
+    const [phaseGroupId, setPhaseGroupId] = React6.useState()
     console.info({ phaseGroupId })
-    const { phaseGroupOptions, pool } = usePhaseData(phaseGroupId)
-    React5.useEffect(() => {
+    const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseGroupId)
+    React6.useEffect(() => {
       if (phaseGroupOptions.length === 1) {
         setPhaseGroupId(phaseGroupOptions[0].id)
       }
     }, [phaseGroupOptions])
-    return /* @__PURE__ */ React5.createElement(
+    return /* @__PURE__ */ React6.createElement(
       'div',
       {
         style: { paddingTop: '1em', display: 'flex', flexDirection: 'column', height: '100vh', maxHeight: '100vh' },
       },
-      /* @__PURE__ */ React5.createElement(
-        'div',
+      /* @__PURE__ */ React6.createElement(
+        'style',
         null,
-        /* @__PURE__ */ React5.createElement(
-          'style',
-          null,
-          `:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`
-        ),
-        /* @__PURE__ */ React5.createElement(
-          'div',
-          {
-            style: { display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'flex-end' },
-          },
-          /* @__PURE__ */ React5.createElement(
-            'h2',
-            null,
-            (_d =
-              (_c =
-                (_b = (_a = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _a.phase) == null
-                  ? void 0
-                  : _b.event) == null
-                ? void 0
-                : _c.tournament) == null
-              ? void 0
-              : _d.name
-          ),
-          /* @__PURE__ */ React5.createElement(
-            'h3',
-            null,
-            (_g =
-              (_f = (_e = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _e.phase) == null
-                ? void 0
-                : _f.event) == null
-              ? void 0
-              : _g.name
-          )
-        ),
-        /* @__PURE__ */ React5.createElement(
-          'div',
-          {
-            style: { display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: '1em' },
-          },
-          /* @__PURE__ */ React5.createElement(
-            'h4',
-            null,
-            (_i = (_h = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _h.phase) == null ? void 0 : _i.name
-          ),
-          /* @__PURE__ */ React5.createElement(
-            'select',
-            {
-              onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
-              value: phaseGroupId,
-              className: 'select-css',
-            },
-            phaseGroupOptions.map((o2) =>
-              /* @__PURE__ */ React5.createElement(
-                'option',
-                {
-                  key: o2.id,
-                  value: o2.id,
-                },
-                'Pool ',
-                o2.displayIdentifier
-              )
-            )
-          )
-        )
+        `:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`
       ),
-      /* @__PURE__ */ React5.createElement(CustomBracket, {
-        data: pool,
-      })
+      dataState === DataState.Loading
+        ? /* @__PURE__ */ React6.createElement(
+            'div',
+            {
+              style: { flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' },
+            },
+            /* @__PURE__ */ React6.createElement(Loading, null)
+          )
+        : /* @__PURE__ */ React6.createElement(
+            React6.Fragment,
+            null,
+            /* @__PURE__ */ React6.createElement(
+              'div',
+              {
+                style: { marginBottom: '0.5em' },
+              },
+              /* @__PURE__ */ React6.createElement(
+                'div',
+                {
+                  style: {
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: 5,
+                    alignItems: 'flex-end',
+                    marginLeft: '-0.5em',
+                  },
+                },
+                /* @__PURE__ */ React6.createElement(
+                  'h2',
+                  null,
+                  (_d =
+                    (_c =
+                      (_b = (_a = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _a.phase) == null
+                        ? void 0
+                        : _b.event) == null
+                      ? void 0
+                      : _c.tournament) == null
+                    ? void 0
+                    : _d.name
+                ),
+                /* @__PURE__ */ React6.createElement(
+                  'h3',
+                  null,
+                  (_g =
+                    (_f = (_e = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _e.phase) == null
+                      ? void 0
+                      : _f.event) == null
+                    ? void 0
+                    : _g.name
+                )
+              ),
+              phaseGroupOptions.length > 1
+                ? /* @__PURE__ */ React6.createElement(
+                    'div',
+                    {
+                      style: {
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 10,
+                        alignItems: 'center',
+                        marginBottom: '1em',
+                      },
+                    },
+                    /* @__PURE__ */ React6.createElement(
+                      'h4',
+                      null,
+                      (_i = (_h = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _h.phase) == null
+                        ? void 0
+                        : _i.name
+                    ),
+                    /* @__PURE__ */ React6.createElement(
+                      'select',
+                      {
+                        onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
+                        value: phaseGroupId,
+                        className: 'select-css',
+                      },
+                      phaseGroupOptions.map((o2) =>
+                        /* @__PURE__ */ React6.createElement(
+                          'option',
+                          {
+                            key: o2.id,
+                            value: o2.id,
+                          },
+                          'Pool ',
+                          o2.displayIdentifier
+                        )
+                      )
+                    )
+                  )
+                : null
+            ),
+            /* @__PURE__ */ React6.createElement(CustomBracket, {
+              data: pool,
+            })
+          )
     )
   }
 

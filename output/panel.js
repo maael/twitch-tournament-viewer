@@ -30609,7 +30609,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             string = toString(string)
             return string && reHasUnescapedHtml.test(string) ? string.replace(reUnescapedHtml, escapeHtmlChar) : string
           }
-          function escapeRegExp(string) {
+          function escapeRegExp2(string) {
             string = toString(string)
             return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, '\\$&') : string
           }
@@ -31260,7 +31260,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           lodash.endsWith = endsWith
           lodash.eq = eq
           lodash.escape = escape
-          lodash.escapeRegExp = escapeRegExp
+          lodash.escapeRegExp = escapeRegExp2
           lodash.every = every
           lodash.find = find
           lodash.findIndex = findIndex
@@ -40909,14 +40909,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/pages/panel.tsx
   var React5 = __toModule(require_react())
 
-  // src/components/hooks/usePhaseData.ts
+  // src/components/hooks/usePhaseData/index.ts
   var React3 = __toModule(require_react())
-  var import_graphql_request = __toModule(require_dist())
+  var import_graphql_request2 = __toModule(require_dist())
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
-  var defaultConfig = '{"phase":"940768"}'
+  var defaultConfig = '{"phase":"965154"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -40961,26 +40961,111 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   var Twitch_default = TwitchContextWrapper
 
-  // src/components/hooks/usePhaseData.ts
-  var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
+  // src/components/hooks/usePhaseData/queries.ts
+  var import_graphql_request = __toModule(require_dist())
+  var PHASE_INFO = import_graphql_request.gql`
+  query TournamentQuery($phaseId: ID) {
+    phase(id: $phaseId) {
+      name
+      phaseGroups {
+        nodes {
+          id
+          displayIdentifier
+        }
+      }
+    }
+  }
+`
+  var PHASE_GROUP_INFO = import_graphql_request.gql`
+  query TournamentQuery($phaseGroupId: ID) {
+    phaseGroup(id: $phaseGroupId) {
+      id
+      displayIdentifier
+      bracketType
+      phase {
+        id
+        name
+        bracketType
+        phaseOrder
+        groupCount
+        event {
+          name
+          tournament {
+            name
+          }
+        }
+      }
+    }
+  }
+`
+  var PHASE_GROUP_SETS = import_graphql_request.gql`
+  query TournamentQuery($phaseGroupId: ID, $page: Int) {
+    phaseGroup(id: $phaseGroupId) {
+      sets(page: $page, perPage: 30) {
+        pageInfo {
+          page
+          totalPages
+        }
+        nodes {
+          completedAt
+          identifier
+          winnerId
+          round
+          fullRoundText
+          vodUrl
+          state
+          displayScore
+          games {
+            stage {
+              name
+            }
+            selections {
+              selectionType
+              selectionValue
+            }
+          }
+          slots {
+            id
+            prereqId
+            prereqType
+            prereqPlacement
+            entrant {
+              id
+              name
+              isDisqualified
+              participants {
+                gamerTag
+                prefix
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+  // src/components/hooks/usePhaseData/index.ts
+  var client = new import_graphql_request2.GraphQLClient('https://api.smash.gg/gql/alpha', {
     headers: {
       Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
     },
   })
+  var DataState
+  ;(function (DataState2) {
+    DataState2['Default'] = 'DEFAULT'
+    DataState2['Loading'] = 'LOADING'
+    DataState2['Error'] = 'ERROR'
+  })(DataState || (DataState = {}))
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  }
   function usePhaseData(phaseGroupId) {
-    var _a, _b
+    var _a
     const { config } = React3.useContext(TwitchContext)
     const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
     const [pool, setPool] = React3.useState(void 0)
-    const mappedPool = pool
-    console.info(
-      'p',
-      (_a = mappedPool == null ? void 0 : mappedPool.phaseGroup.sets.nodes) == null
-        ? void 0
-        : _a.reduce((acc, v) => {
-            return __spreadProps(__spreadValues({}, acc), { [v.round]: (acc[v.round] || []).concat(v) })
-          }, {})
-    )
+    const [dataState, setDataState] = React3.useState(DataState.Default)
     React3.useEffect(() => {
       ;(async () => {
         var _a2
@@ -40988,105 +41073,77 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           console.warn('No phase set, please configure the extension', config.broadcaster)
           return
         }
-        console.info('1', config.broadcaster.phase)
-        const query = import_graphql_request.gql`
-        query TournamentQuery($phaseId: ID) {
-          phase(id: $phaseId) {
-            name
-            phaseGroups {
-              nodes {
-                id
-                displayIdentifier
-              }
-            }
-          }
+        try {
+          setDataState(DataState.Loading)
+          console.info('1', config.broadcaster.phase)
+          const result = await client.request(PHASE_INFO, { phaseId: config.broadcaster.phase })
+          const options = (
+            ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
+          ).map((n2) => ({
+            id: n2.id,
+            displayIdentifier: n2.displayIdentifier,
+          }))
+          setPhaseGroupOptions(options)
+          setDataState(DataState.Default)
+        } catch (e2) {
+          setDataState(DataState.Error)
+          throw e2
         }
-      `
-        const result = await client.request(query, { phaseId: config.broadcaster.phase })
-        const options = (
-          ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
-        ).map((n2) => ({
-          id: n2.id,
-          displayIdentifier: n2.displayIdentifier,
-        }))
-        setPhaseGroupOptions(options)
       })()
-    }, [config.broadcaster, (_b = config.broadcaster) == null ? void 0 : _b.phase])
+    }, [config.broadcaster, (_a = config.broadcaster) == null ? void 0 : _a.phase])
     React3.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
-        const query = import_graphql_request.gql`
-        query TournamentQuery($phaseGroupId: ID) {
-          phaseGroup(id: $phaseGroupId) {
-            id
-            displayIdentifier
-            bracketType
-            numRounds
-            phase {
-              id
-              name
-              bracketType
-              phaseOrder
-              groupCount
-              event {
-                name
-                tournament {
-                  name
-                }
-              }
+        try {
+          setDataState(DataState.Loading)
+          const result = await client.request(PHASE_GROUP_INFO, { phaseGroupId })
+          let page = 0
+          let lastPage = 0
+          let sets = []
+          do {
+            if (page <= lastPage) {
+              page = page + 1
             }
-            sets(page: 1, perPage: 100) {
-              nodes {
-                completedAt
-                identifier
-                winnerId
-                round
-                fullRoundText
-                vodUrl
-                state
-                games {
-                  orderNum
-                  stage {
-                    name
-                  }
-                  winnerId
-                  selections {
-                    participant {
-                      id
-                      gamerTag
-                    }
-                    selectionType
-                    selectionValue
-                  }
-                }
-                displayScore
-                slots {
-                  id
-                  prereqId
-                  prereqType
-                  prereqPlacement
-                  entrant {
-                    id
-                    name
-                    participants {
-                      gamerTag
-                      prefix
-                    }
-                  }
-                }
-              }
+            if (page > lastPage) {
+              lastPage = 0
             }
-          }
+            console.info(page, lastPage)
+            const setsResult = await client.request(PHASE_GROUP_SETS, {
+              phaseGroupId,
+              page,
+            })
+            sets = sets.concat(setsResult.phaseGroup.sets.nodes)
+            console.info({ sets })
+            lastPage = setsResult.phaseGroup.sets.pageInfo.totalPages
+          } while (lastPage && lastPage > page)
+          sets = sets.map((s2) => {
+            s2.slots = s2.slots.map((slot) => {
+              var _a2, _b
+              slot.score =
+                (_b =
+                  (_a2 = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
+                    ? void 0
+                    : _a2.groups) == null
+                  ? void 0
+                  : _b.score
+              return slot
+            })
+            return s2
+          })
+          result.phaseGroup.sets = { nodes: sets }
+          setPool(result)
+          setDataState(DataState.Default)
+        } catch (e2) {
+          setDataState(DataState.Error)
+          throw e2
         }
-      `
-        const result = await client.request(query, { phaseGroupId })
-        setPool(result)
       })()
     }, [phaseGroupId])
     return {
       phaseGroupOptions,
       pool,
+      dataState,
     }
   }
 
@@ -41408,16 +41465,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     })
   }
   function CustomBracket({ data }) {
-    var _a, _b
+    var _a, _b, _c, _d
     console.info({ data })
     const winnerRounds =
-      (_a = data == null ? void 0 : data.phaseGroup.sets.nodes) == null
+      ((_b = (_a = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _a.nodes) == null
         ? void 0
-        : _a.filter((n2) => n2.round >= 0).reduce(reduceRounds, {})
+        : _b.filter((n2) => n2.round >= 0).reduce(reduceRounds, {})) || {}
     const loserRounds =
-      (_b = data == null ? void 0 : data.phaseGroup.sets.nodes) == null
+      ((_d = (_c = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _c.nodes) == null
         ? void 0
-        : _b.filter((n2) => n2.round < 0).reduce(reduceRounds, {})
+        : _d.filter((n2) => n2.round < 0).reduce(reduceRounds, {})) || {}
     return data
       ? /* @__PURE__ */ React4.createElement(
           'div',
@@ -41457,7 +41514,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function getJustifyType(entries, i2) {
     const previous = entries[i2 - 1]
     if (!previous) return 'space-between'
-    return previous[1].length <= entries[i2][1].length ? 'space-between' : 'space-around'
+    return previous[1].length < entries[i2][1].length ? 'space-between' : 'space-around'
   }
   function Rounds({ rounds, reverse }) {
     const entries = Object.entries(rounds)
@@ -41477,7 +41534,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           /* @__PURE__ */ React4.createElement(
             'div',
             {
-              style: { marginBottom: '0.1em' },
+              style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em' },
             },
             roundItems[0].fullRoundText
           ),
@@ -41526,14 +41583,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             'div',
             {
               style: {
-                height: '2rem',
-                width: '2rem',
-                lineHeight: '2rem',
+                height: '2.2em',
+                width: '2.2em',
+                lineHeight: '2.3em',
                 background: 'rgb(30, 64, 175)',
                 borderRadius: '100%',
                 textAlign: 'center',
-                marginRight: '0.3rem',
-                fontSize: '0.9rem',
+                marginRight: '0.3em',
+                fontSize: '0.9em',
               },
             },
             item.identifier
@@ -41561,10 +41618,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     )
   }
   function Slot({ slot, winner, cornerStyle }) {
-    var _a, _b, _c, _d, _e
+    var _a, _b, _c, _d, _e, _f
     const prefix =
       (_b = (((_a = slot.entrant) == null ? void 0 : _a.participants) || [])[0]) == null ? void 0 : _b.prefix
-    const isWinner = winner === ((_c = slot.entrant) == null ? void 0 : _c.id)
+    const name =
+      (_d = (((_c = slot.entrant) == null ? void 0 : _c.participants) || [])[0]) == null ? void 0 : _d.gamerTag
+    const isWinner = winner === ((_e = slot.entrant) == null ? void 0 : _e.id)
     return /* @__PURE__ */ React4.createElement(
       'div',
       {
@@ -41580,25 +41639,51 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           borderBottomLeftRadius: cornerStyle !== 'top' ? '0.3em' : void 0,
           borderBottomRightRadius: cornerStyle !== 'top' ? '0.3em' : void 0,
         },
+        title: `${prefix || ''} ${prefix ? '|' : ''} ${name}`.trim(),
       },
       prefix
         ? /* @__PURE__ */ React4.createElement(
             'span',
             {
-              style: { opacity: '0.7' },
+              style: { opacity: '0.7', whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row' },
             },
-            prefix,
-            ' | '
+            /* @__PURE__ */ React4.createElement(
+              'span',
+              {
+                style: {
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  maxWidth: '5em',
+                  display: 'inline-block',
+                },
+              },
+              prefix
+            ),
+            /* @__PURE__ */ React4.createElement(
+              'span',
+              {
+                style: { display: 'inline-block', marginLeft: '0.4em' },
+              },
+              '|'
+            )
           )
         : null,
       /* @__PURE__ */ React4.createElement(
         'span',
         {
-          style: { flex: 1 },
+          style: { flex: 1, whiteSpace: 'nowrap' },
         },
-        (_e = (((_d = slot.entrant) == null ? void 0 : _d.participants) || [])[0]) == null ? void 0 : _e.gamerTag
+        name
       ),
-      isWinner ? /* @__PURE__ */ React4.createElement('span', null, '\u2713') : null,
+      slot.score
+        ? /* @__PURE__ */ React4.createElement('span', null, slot.score)
+        : isWinner
+        ? /* @__PURE__ */ React4.createElement('span', null, '\u2713')
+        : null,
+      ((_f = slot.entrant) == null ? void 0 : _f.isDisqualified)
+        ? /* @__PURE__ */ React4.createElement('span', null, 'DQ')
+        : null,
       /* @__PURE__ */ React4.createElement(
         'div',
         {

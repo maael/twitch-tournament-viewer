@@ -32547,7 +32547,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
-  var defaultConfig = '{"phase":"940768"}'
+  var defaultConfig = '{"phase":"965154"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
