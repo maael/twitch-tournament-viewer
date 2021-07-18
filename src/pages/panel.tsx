@@ -1,10 +1,12 @@
 import * as React from 'react'
+import { TwitchContext } from '../components/context/Twitch'
 import usePhaseData from '../components/hooks/usePhaseData'
 import CustomBracket from '../components/primitives/CustomBracket'
 
 export default function Index() {
+  const { config } = React.useContext(TwitchContext)
   const [phaseGroupId, setPhaseGroupId] = React.useState<number | undefined>(undefined)
-  const { phaseGroupOptions, pool } = usePhaseData(phaseGroupId)
+  const { phaseGroupOptions, pool } = usePhaseData(config?.broadcaster?.phase, phaseGroupId)
   React.useEffect(() => {
     if (phaseGroupOptions.length === 1) {
       setPhaseGroupId(phaseGroupOptions[0].id)

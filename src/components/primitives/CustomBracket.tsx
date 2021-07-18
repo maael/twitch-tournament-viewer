@@ -12,7 +12,6 @@ function reduceRounds(acc: any, n: NodesEntity) {
 }
 
 export default function CustomBracket({ data }: { data?: PhaseGroupData }) {
-  console.info({ data })
   const winnerRounds = data?.phaseGroup.sets?.nodes?.filter((n) => n.round >= 0).reduce(reduceRounds, {}) || {}
   const loserRounds = data?.phaseGroup.sets?.nodes?.filter((n) => n.round < 0).reduce(reduceRounds, {}) || {}
   return data ? (
@@ -38,11 +37,14 @@ function getJustifyType(entries: [string, NodesEntity[]][], i: number) {
 function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] }; reverse?: boolean }) {
   const entries = Object.entries(rounds)
   if (reverse) entries.reverse()
+  const allowedSlots = entries
+    .flatMap(([_, roundItems]) => roundItems.flatMap((i) => i.slots?.flatMap((s) => s.id)))
+    .filter(Boolean) as string[]
   return (
     <div style={{ display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' }}>
       {entries.map(([k, roundItems], i) => (
         <div key={k} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em' }}>
+          <div style={{ marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' }}>
             {roundItems[0].fullRoundText}
           </div>
           <div
@@ -57,7 +59,7 @@ function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] 
             {roundItems
               .sort((a, b) => a.identifier.localeCompare(b.identifier) && a.identifier.length - b.identifier.length)
               .map((i) => (
-                <Round key={i.identifier} item={i} />
+                <Round key={i.identifier} allowedSlots={allowedSlots} item={i} />
               ))}
           </div>
         </div>
@@ -66,10 +68,7 @@ function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] 
   )
 }
 
-function Round({ item }: { item: NodesEntity }) {
-  if (item.identifier === 'CC') {
-    console.info(item)
-  }
+function Round({ item, allowedSlots }: { item: NodesEntity; allowedSlots: string[] }) {
   return (
     <div id={(item.slots || [])[0].id}>
       <div id={(item.slots || [])[1].id}>
@@ -95,6 +94,7 @@ function Round({ item }: { item: NodesEntity }) {
                 slot={s}
                 winner={item.winnerId || undefined}
                 cornerStyle={item.slots?.length === 1 ? 'all' : i === 0 ? 'top' : 'bottom'}
+                allowedSlots={allowedSlots}
               />
             ))}
           </div>
@@ -108,10 +108,12 @@ function Slot({
   slot,
   winner,
   cornerStyle,
+  allowedSlots,
 }: {
   slot: SlotsEntity
   winner?: number
   cornerStyle?: 'all' | 'top' | 'bottom'
+  allowedSlots: string[]
 }) {
   const prefix = (slot.entrant?.participants || [])[0]?.prefix
   const name = (slot.entrant?.participants || [])[0]?.gamerTag
@@ -151,17 +153,19 @@ function Slot({
       <span style={{ flex: 1, whiteSpace: 'nowrap' }}>{name}</span>
       {slot.score ? <span>{slot.score}</span> : isWinner ? <span>✓</span> : null}
       {slot.entrant?.isDisqualified ? <span>DQ</span> : null}
-      <div style={{ zIndex: -1, position: 'relative' }}>
-        <Xarrow
-          start={`${slot.prereqId}-${slot.prereqPlacement}`}
-          end={slot.id}
-          path="grid"
-          curveness={0.5}
-          headSize={0}
-          divContainerStyle={{ zIndex: -2 }}
-          lineColor="rgba(29, 78, 216, 0.7)"
-        />
-      </div>
+      {allowedSlots.includes(`${slot.prereqId}-${slot.prereqPlacement}`) ? (
+        <div style={{ zIndex: -1, position: 'relative' }}>
+          <Xarrow
+            start={`${slot.prereqId}-${slot.prereqPlacement}`}
+            end={slot.id}
+            path="grid"
+            curveness={0.5}
+            headSize={0}
+            divContainerStyle={{ zIndex: -2 }}
+            lineColor="rgba(29, 78, 216, 0.7)"
+          />
+        </div>
+      ) : null}
     </div>
   )
 }

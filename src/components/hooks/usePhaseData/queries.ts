@@ -31,6 +31,10 @@ export const PHASE_GROUP_INFO = gql`
           tournament {
             name
           }
+          phases {
+            id
+            name
+          }
         }
       }
     }

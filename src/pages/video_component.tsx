@@ -1,12 +1,20 @@
 import * as React from 'react'
+import { TwitchContext } from '../components/context/Twitch'
 import usePhaseData, { DataState } from '../components/hooks/usePhaseData'
 import CustomBracket from '../components/primitives/CustomBracket'
 import Loading from '../components/primitives/Loading'
 
 export default function VideoComponent() {
+  const { config } = React.useContext(TwitchContext)
   const [phaseGroupId, setPhaseGroupId] = React.useState<number | undefined>()
-  console.info({ phaseGroupId })
-  const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseGroupId)
+  const [phaseId, setPhaseId] = React.useState<number | undefined>(() => config?.broadcaster?.phase || undefined)
+  const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseId, phaseGroupId)
+  console.info({ phaseId, phaseGroupId, config })
+  React.useEffect(() => {
+    if (config?.broadcaster?.phase) {
+      setPhaseId(config?.broadcaster?.phase)
+    }
+  }, [config?.broadcaster?.phase])
   React.useEffect(() => {
     if (phaseGroupOptions.length === 1) {
       setPhaseGroupId(phaseGroupOptions[0].id)
@@ -21,31 +29,47 @@ export default function VideoComponent() {
         </div>
       ) : (
         <>
-          <div style={{ marginBottom: '0.5em' }}>
+          <div style={{ marginBottom: '0.2em' }}>
             <div
               style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'flex-end', marginLeft: '-0.5em' }}
             >
               <h2>{pool?.phaseGroup?.phase?.event?.tournament?.name}</h2>
               <h3>{pool?.phaseGroup?.phase?.event?.name}</h3>
             </div>
-            {phaseGroupOptions.length > 1 ? (
-              <div
-                style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: '1em' }}
-              >
-                <h4>{pool?.phaseGroup?.phase?.name}</h4>
-                <select
-                  onChange={(e) => setPhaseGroupId(Number(e.target.value))}
-                  value={phaseGroupId}
-                  className="select-css"
+            <div
+              style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'flex-end', marginLeft: '-0.5em' }}
+            >
+              {(pool?.phaseGroup?.phase?.event?.phases || []).length > 1 ? (
+                <div
+                  style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: '1em' }}
                 >
-                  {phaseGroupOptions.map((o) => (
-                    <option key={o.id} value={o.id}>
-                      Pool {o.displayIdentifier}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : null}
+                  <select onChange={(e) => setPhaseId(Number(e.target.value))} value={phaseId} className="select-css">
+                    {pool?.phaseGroup?.phase?.event?.phases.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : null}
+              {phaseGroupOptions.length > 0 ? (
+                <div
+                  style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: '1em' }}
+                >
+                  <select
+                    onChange={(e) => setPhaseGroupId(Number(e.target.value))}
+                    value={phaseGroupId}
+                    className="select-css"
+                  >
+                    {phaseGroupOptions.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        Pool {o.displayIdentifier}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : null}
+            </div>
           </div>
           <CustomBracket data={pool} />
         </>

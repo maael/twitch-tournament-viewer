@@ -40909,10 +40909,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/pages/video_component.tsx
   var React6 = __toModule(require_react())
 
-  // src/components/hooks/usePhaseData/index.ts
-  var React3 = __toModule(require_react())
-  var import_graphql_request2 = __toModule(require_dist())
-
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
@@ -40962,6 +40958,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   var Twitch_default = TwitchContextWrapper
 
+  // src/components/hooks/usePhaseData/index.ts
+  var React3 = __toModule(require_react())
+  var import_graphql_request2 = __toModule(require_dist())
+
   // src/components/hooks/usePhaseData/queries.ts
   var import_graphql_request = __toModule(require_dist())
   var PHASE_INFO = import_graphql_request.gql`
@@ -40992,6 +40992,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         event {
           name
           tournament {
+            name
+          }
+          phases {
+            id
             name
           }
         }
@@ -41061,25 +41065,23 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
-  function usePhaseData(phaseGroupId) {
-    var _a
-    const { config } = React3.useContext(TwitchContext)
+  function usePhaseData(phase, phaseGroupId) {
     const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
     const [pool, setPool] = React3.useState(void 0)
     const [dataState, setDataState] = React3.useState(DataState.Default)
     React3.useEffect(() => {
       ;(async () => {
-        var _a2
-        if (!config.broadcaster.phase) {
-          console.warn('No phase set, please configure the extension', config.broadcaster)
+        var _a
+        if (!phase) {
+          console.warn('No phase set, please configure the extension', phase)
           return
         }
         try {
           setDataState(DataState.Loading)
-          console.info('1', config.broadcaster.phase)
-          const result = await client.request(PHASE_INFO, { phaseId: config.broadcaster.phase })
+          console.info('1', phase)
+          const result = await client.request(PHASE_INFO, { phaseId: phase })
           const options = (
-            ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
+            ((_a = result == null ? void 0 : result.phase) == null ? void 0 : _a.phaseGroups.nodes) || []
           ).map((n2) => ({
             id: n2.id,
             displayIdentifier: n2.displayIdentifier,
@@ -41091,7 +41093,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           throw e2
         }
       })()
-    }, [config.broadcaster, (_a = config.broadcaster) == null ? void 0 : _a.phase])
+    }, [phase])
     React3.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
@@ -41109,23 +41111,21 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             if (page > lastPage) {
               lastPage = 0
             }
-            console.info(page, lastPage)
             const setsResult = await client.request(PHASE_GROUP_SETS, {
               phaseGroupId,
               page,
             })
             sets = sets.concat(setsResult.phaseGroup.sets.nodes)
-            console.info({ sets })
             lastPage = setsResult.phaseGroup.sets.pageInfo.totalPages
           } while (lastPage && lastPage > page)
           sets = sets.map((s2) => {
             s2.slots = s2.slots.map((slot) => {
-              var _a2, _b
+              var _a, _b
               slot.score =
                 (_b =
-                  (_a2 = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
+                  (_a = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
                     ? void 0
-                    : _a2.groups) == null
+                    : _a.groups) == null
                   ? void 0
                   : _b.score
               if (!slot.score && s2.displayScore === 'DQ' && slot.entrant.id !== s2.winnerId) {
@@ -41470,7 +41470,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function CustomBracket({ data }) {
     var _a, _b, _c, _d
-    console.info({ data })
     const winnerRounds =
       ((_b = (_a = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _a.nodes) == null
         ? void 0
@@ -41523,6 +41522,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function Rounds({ rounds, reverse }) {
     const entries = Object.entries(rounds)
     if (reverse) entries.reverse()
+    const allowedSlots = entries
+      .flatMap(([_, roundItems]) =>
+        roundItems.flatMap((i2) => {
+          var _a
+          return (_a = i2.slots) == null ? void 0 : _a.flatMap((s2) => s2.id)
+        })
+      )
+      .filter(Boolean)
     return /* @__PURE__ */ React4.createElement(
       'div',
       {
@@ -41538,7 +41545,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           /* @__PURE__ */ React4.createElement(
             'div',
             {
-              style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em' },
+              style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' },
             },
             roundItems[0].fullRoundText
           ),
@@ -41558,6 +41565,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               .map((i3) =>
                 /* @__PURE__ */ React4.createElement(Round, {
                   key: i3.identifier,
+                  allowedSlots,
                   item: i3,
                 })
               )
@@ -41566,11 +41574,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       )
     )
   }
-  function Round({ item }) {
+  function Round({ item, allowedSlots }) {
     var _a
-    if (item.identifier === 'CC') {
-      console.info(item)
-    }
     return /* @__PURE__ */ React4.createElement(
       'div',
       {
@@ -41617,6 +41622,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                     winner: item.winnerId || void 0,
                     cornerStyle:
                       ((_a2 = item.slots) == null ? void 0 : _a2.length) === 1 ? 'all' : i2 === 0 ? 'top' : 'bottom',
+                    allowedSlots,
                   })
                 })
           )
@@ -41624,7 +41630,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       )
     )
   }
-  function Slot({ slot, winner, cornerStyle }) {
+  function Slot({ slot, winner, cornerStyle, allowedSlots }) {
     var _a, _b, _c, _d, _e, _f
     const prefix =
       (_b = (((_a = slot.entrant) == null ? void 0 : _a.participants) || [])[0]) == null ? void 0 : _b.prefix
@@ -41691,21 +41697,23 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       ((_f = slot.entrant) == null ? void 0 : _f.isDisqualified)
         ? /* @__PURE__ */ React4.createElement('span', null, 'DQ')
         : null,
-      /* @__PURE__ */ React4.createElement(
-        'div',
-        {
-          style: { zIndex: -1, position: 'relative' },
-        },
-        /* @__PURE__ */ React4.createElement(import_react_xarrows.default, {
-          start: `${slot.prereqId}-${slot.prereqPlacement}`,
-          end: slot.id,
-          path: 'grid',
-          curveness: 0.5,
-          headSize: 0,
-          divContainerStyle: { zIndex: -2 },
-          lineColor: 'rgba(29, 78, 216, 0.7)',
-        })
-      )
+      allowedSlots.includes(`${slot.prereqId}-${slot.prereqPlacement}`)
+        ? /* @__PURE__ */ React4.createElement(
+            'div',
+            {
+              style: { zIndex: -1, position: 'relative' },
+            },
+            /* @__PURE__ */ React4.createElement(import_react_xarrows.default, {
+              start: `${slot.prereqId}-${slot.prereqPlacement}`,
+              end: slot.id,
+              path: 'grid',
+              curveness: 0.5,
+              headSize: 0,
+              divContainerStyle: { zIndex: -2 },
+              lineColor: 'rgba(29, 78, 216, 0.7)',
+            })
+          )
+        : null
     )
   }
 
@@ -41874,10 +41882,21 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // src/pages/video_component.tsx
   function VideoComponent() {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n
+    const { config } = React6.useContext(TwitchContext)
     const [phaseGroupId, setPhaseGroupId] = React6.useState()
-    console.info({ phaseGroupId })
-    const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseGroupId)
+    const [phaseId, setPhaseId] = React6.useState(() => {
+      var _a2
+      return ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) || void 0
+    })
+    const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseId, phaseGroupId)
+    console.info({ phaseId, phaseGroupId, config })
+    React6.useEffect(() => {
+      var _a2, _b2
+      if ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) {
+        setPhaseId((_b2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b2.phase)
+      }
+    }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.phase])
     React6.useEffect(() => {
       if (phaseGroupOptions.length === 1) {
         setPhaseGroupId(phaseGroupOptions[0].id)
@@ -41907,7 +41926,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             /* @__PURE__ */ React6.createElement(
               'div',
               {
-                style: { marginBottom: '0.5em' },
+                style: { marginBottom: '0.2em' },
               },
               /* @__PURE__ */ React6.createElement(
                 'div',
@@ -41923,67 +41942,116 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                 /* @__PURE__ */ React6.createElement(
                   'h2',
                   null,
-                  (_d =
-                    (_c =
-                      (_b = (_a = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _a.phase) == null
+                  (_e =
+                    (_d =
+                      (_c = (_b = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _b.phase) == null
                         ? void 0
-                        : _b.event) == null
+                        : _c.event) == null
                       ? void 0
-                      : _c.tournament) == null
+                      : _d.tournament) == null
                     ? void 0
-                    : _d.name
+                    : _e.name
                 ),
                 /* @__PURE__ */ React6.createElement(
                   'h3',
                   null,
-                  (_g =
-                    (_f = (_e = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _e.phase) == null
+                  (_h =
+                    (_g = (_f = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _f.phase) == null
                       ? void 0
-                      : _f.event) == null
+                      : _g.event) == null
                     ? void 0
-                    : _g.name
+                    : _h.name
                 )
               ),
-              phaseGroupOptions.length > 1
-                ? /* @__PURE__ */ React6.createElement(
-                    'div',
-                    {
-                      style: {
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: 10,
-                        alignItems: 'center',
-                        marginBottom: '1em',
-                      },
-                    },
-                    /* @__PURE__ */ React6.createElement(
-                      'h4',
-                      null,
-                      (_i = (_h = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _h.phase) == null
-                        ? void 0
-                        : _i.name
-                    ),
-                    /* @__PURE__ */ React6.createElement(
-                      'select',
+              /* @__PURE__ */ React6.createElement(
+                'div',
+                {
+                  style: {
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: 5,
+                    alignItems: 'flex-end',
+                    marginLeft: '-0.5em',
+                  },
+                },
+                (
+                  ((_k =
+                    (_j = (_i = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _i.phase) == null
+                      ? void 0
+                      : _j.event) == null
+                    ? void 0
+                    : _k.phases) || []
+                ).length > 1
+                  ? /* @__PURE__ */ React6.createElement(
+                      'div',
                       {
-                        onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
-                        value: phaseGroupId,
-                        className: 'select-css',
+                        style: {
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 10,
+                          alignItems: 'center',
+                          marginBottom: '1em',
+                        },
                       },
-                      phaseGroupOptions.map((o2) =>
-                        /* @__PURE__ */ React6.createElement(
-                          'option',
-                          {
-                            key: o2.id,
-                            value: o2.id,
-                          },
-                          'Pool ',
-                          o2.displayIdentifier
+                      /* @__PURE__ */ React6.createElement(
+                        'select',
+                        {
+                          onChange: (e2) => setPhaseId(Number(e2.target.value)),
+                          value: phaseId,
+                          className: 'select-css',
+                        },
+                        (_n =
+                          (_m = (_l = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _l.phase) == null
+                            ? void 0
+                            : _m.event) == null
+                          ? void 0
+                          : _n.phases.map((o2) =>
+                              /* @__PURE__ */ React6.createElement(
+                                'option',
+                                {
+                                  key: o2.id,
+                                  value: o2.id,
+                                },
+                                o2.name
+                              )
+                            )
+                      )
+                    )
+                  : null,
+                phaseGroupOptions.length > 0
+                  ? /* @__PURE__ */ React6.createElement(
+                      'div',
+                      {
+                        style: {
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 10,
+                          alignItems: 'center',
+                          marginBottom: '1em',
+                        },
+                      },
+                      /* @__PURE__ */ React6.createElement(
+                        'select',
+                        {
+                          onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
+                          value: phaseGroupId,
+                          className: 'select-css',
+                        },
+                        phaseGroupOptions.map((o2) =>
+                          /* @__PURE__ */ React6.createElement(
+                            'option',
+                            {
+                              key: o2.id,
+                              value: o2.id,
+                            },
+                            'Pool ',
+                            o2.displayIdentifier
+                          )
                         )
                       )
                     )
-                  )
-                : null
+                  : null
+              )
             ),
             /* @__PURE__ */ React6.createElement(CustomBracket, {
               data: pool,

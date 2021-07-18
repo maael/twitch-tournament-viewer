@@ -22,6 +22,7 @@ export interface Phase {
 export interface Event {
   name: string
   tournament: Tournament
+  phases: { id: number; name: string }[]
 }
 export interface Tournament {
   name: string

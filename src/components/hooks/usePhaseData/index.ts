@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { GraphQLClient } from 'graphql-request'
-import { TwitchContext } from '../../context/Twitch'
 import { PhaseData, PhaseGroupData } from '../../../types'
 import { PHASE_GROUP_INFO, PHASE_GROUP_SETS, PHASE_INFO } from './queries'
 
@@ -20,21 +19,20 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
 }
 
-export default function usePhaseData(phaseGroupId?: number) {
-  const { config } = React.useContext(TwitchContext)
+export default function usePhaseData(phase?: number, phaseGroupId?: number) {
   const [phaseGroupOptions, setPhaseGroupOptions] = React.useState<{ id: number; displayIdentifier: string }[]>([])
   const [pool, setPool] = React.useState<PhaseGroupData | undefined>(undefined)
   const [dataState, setDataState] = React.useState<DataState>(DataState.Default)
   React.useEffect(() => {
     ;(async () => {
-      if (!config.broadcaster.phase) {
-        console.warn('No phase set, please configure the extension', config.broadcaster)
+      if (!phase) {
+        console.warn('No phase set, please configure the extension', phase)
         return
       }
       try {
         setDataState(DataState.Loading)
-        console.info('1', config.broadcaster.phase)
-        const result = await client.request<PhaseData>(PHASE_INFO, { phaseId: config.broadcaster.phase })
+        console.info('1', phase)
+        const result = await client.request<PhaseData>(PHASE_INFO, { phaseId: phase })
         const options = (result?.phase?.phaseGroups.nodes || []).map((n) => ({
           id: n.id,
           displayIdentifier: n.displayIdentifier,
@@ -46,7 +44,7 @@ export default function usePhaseData(phaseGroupId?: number) {
         throw e
       }
     })()
-  }, [config.broadcaster, config.broadcaster?.phase])
+  }, [phase])
   React.useEffect(() => {
     ;(async () => {
       if (!phaseGroupId) return
@@ -64,13 +62,11 @@ export default function usePhaseData(phaseGroupId?: number) {
           if (page > lastPage) {
             lastPage = 0
           }
-          console.info(page, lastPage)
           const setsResult = await client.request<PhaseGroupData>(PHASE_GROUP_SETS, {
             phaseGroupId: phaseGroupId,
             page,
           })
           sets = sets.concat(setsResult.phaseGroup.sets.nodes)
-          console.info({ sets })
           lastPage = (setsResult.phaseGroup.sets as any).pageInfo.totalPages
         } while (lastPage && lastPage > page)
         sets = sets.map((s) => {

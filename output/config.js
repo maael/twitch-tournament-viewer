@@ -32542,7 +32542,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // src/pages/config.tsx
   var React3 = __toModule(require_react())
-  var import_graphql_request = __toModule(require_dist())
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
@@ -32593,12 +32592,47 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   var Twitch_default = TwitchContextWrapper
 
-  // src/pages/config.tsx
+  // src/util/getEvent.ts
+  var import_graphql_request = __toModule(require_dist())
   var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
     headers: {
       Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
     },
   })
+  async function getEvent(link) {
+    var _a, _b
+    const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
+    const tournament = (_a = match == null ? void 0 : match.groups) == null ? void 0 : _a.t
+    const event = (_b = match == null ? void 0 : match.groups) == null ? void 0 : _b.e
+    const query = import_graphql_request.gql`
+    query TournamentQuery($slug: String) {
+      tournament(slug: $slug) {
+        id
+        name
+        events(filter: {}) {
+          id
+          slug
+          name
+          phases {
+            id
+            name
+          }
+        }
+      }
+    }
+  `
+    if (!tournament || !event) {
+      return void 0
+    }
+    const result = await client.request(query, { slug: tournament })
+    const foundEvent = result.tournament.events.find((e) => e.slug === `tournament/${tournament}/event/${event}`)
+    return {
+      name: result.tournament.name,
+      event: foundEvent,
+    }
+  }
+
+  // src/pages/config.tsx
   function Index() {
     var _a, _b, _c, _d, _e
     const { twitch, config } = React3.useContext(TwitchContext)
@@ -32624,38 +32658,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           onSubmit: async (e) => {
             e.preventDefault()
             const link2 = e.currentTarget.elements.eventLink.value.trim()
-            const match = link2.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
-            const tournament = match == null ? void 0 : match.groups.t
-            const event = match == null ? void 0 : match.groups.e
-            const query = import_graphql_request.gql`
-            query TournamentQuery($slug: String) {
-              tournament(slug: $slug) {
-                id
-                name
-                events(filter: {}) {
-                  id
-                  slug
-                  name
-                  phases {
-                    id
-                    name
-                  }
-                }
-              }
-            }
-          `
-            if (!tournament || !event) {
-              setTournamentData(void 0)
-              return
-            }
-            const result = await client.request(query, { slug: tournament })
-            const foundEvent = result.tournament.events.find(
-              (e2) => e2.slug === `tournament/${tournament}/event/${event}`
-            )
-            setTournamentData({
-              name: result.tournament.name,
-              event: foundEvent,
-            })
+            const data = await getEvent(link2)
+            setTournamentData(data)
             setLink(link2)
           },
         },
@@ -32720,7 +32724,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               {
                 style: { display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' },
               },
-              'Choose the phase to show:',
+              'Choose the default phase to show:',
               /* @__PURE__ */ React3.createElement(
                 'select',
                 {
