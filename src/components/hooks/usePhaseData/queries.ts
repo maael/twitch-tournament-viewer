@@ -20,6 +20,9 @@ export const PHASE_GROUP_INFO = gql`
       id
       displayIdentifier
       bracketType
+      progressionsOut {
+        id
+      }
       phase {
         id
         name
@@ -72,6 +75,10 @@ export const PHASE_GROUP_SETS = gql`
             prereqId
             prereqType
             prereqPlacement
+            seed {
+              id
+              progressionSeedId
+            }
             entrant {
               id
               name

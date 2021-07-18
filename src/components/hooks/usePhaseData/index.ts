@@ -1,13 +1,7 @@
 import * as React from 'react'
-import { GraphQLClient } from 'graphql-request'
+import client from '../../../util/gqlClient'
 import { PhaseData, PhaseGroupData } from '../../../types'
 import { PHASE_GROUP_INFO, PHASE_GROUP_SETS, PHASE_INFO } from './queries'
-
-const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_SMASH_GG_TOKEN}`,
-  },
-})
 
 export enum DataState {
   Default = 'DEFAULT',
@@ -82,6 +76,7 @@ export default function usePhaseData(phase?: number, phaseGroupId?: number) {
           return s
         })
         result.phaseGroup.sets = { nodes: sets }
+        console.info('phase data', { result })
         setPool(result)
         setDataState(DataState.Default)
       } catch (e) {

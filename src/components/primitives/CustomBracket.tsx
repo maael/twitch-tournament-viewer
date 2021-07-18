@@ -3,6 +3,7 @@ import Xarrow from 'react-xarrows'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { PhaseGroupData } from '../../types'
 import { NodesEntity, SlotsEntity } from '../../types/phaseGroup'
+import { ProgressionInfoContext } from '../context/ProgressionInfo'
 
 function reduceRounds(acc: any, n: NodesEntity) {
   return {
@@ -11,7 +12,13 @@ function reduceRounds(acc: any, n: NodesEntity) {
   }
 }
 
-export default function CustomBracket({ data }: { data?: PhaseGroupData }) {
+export default function CustomBracket({
+  data,
+  onClickRound,
+}: {
+  data?: PhaseGroupData
+  onClickRound?: (phaseId: number, phaseGroupId: number) => void
+}) {
   const winnerRounds = data?.phaseGroup.sets?.nodes?.filter((n) => n.round >= 0).reduce(reduceRounds, {}) || {}
   const loserRounds = data?.phaseGroup.sets?.nodes?.filter((n) => n.round < 0).reduce(reduceRounds, {}) || {}
   return data ? (
@@ -20,8 +27,8 @@ export default function CustomBracket({ data }: { data?: PhaseGroupData }) {
         style={{ maxHeight: '100%', maxWidth: '100vw', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', userSelect: 'none' }}>
-          <Rounds rounds={winnerRounds} />
-          <Rounds rounds={loserRounds} reverse />
+          <Rounds rounds={winnerRounds} onClickRound={onClickRound} />
+          <Rounds rounds={loserRounds} onClickRound={onClickRound} reverse />
         </div>
       </ScrollContainer>
     </div>
@@ -34,12 +41,21 @@ function getJustifyType(entries: [string, NodesEntity[]][], i: number) {
   return previous[1].length < entries[i][1].length ? 'space-between' : 'space-around'
 }
 
-function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] }; reverse?: boolean }) {
+function Rounds({
+  rounds,
+  reverse,
+  onClickRound,
+}: {
+  rounds: { [round: number]: NodesEntity[] }
+  reverse?: boolean
+  onClickRound?: (phaseId: number, phaseGroupId: number) => void
+}) {
   const entries = Object.entries(rounds)
   if (reverse) entries.reverse()
   const allowedSlots = entries
     .flatMap(([_, roundItems]) => roundItems.flatMap((i) => i.slots?.flatMap((s) => s.id)))
     .filter(Boolean) as string[]
+  const progData = React.useContext(ProgressionInfoContext)
   return (
     <div style={{ display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' }}>
       {entries.map(([k, roundItems], i) => (
@@ -58,17 +74,87 @@ function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] 
           >
             {roundItems
               .sort((a, b) => a.identifier.localeCompare(b.identifier) && a.identifier.length - b.identifier.length)
-              .map((i) => (
-                <Round key={i.identifier} allowedSlots={allowedSlots} item={i} />
+              .map((item) => (
+                <Match key={item.identifier} allowedSlots={allowedSlots} item={item} />
               ))}
           </div>
         </div>
       ))}
+      {progData.length > 0 ? <NextBracketColumn entries={entries} onClickRound={onClickRound} /> : null}
     </div>
   )
 }
 
-function Round({ item, allowedSlots }: { item: NodesEntity; allowedSlots: string[] }) {
+function NextBracketColumn({
+  entries,
+  onClickRound,
+}: {
+  entries: [string, NodesEntity[]][]
+  onClickRound?: (phaseId: number, phaseGroupId: number) => void
+}) {
+  const i = entries.length - 1
+  const roundItems = (entries[i] || [])[1]
+  const progData = React.useContext(ProgressionInfoContext)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' }}>
+        Next Bracket
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          flex: 1,
+          justifyContent: 'space-around',
+        }}
+      >
+        {roundItems
+          .sort((a, b) => a.identifier.localeCompare(b.identifier) && a.identifier.length - b.identifier.length)
+          .map((item) => (
+            <div key={item.identifier} style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+              {item.slots?.map((slot) => {
+                const progSeed = slot.seed?.progressionSeedId
+                  ? progData.find((d) => d.id === slot.seed?.progressionSeedId)
+                  : undefined
+                return progSeed ? (
+                  <div key={slot.id} id={`next-${slot.id}`}>
+                    <div style={{ zIndex: -1, position: 'relative' }}>
+                      <Xarrow
+                        start={`next-${slot.id}`}
+                        end={`slot-${slot.id}`}
+                        path="grid"
+                        curveness={0.5}
+                        headSize={0}
+                        divContainerStyle={{ zIndex: -2 }}
+                        lineColor="rgba(29, 78, 216, 0.5)"
+                        dashness={true}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        whiteSpace: 'nowrap',
+                        flex: 1,
+                        background: `rgba(30, 64, 175, 0.5)`,
+                        padding: '0.3em 0.8em',
+                        borderRadius: '0.3em',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => onClickRound && onClickRound(progSeed.phase.id, progSeed.phaseGroup.id)}
+                    >
+                      {progSeed.phase.name}
+                    </div>
+                  </div>
+                ) : null
+              })}
+            </div>
+          ))}
+      </div>
+    </div>
+  )
+}
+
+function Match({ item, allowedSlots }: { item: NodesEntity; allowedSlots: string[] }) {
   return (
     <div id={(item.slots || [])[0].id}>
       <div id={(item.slots || [])[1].id}>
@@ -133,6 +219,7 @@ function Slot({
         borderBottomRightRadius: cornerStyle !== 'top' ? '0.3em' : undefined,
       }}
       title={`${prefix || ''} ${prefix ? '|' : ''} ${name}`.trim()}
+      id={`slot-${slot.id}`}
     >
       {prefix ? (
         <span style={{ opacity: '0.7', whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row' }}>

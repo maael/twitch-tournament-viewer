@@ -1,10 +1,4 @@
-import { GraphQLClient, gql } from 'graphql-request'
-
-const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_SMASH_GG_TOKEN}`,
-  },
-})
+import client, { gql } from './gqlClient'
 
 export async function getEvent(link: string) {
   const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)

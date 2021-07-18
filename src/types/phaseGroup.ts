@@ -49,6 +49,10 @@ export interface SlotsEntity {
   prereqPlacement?: number
   entrant?: Entrant | null
   score?: string
+  seed?: {
+    id?: number
+    progressionSeedId?: number
+  }
 }
 export interface Entrant {
   id: number

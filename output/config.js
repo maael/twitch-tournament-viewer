@@ -32547,7 +32547,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
   var defaultConfig =
-    '{"phase":"965154", "link":"https://smash.gg/tournament/rollback-rumble-the-big-one-1/event/na-singles-top-64-combined/brackets/965154/1530770"}'
+    '{"phase":"204945","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -32592,13 +32592,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   var Twitch_default = TwitchContextWrapper
 
-  // src/util/getEvent.ts
+  // src/util/gqlClient.ts
   var import_graphql_request = __toModule(require_dist())
   var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
     headers: {
       Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
     },
   })
+  var gqlClient_default = client
+
+  // src/util/getEvent.ts
   async function getEvent(link) {
     var _a, _b
     const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
@@ -32624,7 +32627,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     if (!tournament || !event) {
       return void 0
     }
-    const result = await client.request(query, { slug: tournament })
+    const result = await gqlClient_default.request(query, { slug: tournament })
     const foundEvent = result.tournament.events.find((e) => e.slug === `tournament/${tournament}/event/${event}`)
     return {
       name: result.tournament.name,

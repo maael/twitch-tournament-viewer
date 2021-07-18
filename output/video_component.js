@@ -572,7 +572,7 @@
             }
             return element
           }
-          function createElement5(type, config, children) {
+          function createElement6(type, config, children) {
             var propName
             var props = {}
             var key = null
@@ -859,7 +859,7 @@
             }
             return children
           }
-          function createContext2(defaultValue, calculateChangedBits) {
+          function createContext3(defaultValue, calculateChangedBits) {
             if (calculateChangedBits === void 0) {
               calculateChangedBits = null
             } else {
@@ -1185,7 +1185,7 @@
             }
             return dispatcher
           }
-          function useContext2(Context, unstable_observedBits) {
+          function useContext3(Context, unstable_observedBits) {
             var dispatcher = resolveDispatcher()
             {
               if (unstable_observedBits !== void 0) {
@@ -1212,7 +1212,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits)
           }
-          function useState4(initialState) {
+          function useState5(initialState) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useState(initialState)
           }
@@ -1224,7 +1224,7 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useRef(initialValue)
           }
-          function useEffect4(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useEffect(create, deps)
           }
@@ -1236,7 +1236,7 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useCallback(callback, deps)
           }
-          function useMemo(create, deps) {
+          function useMemo2(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useMemo(create, deps)
           }
@@ -1762,7 +1762,7 @@
                 )
               }
             }
-            var element = createElement5.apply(this, arguments)
+            var element = createElement6.apply(this, arguments)
             if (element == null) {
               return element
             }
@@ -1832,7 +1832,7 @@
           exports.PureComponent = PureComponent
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals
           exports.cloneElement = cloneElement$1
-          exports.createContext = createContext2
+          exports.createContext = createContext3
           exports.createElement = createElement$1
           exports.createFactory = createFactory
           exports.createRef = createRef
@@ -1841,15 +1841,15 @@
           exports.lazy = lazy
           exports.memo = memo
           exports.useCallback = useCallback
-          exports.useContext = useContext2
+          exports.useContext = useContext3
           exports.useDebugValue = useDebugValue
-          exports.useEffect = useEffect4
+          exports.useEffect = useEffect5
           exports.useImperativeHandle = useImperativeHandle
           exports.useLayoutEffect = useLayoutEffect
-          exports.useMemo = useMemo
+          exports.useMemo = useMemo2
           exports.useReducer = useReducer
           exports.useRef = useRef
-          exports.useState = useState4
+          exports.useState = useState5
           exports.version = ReactVersion
         })()
       }
@@ -2659,11 +2659,11 @@
       if (true) {
         ;(function () {
           'use strict'
-          var React9 = require_react()
+          var React11 = require_react()
           var _assign = require_object_assign()
           var Scheduler = require_scheduler()
           var tracing = require_tracing()
-          var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
           function warn(format) {
             {
               for (
@@ -2703,7 +2703,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat)
             }
           }
-          if (!React9) {
+          if (!React11) {
             {
               throw Error(
                 'ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.'
@@ -4010,7 +4010,7 @@
           var didWarnInvalidChild = false
           function flattenChildren(children) {
             var content = ''
-            React9.Children.forEach(children, function (child) {
+            React11.Children.forEach(children, function (child) {
               if (child == null) {
                 return
               }
@@ -4021,7 +4021,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === 'object' && props.children !== null) {
-                React9.Children.forEach(props.children, function (child) {
+                React11.Children.forEach(props.children, function (child) {
                   if (child == null) {
                     return
                   }
@@ -9419,7 +9419,7 @@
               }
             }
           }
-          function createElement5(type, props, rootContainerElement, parentNamespace) {
+          function createElement6(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement)
             var domElement
@@ -10451,7 +10451,7 @@
               }
               parentNamespace = hostContextDev.namespace
             }
-            var domElement = createElement5(type, props, rootContainerInstance, parentNamespace)
+            var domElement = createElement6(type, props, rootContainerInstance, parentNamespace)
             precacheFiberNode(internalInstanceHandle, domElement)
             updateFiberProps(domElement, props)
             return domElement
@@ -12149,7 +12149,7 @@
           }
           var fakeInternalInstance = {}
           var isArray = Array.isArray
-          var emptyRefsObject = new React9.Component().refs
+          var emptyRefsObject = new React11.Component().refs
           var didWarnAboutStateAssignmentForComponent
           var didWarnAboutUninitializedState
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate
@@ -25356,7 +25356,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         if (typeof document2 === 'string') return document2
         return printer_1.print(document2)
       }
-      function gql2(chunks) {
+      function gql3(chunks) {
         var variables = []
         for (var _i = 1; _i < arguments.length; _i++) {
           variables[_i - 1] = arguments[_i]
@@ -25365,7 +25365,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           return '' + accumulator + chunk + (index in variables ? variables[index] : '')
         }, '')
       }
-      exports.gql = gql2
+      exports.gql = gql3
       function HeadersInstanceToPlainObject(headers) {
         var o2 = {}
         headers.forEach(function (v, k) {
@@ -40907,13 +40907,75 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   addExtensionMethods()
 
   // src/pages/video_component.tsx
-  var React6 = __toModule(require_react())
+  var React8 = __toModule(require_react())
+
+  // src/components/context/ProgressionInfo.tsx
+  var React3 = __toModule(require_react())
+
+  // src/components/hooks/useProgressionInfo/index.ts
+  var React2 = __toModule(require_react())
+
+  // src/util/gqlClient.ts
+  var import_graphql_request = __toModule(require_dist())
+  var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
+    headers: {
+      Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
+    },
+  })
+  var gqlClient_default = client
+
+  // src/components/hooks/useProgressionInfo/index.ts
+  function useProgressionInfo(progressionSeeds) {
+    const [progData, setProgData] = React2.useState([])
+    React2.useEffect(() => {
+      ;(async () => {
+        if (!progressionSeeds || progressionSeeds.length === 0) {
+          setProgData([])
+          return
+        }
+        const query = `query {
+        ${progressionSeeds
+          .map(
+            (s2) => `seed_${s2}: seed(id: ${s2}) {
+          id
+          progressionSeedId
+          phase {
+            id
+            name
+          }
+          phaseGroup {
+            id
+            displayIdentifier
+          }
+        }`
+          )
+          .join('\n')}
+      }`
+        const result = await gqlClient_default.request(import_graphql_request.gql`${query}`)
+        setProgData(Object.values(result))
+      })()
+    }, [progressionSeeds])
+    return progData
+  }
+
+  // src/components/context/ProgressionInfo.tsx
+  var ProgressionInfoContext = React3.createContext([])
+  var ProgressionInfoProvider = ({ progressionSeeds, children }) => {
+    const progData = useProgressionInfo(progressionSeeds)
+    return /* @__PURE__ */ React3.createElement(
+      ProgressionInfoContext.Provider,
+      {
+        value: progData,
+      },
+      children
+    )
+  }
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
   var defaultConfig =
-    '{"phase":"965154", "link":"https://smash.gg/tournament/rollback-rumble-the-big-one-1/event/na-singles-top-64-combined/brackets/965154/1530770"}'
+    '{"phase":"204945","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -40959,12 +41021,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var Twitch_default = TwitchContextWrapper
 
   // src/components/hooks/usePhaseData/index.ts
-  var React3 = __toModule(require_react())
-  var import_graphql_request2 = __toModule(require_dist())
+  var React5 = __toModule(require_react())
 
   // src/components/hooks/usePhaseData/queries.ts
-  var import_graphql_request = __toModule(require_dist())
-  var PHASE_INFO = import_graphql_request.gql`
+  var import_graphql_request2 = __toModule(require_dist())
+  var PHASE_INFO = import_graphql_request2.gql`
   query TournamentQuery($phaseId: ID) {
     phase(id: $phaseId) {
       name
@@ -40977,12 +41038,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     }
   }
 `
-  var PHASE_GROUP_INFO = import_graphql_request.gql`
+  var PHASE_GROUP_INFO = import_graphql_request2.gql`
   query TournamentQuery($phaseGroupId: ID) {
     phaseGroup(id: $phaseGroupId) {
       id
       displayIdentifier
       bracketType
+      progressionsOut {
+        id
+      }
       phase {
         id
         name
@@ -41003,7 +41067,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     }
   }
 `
-  var PHASE_GROUP_SETS = import_graphql_request.gql`
+  var PHASE_GROUP_SETS = import_graphql_request2.gql`
   query TournamentQuery($phaseGroupId: ID, $page: Int) {
     phaseGroup(id: $phaseGroupId) {
       sets(page: $page, perPage: 30) {
@@ -41034,6 +41098,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             prereqId
             prereqType
             prereqPlacement
+            seed {
+              id
+              progressionSeedId
+            }
             entrant {
               id
               name
@@ -41051,11 +41119,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 `
 
   // src/components/hooks/usePhaseData/index.ts
-  var client = new import_graphql_request2.GraphQLClient('https://api.smash.gg/gql/alpha', {
-    headers: {
-      Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
-    },
-  })
   var DataState
   ;(function (DataState2) {
     DataState2['Default'] = 'DEFAULT'
@@ -41066,10 +41129,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
   function usePhaseData(phase, phaseGroupId) {
-    const [phaseGroupOptions, setPhaseGroupOptions] = React3.useState([])
-    const [pool, setPool] = React3.useState(void 0)
-    const [dataState, setDataState] = React3.useState(DataState.Default)
-    React3.useEffect(() => {
+    const [phaseGroupOptions, setPhaseGroupOptions] = React5.useState([])
+    const [pool, setPool] = React5.useState(void 0)
+    const [dataState, setDataState] = React5.useState(DataState.Default)
+    React5.useEffect(() => {
       ;(async () => {
         var _a
         if (!phase) {
@@ -41079,7 +41142,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         try {
           setDataState(DataState.Loading)
           console.info('1', phase)
-          const result = await client.request(PHASE_INFO, { phaseId: phase })
+          const result = await gqlClient_default.request(PHASE_INFO, { phaseId: phase })
           const options = (
             ((_a = result == null ? void 0 : result.phase) == null ? void 0 : _a.phaseGroups.nodes) || []
           ).map((n2) => ({
@@ -41094,13 +41157,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         }
       })()
     }, [phase])
-    React3.useEffect(() => {
+    React5.useEffect(() => {
       ;(async () => {
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
         try {
           setDataState(DataState.Loading)
-          const result = await client.request(PHASE_GROUP_INFO, { phaseGroupId })
+          const result = await gqlClient_default.request(PHASE_GROUP_INFO, { phaseGroupId })
           let page = 0
           let lastPage = 0
           let sets = []
@@ -41111,7 +41174,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             if (page > lastPage) {
               lastPage = 0
             }
-            const setsResult = await client.request(PHASE_GROUP_SETS, {
+            const setsResult = await gqlClient_default.request(PHASE_GROUP_SETS, {
               phaseGroupId,
               page,
             })
@@ -41136,6 +41199,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             return s2
           })
           result.phaseGroup.sets = { nodes: sets }
+          console.info('phase data', { result })
           setPool(result)
           setDataState(DataState.Default)
         } catch (e2) {
@@ -41152,7 +41216,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
 
   // src/components/primitives/CustomBracket.tsx
-  var React4 = __toModule(require_react())
+  var React6 = __toModule(require_react())
   var import_react_xarrows = __toModule(require_lib())
 
   // node_modules/react-indiana-drag-scroll/dist/index.es.js
@@ -41468,7 +41532,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       [n2.round]: (acc[n2.round] || []).concat(n2),
     })
   }
-  function CustomBracket({ data }) {
+  function CustomBracket({ data, onClickRound }) {
     var _a, _b, _c, _d
     const winnerRounds =
       ((_b = (_a = data == null ? void 0 : data.phaseGroup.sets) == null ? void 0 : _a.nodes) == null
@@ -41479,12 +41543,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         ? void 0
         : _d.filter((n2) => n2.round < 0).reduce(reduceRounds, {})) || {}
     return data
-      ? /* @__PURE__ */ React4.createElement(
+      ? /* @__PURE__ */ React6.createElement(
           'div',
           {
             style: { position: 'relative', flex: 1 },
           },
-          /* @__PURE__ */ React4.createElement(
+          /* @__PURE__ */ React6.createElement(
             index_es_default,
             {
               style: {
@@ -41497,16 +41561,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                 bottom: 0,
               },
             },
-            /* @__PURE__ */ React4.createElement(
+            /* @__PURE__ */ React6.createElement(
               'div',
               {
                 style: { display: 'flex', flexDirection: 'column', position: 'relative', userSelect: 'none' },
               },
-              /* @__PURE__ */ React4.createElement(Rounds, {
+              /* @__PURE__ */ React6.createElement(Rounds, {
                 rounds: winnerRounds,
+                onClickRound,
               }),
-              /* @__PURE__ */ React4.createElement(Rounds, {
+              /* @__PURE__ */ React6.createElement(Rounds, {
                 rounds: loserRounds,
+                onClickRound,
                 reverse: true,
               })
             )
@@ -41519,7 +41585,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     if (!previous) return 'space-between'
     return previous[1].length < entries[i2][1].length ? 'space-between' : 'space-around'
   }
-  function Rounds({ rounds, reverse }) {
+  function Rounds({ rounds, reverse, onClickRound }) {
     const entries = Object.entries(rounds)
     if (reverse) entries.reverse()
     const allowedSlots = entries
@@ -41530,26 +41596,27 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         })
       )
       .filter(Boolean)
-    return /* @__PURE__ */ React4.createElement(
+    const progData = React6.useContext(ProgressionInfoContext)
+    return /* @__PURE__ */ React6.createElement(
       'div',
       {
         style: { display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' },
       },
       entries.map(([k, roundItems], i2) =>
-        /* @__PURE__ */ React4.createElement(
+        /* @__PURE__ */ React6.createElement(
           'div',
           {
             key: k,
             style: { display: 'flex', flexDirection: 'column', gap: 10 },
           },
-          /* @__PURE__ */ React4.createElement(
+          /* @__PURE__ */ React6.createElement(
             'div',
             {
               style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' },
             },
             roundItems[0].fullRoundText
           ),
-          /* @__PURE__ */ React4.createElement(
+          /* @__PURE__ */ React6.createElement(
             'div',
             {
               style: {
@@ -41562,36 +41629,135 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             },
             roundItems
               .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
-              .map((i3) =>
-                /* @__PURE__ */ React4.createElement(Round, {
-                  key: i3.identifier,
+              .map((item) =>
+                /* @__PURE__ */ React6.createElement(Match, {
+                  key: item.identifier,
                   allowedSlots,
-                  item: i3,
+                  item,
                 })
               )
           )
         )
+      ),
+      progData.length > 0
+        ? /* @__PURE__ */ React6.createElement(NextBracketColumn, {
+            entries,
+            onClickRound,
+          })
+        : null
+    )
+  }
+  function NextBracketColumn({ entries, onClickRound }) {
+    const i2 = entries.length - 1
+    const roundItems = (entries[i2] || [])[1]
+    const progData = React6.useContext(ProgressionInfoContext)
+    return /* @__PURE__ */ React6.createElement(
+      'div',
+      {
+        style: { display: 'flex', flexDirection: 'column', gap: 10 },
+      },
+      /* @__PURE__ */ React6.createElement(
+        'div',
+        {
+          style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' },
+        },
+        'Next Bracket'
+      ),
+      /* @__PURE__ */ React6.createElement(
+        'div',
+        {
+          style: {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            flex: 1,
+            justifyContent: 'space-around',
+          },
+        },
+        roundItems
+          .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
+          .map((item) => {
+            var _a
+            return /* @__PURE__ */ React6.createElement(
+              'div',
+              {
+                key: item.identifier,
+                style: { display: 'flex', flexDirection: 'column', gap: 40 },
+              },
+              (_a = item.slots) == null
+                ? void 0
+                : _a.map((slot) => {
+                    var _a2
+                    const progSeed = ((_a2 = slot.seed) == null ? void 0 : _a2.progressionSeedId)
+                      ? progData.find((d) => {
+                          var _a3
+                          return d.id === ((_a3 = slot.seed) == null ? void 0 : _a3.progressionSeedId)
+                        })
+                      : void 0
+                    return progSeed
+                      ? /* @__PURE__ */ React6.createElement(
+                          'div',
+                          {
+                            key: slot.id,
+                            id: `next-${slot.id}`,
+                          },
+                          /* @__PURE__ */ React6.createElement(
+                            'div',
+                            {
+                              style: { zIndex: -1, position: 'relative' },
+                            },
+                            /* @__PURE__ */ React6.createElement(import_react_xarrows.default, {
+                              start: `next-${slot.id}`,
+                              end: `slot-${slot.id}`,
+                              path: 'grid',
+                              curveness: 0.5,
+                              headSize: 0,
+                              divContainerStyle: { zIndex: -2 },
+                              lineColor: 'rgba(29, 78, 216, 0.5)',
+                              dashness: true,
+                            })
+                          ),
+                          /* @__PURE__ */ React6.createElement(
+                            'div',
+                            {
+                              style: {
+                                whiteSpace: 'nowrap',
+                                flex: 1,
+                                background: `rgba(30, 64, 175, 0.5)`,
+                                padding: '0.3em 0.8em',
+                                borderRadius: '0.3em',
+                                cursor: 'pointer',
+                              },
+                              onClick: () => onClickRound && onClickRound(progSeed.phase.id, progSeed.phaseGroup.id),
+                            },
+                            progSeed.phase.name
+                          )
+                        )
+                      : null
+                  })
+            )
+          })
       )
     )
   }
-  function Round({ item, allowedSlots }) {
+  function Match({ item, allowedSlots }) {
     var _a
-    return /* @__PURE__ */ React4.createElement(
+    return /* @__PURE__ */ React6.createElement(
       'div',
       {
         id: (item.slots || [])[0].id,
       },
-      /* @__PURE__ */ React4.createElement(
+      /* @__PURE__ */ React6.createElement(
         'div',
         {
           id: (item.slots || [])[1].id,
         },
-        /* @__PURE__ */ React4.createElement(
+        /* @__PURE__ */ React6.createElement(
           'div',
           {
             style: { display: 'flex', flexDirection: 'row', alignItems: 'center', zIndex: 9, position: 'relative' },
           },
-          /* @__PURE__ */ React4.createElement(
+          /* @__PURE__ */ React6.createElement(
             'div',
             {
               style: {
@@ -41607,7 +41773,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             },
             item.identifier
           ),
-          /* @__PURE__ */ React4.createElement(
+          /* @__PURE__ */ React6.createElement(
             'div',
             {
               style: { display: 'flex', flexDirection: 'column', borderRadius: '0.3em', flex: 1 },
@@ -41616,7 +41782,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               ? void 0
               : _a.map((s2, i2) => {
                   var _a2
-                  return /* @__PURE__ */ React4.createElement(Slot, {
+                  return /* @__PURE__ */ React6.createElement(Slot, {
                     key: s2.id,
                     slot: s2,
                     winner: item.winnerId || void 0,
@@ -41637,7 +41803,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     const name =
       (_d = (((_c = slot.entrant) == null ? void 0 : _c.participants) || [])[0]) == null ? void 0 : _d.gamerTag
     const isWinner = winner === ((_e = slot.entrant) == null ? void 0 : _e.id)
-    return /* @__PURE__ */ React4.createElement(
+    return /* @__PURE__ */ React6.createElement(
       'div',
       {
         style: {
@@ -41653,14 +41819,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           borderBottomRightRadius: cornerStyle !== 'top' ? '0.3em' : void 0,
         },
         title: `${prefix || ''} ${prefix ? '|' : ''} ${name}`.trim(),
+        id: `slot-${slot.id}`,
       },
       prefix
-        ? /* @__PURE__ */ React4.createElement(
+        ? /* @__PURE__ */ React6.createElement(
             'span',
             {
               style: { opacity: '0.7', whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row' },
             },
-            /* @__PURE__ */ React4.createElement(
+            /* @__PURE__ */ React6.createElement(
               'span',
               {
                 style: {
@@ -41673,7 +41840,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               },
               prefix
             ),
-            /* @__PURE__ */ React4.createElement(
+            /* @__PURE__ */ React6.createElement(
               'span',
               {
                 style: { display: 'inline-block', marginLeft: '0.4em' },
@@ -41682,7 +41849,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             )
           )
         : null,
-      /* @__PURE__ */ React4.createElement(
+      /* @__PURE__ */ React6.createElement(
         'span',
         {
           style: { flex: 1, whiteSpace: 'nowrap' },
@@ -41690,20 +41857,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         name
       ),
       slot.score
-        ? /* @__PURE__ */ React4.createElement('span', null, slot.score)
+        ? /* @__PURE__ */ React6.createElement('span', null, slot.score)
         : isWinner
-        ? /* @__PURE__ */ React4.createElement('span', null, '\u2713')
+        ? /* @__PURE__ */ React6.createElement('span', null, '\u2713')
         : null,
       ((_f = slot.entrant) == null ? void 0 : _f.isDisqualified)
-        ? /* @__PURE__ */ React4.createElement('span', null, 'DQ')
+        ? /* @__PURE__ */ React6.createElement('span', null, 'DQ')
         : null,
       allowedSlots.includes(`${slot.prereqId}-${slot.prereqPlacement}`)
-        ? /* @__PURE__ */ React4.createElement(
+        ? /* @__PURE__ */ React6.createElement(
             'div',
             {
               style: { zIndex: -1, position: 'relative' },
             },
-            /* @__PURE__ */ React4.createElement(import_react_xarrows.default, {
+            /* @__PURE__ */ React6.createElement(import_react_xarrows.default, {
               start: `${slot.prereqId}-${slot.prereqPlacement}`,
               end: slot.id,
               path: 'grid',
@@ -41718,9 +41885,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
 
   // src/components/primitives/Loading.tsx
-  var React5 = __toModule(require_react())
+  var React7 = __toModule(require_react())
   function Loading(props) {
-    return /* @__PURE__ */ React5.createElement(
+    return /* @__PURE__ */ React7.createElement(
       'svg',
       __spreadValues(
         {
@@ -41732,14 +41899,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         },
         props
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 12.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '0s',
           dur: '1s',
@@ -41748,7 +41915,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 12.5,
@@ -41756,7 +41923,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           r: 12.5,
           fillOpacity: 0.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '100ms',
           dur: '1s',
@@ -41765,14 +41932,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '300ms',
           dur: '1s',
@@ -41781,14 +41948,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 52.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '600ms',
           dur: '1s',
@@ -41797,14 +41964,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '800ms',
           dur: '1s',
@@ -41813,14 +41980,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 52.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '400ms',
           dur: '1s',
@@ -41829,14 +41996,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 12.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '700ms',
           dur: '1s',
@@ -41845,14 +42012,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '500ms',
           dur: '1s',
@@ -41861,14 +42028,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React5.createElement(
+      /* @__PURE__ */ React7.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React5.createElement('animate', {
+        /* @__PURE__ */ React7.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '200ms',
           dur: '1s',
@@ -41883,180 +42050,206 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/pages/video_component.tsx
   function VideoComponent() {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n
-    const { config } = React6.useContext(TwitchContext)
-    const [phaseGroupId, setPhaseGroupId] = React6.useState()
-    const [phaseId, setPhaseId] = React6.useState(() => {
+    const { config } = React8.useContext(TwitchContext)
+    const [phaseGroupId, setPhaseGroupId] = React8.useState()
+    const [phaseId, setPhaseId] = React8.useState(() => {
       var _a2
       return ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) || void 0
     })
     const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseId, phaseGroupId)
     console.info({ phaseId, phaseGroupId, config })
-    React6.useEffect(() => {
+    React8.useEffect(() => {
       var _a2, _b2
       if ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) {
         setPhaseId((_b2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b2.phase)
       }
     }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.phase])
-    React6.useEffect(() => {
+    React8.useEffect(() => {
       if (phaseGroupOptions.length === 1) {
         setPhaseGroupId(phaseGroupOptions[0].id)
       }
     }, [phaseGroupOptions])
-    return /* @__PURE__ */ React6.createElement(
-      'div',
+    const progressionSeeds = React8.useMemo(() => {
+      var _a2
+      return (_a2 = pool == null ? void 0 : pool.phaseGroup.sets.nodes) == null
+        ? void 0
+        : _a2
+            .flatMap((n2) => {
+              var _a3
+              return (_a3 = n2.slots) == null
+                ? void 0
+                : _a3.flatMap((s2) => {
+                    var _a4
+                    return (_a4 = s2.seed) == null ? void 0 : _a4.progressionSeedId
+                  })
+            })
+            .filter(Boolean)
+    }, [pool])
+    return /* @__PURE__ */ React8.createElement(
+      ProgressionInfoProvider,
       {
-        style: { paddingTop: '1em', display: 'flex', flexDirection: 'column', height: '100vh', maxHeight: '100vh' },
+        progressionSeeds,
       },
-      /* @__PURE__ */ React6.createElement(
-        'style',
-        null,
-        `:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`
-      ),
-      dataState === DataState.Loading
-        ? /* @__PURE__ */ React6.createElement(
-            'div',
-            {
-              style: { flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' },
-            },
-            /* @__PURE__ */ React6.createElement(Loading, null)
-          )
-        : /* @__PURE__ */ React6.createElement(
-            React6.Fragment,
-            null,
-            /* @__PURE__ */ React6.createElement(
+      /* @__PURE__ */ React8.createElement(
+        'div',
+        {
+          style: { paddingTop: '1em', display: 'flex', flexDirection: 'column', height: '100vh', maxHeight: '100vh' },
+        },
+        /* @__PURE__ */ React8.createElement(
+          'style',
+          null,
+          `:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`
+        ),
+        dataState === DataState.Loading
+          ? /* @__PURE__ */ React8.createElement(
               'div',
               {
-                style: { marginBottom: '0.2em' },
+                style: { flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' },
               },
-              /* @__PURE__ */ React6.createElement(
+              /* @__PURE__ */ React8.createElement(Loading, null)
+            )
+          : /* @__PURE__ */ React8.createElement(
+              React8.Fragment,
+              null,
+              /* @__PURE__ */ React8.createElement(
                 'div',
                 {
-                  style: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: 5,
-                    alignItems: 'flex-end',
-                    marginLeft: '-0.5em',
-                  },
+                  style: { marginBottom: '0.2em' },
                 },
-                /* @__PURE__ */ React6.createElement(
-                  'h2',
-                  null,
-                  (_e =
-                    (_d =
-                      (_c = (_b = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _b.phase) == null
-                        ? void 0
-                        : _c.event) == null
-                      ? void 0
-                      : _d.tournament) == null
-                    ? void 0
-                    : _e.name
-                ),
-                /* @__PURE__ */ React6.createElement(
-                  'h3',
-                  null,
-                  (_h =
-                    (_g = (_f = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _f.phase) == null
-                      ? void 0
-                      : _g.event) == null
-                    ? void 0
-                    : _h.name
-                )
-              ),
-              /* @__PURE__ */ React6.createElement(
-                'div',
-                {
-                  style: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: 5,
-                    alignItems: 'flex-end',
-                    marginLeft: '-0.5em',
+                /* @__PURE__ */ React8.createElement(
+                  'div',
+                  {
+                    style: {
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: 5,
+                      alignItems: 'flex-end',
+                      marginLeft: '-0.5em',
+                    },
                   },
-                },
-                (
-                  ((_k =
-                    (_j = (_i = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _i.phase) == null
-                      ? void 0
-                      : _j.event) == null
-                    ? void 0
-                    : _k.phases) || []
-                ).length > 1
-                  ? /* @__PURE__ */ React6.createElement(
-                      'div',
-                      {
-                        style: {
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: 10,
-                          alignItems: 'center',
-                          marginBottom: '1em',
-                        },
-                      },
-                      /* @__PURE__ */ React6.createElement(
-                        'select',
-                        {
-                          onChange: (e2) => setPhaseId(Number(e2.target.value)),
-                          value: phaseId,
-                          className: 'select-css',
-                        },
-                        (_n =
-                          (_m = (_l = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _l.phase) == null
-                            ? void 0
-                            : _m.event) == null
+                  /* @__PURE__ */ React8.createElement(
+                    'h2',
+                    null,
+                    (_e =
+                      (_d =
+                        (_c = (_b = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _b.phase) == null
                           ? void 0
-                          : _n.phases.map((o2) =>
-                              /* @__PURE__ */ React6.createElement(
-                                'option',
-                                {
-                                  key: o2.id,
-                                  value: o2.id,
-                                },
-                                o2.name
-                              )
-                            )
-                      )
-                    )
-                  : null,
-                phaseGroupOptions.length > 0
-                  ? /* @__PURE__ */ React6.createElement(
-                      'div',
-                      {
-                        style: {
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: 10,
-                          alignItems: 'center',
-                          marginBottom: '1em',
-                        },
-                      },
-                      /* @__PURE__ */ React6.createElement(
-                        'select',
+                          : _c.event) == null
+                        ? void 0
+                        : _d.tournament) == null
+                      ? void 0
+                      : _e.name
+                  ),
+                  /* @__PURE__ */ React8.createElement(
+                    'h3',
+                    null,
+                    (_h =
+                      (_g = (_f = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _f.phase) == null
+                        ? void 0
+                        : _g.event) == null
+                      ? void 0
+                      : _h.name
+                  )
+                ),
+                /* @__PURE__ */ React8.createElement(
+                  'div',
+                  {
+                    style: {
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: 5,
+                      alignItems: 'flex-end',
+                      marginLeft: '-0.5em',
+                    },
+                  },
+                  (
+                    ((_k =
+                      (_j = (_i = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _i.phase) == null
+                        ? void 0
+                        : _j.event) == null
+                      ? void 0
+                      : _k.phases) || []
+                  ).length > 1
+                    ? /* @__PURE__ */ React8.createElement(
+                        'div',
                         {
-                          onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
-                          value: phaseGroupId,
-                          className: 'select-css',
+                          style: {
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 10,
+                            alignItems: 'center',
+                            marginBottom: '1em',
+                          },
                         },
-                        phaseGroupOptions.map((o2) =>
-                          /* @__PURE__ */ React6.createElement(
-                            'option',
-                            {
-                              key: o2.id,
-                              value: o2.id,
-                            },
-                            'Pool ',
-                            o2.displayIdentifier
+                        /* @__PURE__ */ React8.createElement(
+                          'select',
+                          {
+                            onChange: (e2) => setPhaseId(Number(e2.target.value)),
+                            value: phaseId,
+                            className: 'select-css',
+                          },
+                          (_n =
+                            (_m = (_l = pool == null ? void 0 : pool.phaseGroup) == null ? void 0 : _l.phase) == null
+                              ? void 0
+                              : _m.event) == null
+                            ? void 0
+                            : _n.phases.map((o2) =>
+                                /* @__PURE__ */ React8.createElement(
+                                  'option',
+                                  {
+                                    key: o2.id,
+                                    value: o2.id,
+                                  },
+                                  o2.name
+                                )
+                              )
+                        )
+                      )
+                    : null,
+                  phaseGroupOptions.length > 0
+                    ? /* @__PURE__ */ React8.createElement(
+                        'div',
+                        {
+                          style: {
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 10,
+                            alignItems: 'center',
+                            marginBottom: '1em',
+                          },
+                        },
+                        /* @__PURE__ */ React8.createElement(
+                          'select',
+                          {
+                            onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
+                            value: phaseGroupId,
+                            className: 'select-css',
+                          },
+                          phaseGroupOptions.map((o2) =>
+                            /* @__PURE__ */ React8.createElement(
+                              'option',
+                              {
+                                key: o2.id,
+                                value: o2.id,
+                              },
+                              'Pool ',
+                              o2.displayIdentifier
+                            )
                           )
                         )
                       )
-                    )
-                  : null
-              )
-            ),
-            /* @__PURE__ */ React6.createElement(CustomBracket, {
-              data: pool,
-            })
-          )
+                    : null
+                )
+              ),
+              /* @__PURE__ */ React8.createElement(CustomBracket, {
+                data: pool,
+                onClickRound: (newPhaseId, newPhaseGroupId) => {
+                  setPhaseGroupId(newPhaseGroupId)
+                  setPhaseId(newPhaseId)
+                },
+              })
+            )
+      )
     )
   }
 
