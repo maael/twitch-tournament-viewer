@@ -78,6 +78,9 @@ export default function usePhaseData(phaseGroupId?: number) {
             slot.score = s.displayScore.match(
               new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`)
             )?.groups?.score
+            if (!slot.score && s.displayScore === 'DQ' && slot.entrant.id !== s.winnerId) {
+              slot.score = 'DQ'
+            }
             return slot
           })
           return s

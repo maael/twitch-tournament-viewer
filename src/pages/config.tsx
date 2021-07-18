@@ -17,6 +17,7 @@ export default function Index() {
       setLink(config?.broadcaster?.link)
     }
   }, [config?.broadcaster?.link])
+  const [saved, setSaved] = React.useState(false)
   return (
     <div>
       <h2>Config</h2>
@@ -69,10 +70,12 @@ export default function Index() {
       <h2>Event: {tournamentData?.event?.name || 'Please fetch brackets'}</h2>
       <form
         onSubmit={(e) => {
+          setSaved(false)
           e.preventDefault()
           const phase = (e.currentTarget.elements as any).phase.value
           twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase, link }))
           twitch?.rig.log('saved', { phase, link })
+          setSaved(true)
         }}
       >
         {tournamentData?.event?.phases ? (
@@ -91,8 +94,25 @@ export default function Index() {
           <small>To see changes, you'll need to refresh the page after saving.</small>
         </div>
         <button disabled={!tournamentData?.event?.phases} type="submit">
-          Save
+          Save Config
         </button>
+        <div>
+          {saved ? (
+            <div
+              style={{
+                border: '1px solid darkgreen',
+                background: 'lightgreen',
+                color: 'darkgreen',
+                padding: '0.5em 2em',
+                borderRadius: '0.4em',
+                margin: '0.5em 0',
+                display: 'inline-block',
+              }}
+            >
+              Saved! Refresh to see the changes.
+            </div>
+          ) : null}
+        </div>
       </form>
     </div>
   )

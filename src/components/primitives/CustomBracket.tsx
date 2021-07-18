@@ -67,6 +67,9 @@ function Rounds({ rounds, reverse }: { rounds: { [round: number]: NodesEntity[] 
 }
 
 function Round({ item }: { item: NodesEntity }) {
+  if (item.identifier === 'CC') {
+    console.info(item)
+  }
   return (
     <div id={(item.slots || [])[0].id}>
       <div id={(item.slots || [])[1].id}>
