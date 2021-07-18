@@ -23,7 +23,8 @@ export const TwitchContext = createContext<{
   twitch?: any
 }>({ ctx: {}, auth: {}, config: { broadcaster: {} } })
 
-const defaultConfig = '{"phase":"965154"}'
+const defaultConfig =
+  '{"phase":"965154", "link":"https://smash.gg/tournament/rollback-rumble-the-big-one-1/event/na-singles-top-64-combined/brackets/965154/1530770"}'
 
 const TwitchContextWrapper: React.FC = ({ children }) => {
   const [ctx, setCtx] = useState<Partial<TwitchContext>>({})

@@ -9,8 +9,14 @@ const client = new GraphQLClient('https://api.smash.gg/gql/alpha', {
 })
 
 export default function Index() {
-  const { twitch, config: _config } = React.useContext(TwitchContext)
+  const { twitch, config: config } = React.useContext(TwitchContext)
   const [tournamentData, setTournamentData] = React.useState<any>()
+  const [link, setLink] = React.useState(() => config?.broadcaster?.link || '')
+  React.useEffect(() => {
+    if (config?.broadcaster?.link) {
+      setLink(config?.broadcaster?.link)
+    }
+  }, [config?.broadcaster?.link])
   return (
     <div>
       <h2>Config</h2>
@@ -48,10 +54,11 @@ export default function Index() {
             name: result.tournament.name,
             event: foundEvent,
           })
+          setLink(link)
         }}
       >
         <div>
-          <input type="text" placeholder="Event link..." name="eventLink" />
+          <input type="text" placeholder="Event link..." name="eventLink" defaultValue={link} />
           <button type="submit">Fetch Brackets</button>
         </div>
         <small>
@@ -64,8 +71,8 @@ export default function Index() {
         onSubmit={(e) => {
           e.preventDefault()
           const phase = (e.currentTarget.elements as any).phase.value
-          twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase }))
-          twitch.rig.log('saved', { phase })
+          twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase, link }))
+          twitch?.rig.log('saved', { phase, link })
         }}
       >
         {tournamentData?.event?.phases ? (
@@ -80,6 +87,9 @@ export default function Index() {
             </select>
           </div>
         ) : null}
+        <div style={{ marginBottom: '0.5em' }}>
+          <small>To see changes, you'll need to refresh the page after saving.</small>
+        </div>
         <button disabled={!tournamentData?.event?.phases} type="submit">
           Save
         </button>
