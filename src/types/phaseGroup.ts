@@ -47,11 +47,13 @@ export interface SlotsEntity {
   prereqType?: string
   prereqPlacement?: number
   entrant?: Entrant | null
+  score?: string
 }
 export interface Entrant {
   id: number
   name: string
   participants?: Participant[]
+  isDisqualified?: boolean
 }
 export interface Participant {
   gamerTag: string

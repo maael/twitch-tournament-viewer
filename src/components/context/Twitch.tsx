@@ -23,7 +23,7 @@ export const TwitchContext = createContext<{
   twitch?: any
 }>({ ctx: {}, auth: {}, config: { broadcaster: {} } })
 
-const defaultConfig = '{"phase":"940768"}'
+const defaultConfig = '{"phase":"965154"}'
 
 const TwitchContextWrapper: React.FC = ({ children }) => {
   const [ctx, setCtx] = useState<Partial<TwitchContext>>({})
