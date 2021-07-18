@@ -40916,7 +40916,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
-  var defaultConfig = '{"phase":"965154"}'
+  var defaultConfig =
+    '{"phase":"965154", "link":"https://smash.gg/tournament/rollback-rumble-the-big-one-1/event/na-singles-top-64-combined/brackets/965154/1530770"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -41127,6 +41128,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                     : _a2.groups) == null
                   ? void 0
                   : _b.score
+              if (!slot.score && s2.displayScore === 'DQ' && slot.entrant.id !== s2.winnerId) {
+                slot.score = 'DQ'
+              }
               return slot
             })
             return s2
@@ -41564,6 +41568,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function Round({ item }) {
     var _a
+    if (item.identifier === 'CC') {
+      console.info(item)
+    }
     return /* @__PURE__ */ React4.createElement(
       'div',
       {

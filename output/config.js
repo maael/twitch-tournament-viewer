@@ -1207,7 +1207,7 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useRef(initialValue)
           }
-          function useEffect2(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useEffect(create, deps)
           }
@@ -1826,7 +1826,7 @@
           exports.useCallback = useCallback
           exports.useContext = useContext2
           exports.useDebugValue = useDebugValue
-          exports.useEffect = useEffect2
+          exports.useEffect = useEffect3
           exports.useImperativeHandle = useImperativeHandle
           exports.useLayoutEffect = useLayoutEffect
           exports.useMemo = useMemo
@@ -32547,7 +32547,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
   var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
-  var defaultConfig = '{"phase":"965154"}'
+  var defaultConfig =
+    '{"phase":"965154", "link":"https://smash.gg/tournament/rollback-rumble-the-big-one-1/event/na-singles-top-64-combined/brackets/965154/1530770"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -32599,9 +32600,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     },
   })
   function Index() {
-    var _a, _b, _c, _d
-    const { twitch, config: _config } = React3.useContext(TwitchContext)
+    var _a, _b, _c, _d, _e
+    const { twitch, config } = React3.useContext(TwitchContext)
     const [tournamentData, setTournamentData] = React3.useState()
+    const [link, setLink] = React3.useState(() => {
+      var _a2
+      return ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.link) || ''
+    })
+    React3.useEffect(() => {
+      var _a2, _b2
+      if ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.link) {
+        setLink((_b2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b2.link)
+      }
+    }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.link])
+    const [saved, setSaved] = React3.useState(false)
     return /* @__PURE__ */ React3.createElement(
       'div',
       null,
@@ -32611,8 +32623,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         {
           onSubmit: async (e) => {
             e.preventDefault()
-            const link = e.currentTarget.elements.eventLink.value.trim()
-            const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
+            const link2 = e.currentTarget.elements.eventLink.value.trim()
+            const match = link2.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
             const tournament = match == null ? void 0 : match.groups.t
             const event = match == null ? void 0 : match.groups.e
             const query = import_graphql_request.gql`
@@ -32644,6 +32656,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               name: result.tournament.name,
               event: foundEvent,
             })
+            setLink(link2)
           },
         },
         /* @__PURE__ */ React3.createElement(
@@ -32653,6 +32666,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             type: 'text',
             placeholder: 'Event link...',
             name: 'eventLink',
+            defaultValue: link,
           }),
           /* @__PURE__ */ React3.createElement(
             'button',
@@ -32685,20 +32699,22 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         'h2',
         null,
         'Event: ',
-        ((_a = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _a.name) ||
+        ((_b = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _b.name) ||
           'Please fetch brackets'
       ),
       /* @__PURE__ */ React3.createElement(
         'form',
         {
           onSubmit: (e) => {
+            setSaved(false)
             e.preventDefault()
             const phase = e.currentTarget.elements.phase.value
-            twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase }))
-            twitch.rig.log('saved', { phase })
+            twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase, link }))
+            twitch == null ? void 0 : twitch.rig.log('saved', { phase, link })
+            setSaved(true)
           },
         },
-        ((_b = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _b.phases)
+        ((_c = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _c.phases)
           ? /* @__PURE__ */ React3.createElement(
               'div',
               {
@@ -32712,7 +32728,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                   className: 'select-css',
                 },
                 (
-                  ((_c = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _c.phases) || []
+                  ((_d = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _d.phases) || []
                 ).map((p) =>
                   /* @__PURE__ */ React3.createElement(
                     'option',
@@ -32727,12 +32743,44 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             )
           : null,
         /* @__PURE__ */ React3.createElement(
+          'div',
+          {
+            style: { marginBottom: '0.5em' },
+          },
+          /* @__PURE__ */ React3.createElement(
+            'small',
+            null,
+            "To see changes, you'll need to refresh the page after saving."
+          )
+        ),
+        /* @__PURE__ */ React3.createElement(
           'button',
           {
-            disabled: !((_d = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _d.phases),
+            disabled: !((_e = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _e.phases),
             type: 'submit',
           },
-          'Save'
+          'Save Config'
+        ),
+        /* @__PURE__ */ React3.createElement(
+          'div',
+          null,
+          saved
+            ? /* @__PURE__ */ React3.createElement(
+                'div',
+                {
+                  style: {
+                    border: '1px solid darkgreen',
+                    background: 'lightgreen',
+                    color: 'darkgreen',
+                    padding: '0.5em 2em',
+                    borderRadius: '0.4em',
+                    margin: '0.5em 0',
+                    display: 'inline-block',
+                  },
+                },
+                'Saved! Refresh to see the changes.'
+              )
+            : null
         )
       )
     )
