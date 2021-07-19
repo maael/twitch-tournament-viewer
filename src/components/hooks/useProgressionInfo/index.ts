@@ -1,7 +1,10 @@
 import * as React from 'react'
-import client, { gql } from '../../../util/gqlClient'
+import { TwitchContext } from '../../context/Twitch'
+import useClient, { gql } from '../useClient'
 
 export default function useProgressionInfo(progressionSeeds?: number[]) {
+  const { config } = React.useContext(TwitchContext)
+  const client = useClient(config?.broadcaster?.apiKey || '')
   const [progData, setProgData] = React.useState<any>([])
   React.useEffect(() => {
     ;(async () => {
@@ -27,13 +30,15 @@ export default function useProgressionInfo(progressionSeeds?: number[]) {
           )
           .join('\n')}
       }`
-      const result = await client.request(
-        gql`
-          ${query}
-        `
-      )
-      setProgData(Object.values(result))
+      const result = await client
+        .request(
+          gql`
+            ${query}
+          `
+        )
+        .catch((e) => console.error(e))
+      setProgData(Object.values(result || {}))
     })()
-  }, [progressionSeeds])
+  }, [progressionSeeds, client])
   return progData
 }

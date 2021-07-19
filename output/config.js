@@ -1,10 +1,27 @@
 ;(() => {
   var __create = Object.create
   var __defProp = Object.defineProperty
+  var __defProps = Object.defineProperties
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor
+  var __getOwnPropDescs = Object.getOwnPropertyDescriptors
   var __getOwnPropNames = Object.getOwnPropertyNames
+  var __getOwnPropSymbols = Object.getOwnPropertySymbols
   var __getProtoOf = Object.getPrototypeOf
   var __hasOwnProp = Object.prototype.hasOwnProperty
+  var __propIsEnum = Object.prototype.propertyIsEnumerable
+  var __defNormalProp = (obj, key, value) =>
+    key in obj
+      ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value })
+      : (obj[key] = value)
+  var __spreadValues = (a, b) => {
+    for (var prop in b || (b = {})) if (__hasOwnProp.call(b, prop)) __defNormalProp(a, prop, b[prop])
+    if (__getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(b)) {
+        if (__propIsEnum.call(b, prop)) __defNormalProp(a, prop, b[prop])
+      }
+    return a
+  }
+  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b))
   var __markAsModule = (target) => __defProp(target, '__esModule', { value: true })
   var __commonJS = (cb, mod) =>
     function __require() {
@@ -1207,7 +1224,7 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useRef(initialValue)
           }
-          function useEffect3(create, deps) {
+          function useEffect2(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useEffect(create, deps)
           }
@@ -1215,11 +1232,11 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useLayoutEffect(create, deps)
           }
-          function useCallback(callback, deps) {
+          function useCallback2(callback, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useCallback(callback, deps)
           }
-          function useMemo(create, deps) {
+          function useMemo2(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useMemo(create, deps)
           }
@@ -1823,13 +1840,13 @@
           exports.isValidElement = isValidElement2
           exports.lazy = lazy
           exports.memo = memo
-          exports.useCallback = useCallback
+          exports.useCallback = useCallback2
           exports.useContext = useContext2
           exports.useDebugValue = useDebugValue
-          exports.useEffect = useEffect3
+          exports.useEffect = useEffect2
           exports.useImperativeHandle = useImperativeHandle
           exports.useLayoutEffect = useLayoutEffect
-          exports.useMemo = useMemo
+          exports.useMemo = useMemo2
           exports.useReducer = useReducer
           exports.useRef = useRef
           exports.useState = useState3
@@ -2642,11 +2659,11 @@
       if (true) {
         ;(function () {
           'use strict'
-          var React6 = require_react()
+          var React7 = require_react()
           var _assign = require_object_assign()
           var Scheduler = require_scheduler()
           var tracing = require_tracing()
-          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+          var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
           function warn(format) {
             {
               for (
@@ -2686,7 +2703,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat)
             }
           }
-          if (!React6) {
+          if (!React7) {
             {
               throw Error(
                 'ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.'
@@ -3993,7 +4010,7 @@
           var didWarnInvalidChild = false
           function flattenChildren(children) {
             var content = ''
-            React6.Children.forEach(children, function (child) {
+            React7.Children.forEach(children, function (child) {
               if (child == null) {
                 return
               }
@@ -4004,7 +4021,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === 'object' && props.children !== null) {
-                React6.Children.forEach(props.children, function (child) {
+                React7.Children.forEach(props.children, function (child) {
                   if (child == null) {
                     return
                   }
@@ -12132,7 +12149,7 @@
           }
           var fakeInternalInstance = {}
           var isArray = Array.isArray
-          var emptyRefsObject = new React6.Component().refs
+          var emptyRefsObject = new React7.Component().refs
           var didWarnAboutStateAssignmentForComponent
           var didWarnAboutUninitializedState
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate
@@ -25178,12 +25195,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         }
         return oHeaders
       }
-      var GraphQLClient2 = (function () {
-        function GraphQLClient3(url, options) {
+      var GraphQLClient3 = (function () {
+        function GraphQLClient4(url, options) {
           this.url = url
           this.options = options || {}
         }
-        GraphQLClient3.prototype.rawRequest = function (query, variables, requestHeaders) {
+        GraphQLClient4.prototype.rawRequest = function (query, variables, requestHeaders) {
           return __awaiter2(this, void 0, void 0, function () {
             var _a, headers, _b, localFetch, others, body, response, result, headers_1, status_1, errorResult
             return __generator2(this, function (_c) {
@@ -25235,7 +25252,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             })
           })
         }
-        GraphQLClient3.prototype.request = function (document2, variables, requestHeaders) {
+        GraphQLClient4.prototype.request = function (document2, variables, requestHeaders) {
           return __awaiter2(this, void 0, void 0, function () {
             var _a, headers, _b, localFetch, others, resolvedDoc, body, response, result, errorResult
             return __generator2(this, function (_c) {
@@ -25287,11 +25304,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             })
           })
         }
-        GraphQLClient3.prototype.setHeaders = function (headers) {
+        GraphQLClient4.prototype.setHeaders = function (headers) {
           this.options.headers = headers
           return this
         }
-        GraphQLClient3.prototype.setHeader = function (key, value) {
+        GraphQLClient4.prototype.setHeader = function (key, value) {
           var _a
           var headers = this.options.headers
           if (headers) {
@@ -25301,25 +25318,25 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           }
           return this
         }
-        return GraphQLClient3
+        return GraphQLClient4
       })()
-      exports.GraphQLClient = GraphQLClient2
+      exports.GraphQLClient = GraphQLClient3
       function rawRequest(url, query, variables) {
         return __awaiter2(this, void 0, void 0, function () {
-          var client2
+          var client
           return __generator2(this, function (_a) {
-            client2 = new GraphQLClient2(url)
-            return [2, client2.rawRequest(query, variables)]
+            client = new GraphQLClient3(url)
+            return [2, client.rawRequest(query, variables)]
           })
         })
       }
       exports.rawRequest = rawRequest
       function request(url, document2, variables) {
         return __awaiter2(this, void 0, void 0, function () {
-          var client2
+          var client
           return __generator2(this, function (_a) {
-            client2 = new GraphQLClient2(url)
-            return [2, client2.request(document2, variables)]
+            client = new GraphQLClient3(url)
+            return [2, client.request(document2, variables)]
           })
         })
       }
@@ -25337,7 +25354,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         if (typeof document2 === 'string') return document2
         return printer_1.print(document2)
       }
-      function gql2(chunks) {
+      function gql3(chunks) {
         var variables = []
         for (var _i = 1; _i < arguments.length; _i++) {
           variables[_i - 1] = arguments[_i]
@@ -25346,7 +25363,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           return '' + accumulator + chunk + (index in variables ? variables[index] : '')
         }, '')
       }
-      exports.gql = gql2
+      exports.gql = gql3
       function HeadersInstanceToPlainObject(headers) {
         var o = {}
         headers.forEach(function (v, k) {
@@ -27474,7 +27491,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var API_VERSION = 4
   var DEFAULT_BREADCRUMBS = 100
   var Hub = (function () {
-    function Hub2(client2, scope, _version) {
+    function Hub2(client, scope, _version) {
       if (scope === void 0) {
         scope = new Scope()
       }
@@ -27484,16 +27501,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       this._version = _version
       this._stack = [{}]
       this.getStackTop().scope = scope
-      this.bindClient(client2)
+      this.bindClient(client)
     }
     Hub2.prototype.isOlderThan = function (version2) {
       return this._version < version2
     }
-    Hub2.prototype.bindClient = function (client2) {
+    Hub2.prototype.bindClient = function (client) {
       var top = this.getStackTop()
-      top.client = client2
-      if (client2 && client2.setupIntegrations) {
-        client2.setupIntegrations()
+      top.client = client
+      if (client && client.setupIntegrations) {
+        client.setupIntegrations()
       }
     }
     Hub2.prototype.pushScope = function () {
@@ -27575,9 +27592,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.addBreadcrumb = function (breadcrumb, hint) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      if (!scope || !client2) return
-      var _b = (client2.getOptions && client2.getOptions()) || {},
+        client = _a.client
+      if (!scope || !client) return
+      var _b = (client.getOptions && client.getOptions()) || {},
         _c = _b.beforeBreadcrumb,
         beforeBreadcrumb = _c === void 0 ? null : _c,
         _d = _b.maxBreadcrumbs,
@@ -27620,8 +27637,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.configureScope = function (callback) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      if (scope && client2) {
+        client = _a.client
+      if (scope && client) {
         callback(scope)
       }
     }
@@ -27634,10 +27651,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       }
     }
     Hub2.prototype.getIntegration = function (integration) {
-      var client2 = this.getClient()
-      if (!client2) return null
+      var client = this.getClient()
+      if (!client) return null
       try {
-        return client2.getIntegration(integration)
+        return client.getIntegration(integration)
       } catch (_oO) {
         logger.warn('Cannot retrieve integration ' + integration.id + ' from the current Hub')
         return null
@@ -27677,8 +27694,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.startSession = function (context) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      var _b = (client2 && client2.getOptions()) || {},
+        client = _a.client
+      var _b = (client && client.getOptions()) || {},
         release = _b.release,
         environment = _b.environment
       var global8 = getGlobalObject()
@@ -27711,12 +27728,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype._sendSessionUpdate = function () {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
+        client = _a.client
       if (!scope) return
       var session = scope.getSession && scope.getSession()
       if (session) {
-        if (client2 && client2.captureSession) {
-          client2.captureSession(session)
+        if (client && client.captureSession) {
+          client.captureSession(session)
         }
       }
     }
@@ -27728,9 +27745,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       }
       var _b = this.getStackTop(),
         scope = _b.scope,
-        client2 = _b.client
-      if (client2 && client2[method]) {
-        ;(_a = client2)[method].apply(_a, __spread(args, [scope]))
+        client = _b.client
+      if (client && client[method]) {
+        ;(_a = client)[method].apply(_a, __spread(args, [scope]))
       }
     }
     Hub2.prototype._callExtensionMethod = function (method) {
@@ -28518,8 +28535,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     }
     var hub = getCurrentHub()
     ;(_a = hub.getScope()) === null || _a === void 0 ? void 0 : _a.update(options.initialScope)
-    var client2 = new clientClass(options)
-    hub.bindClient(client2)
+    var client = new clientClass(options)
+    hub.bindClient(client)
   }
 
   // node_modules/@sentry/core/esm/version.js
@@ -28571,8 +28588,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         }
         var self2 = hub.getIntegration(InboundFilters2)
         if (self2) {
-          var client2 = hub.getClient()
-          var clientOptions = client2 ? client2.getOptions() : {}
+          var client = hub.getClient()
+          var clientOptions = client ? client.getOptions() : {}
           var options = typeof self2._mergeOptions === 'function' ? self2._mergeOptions(clientOptions) : {}
           if (typeof self2._shouldDropEvent !== 'function') {
             return event
@@ -29493,13 +29510,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           if (!hasIntegration || shouldIgnoreOnError() || isFailedOwnDelivery) {
             return
           }
-          var client2 = currentHub.getClient()
+          var client = currentHub.getClient()
           var event =
             error === void 0 && isString(data.msg)
               ? _this._eventFromIncompleteOnError(data.msg, data.url, data.line, data.column)
               : _this._enhanceEventWithInitialFrame(
                   eventFromUnknownInput(error || data.msg, void 0, {
-                    attachStacktrace: client2 && client2.getOptions().attachStacktrace,
+                    attachStacktrace: client && client.getOptions().attachStacktrace,
                     rejection: false,
                   }),
                   data.url,
@@ -29539,11 +29556,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           if (!hasIntegration || shouldIgnoreOnError() || isFailedOwnDelivery) {
             return true
           }
-          var client2 = currentHub.getClient()
+          var client = currentHub.getClient()
           var event = isPrimitive(error)
             ? _this._eventFromRejectionWithPrimitive(error)
             : eventFromUnknownInput(error, void 0, {
-                attachStacktrace: client2 && client2.getOptions().attachStacktrace,
+                attachStacktrace: client && client.getOptions().attachStacktrace,
                 rejection: true,
               })
           event.level = Severity.Error
@@ -30334,9 +30351,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     if (!options.eventId) {
       options.eventId = getCurrentHub().lastEventId()
     }
-    var client2 = getCurrentHub().getClient()
-    if (client2) {
-      client2.showReportDialog(options)
+    var client = getCurrentHub().getClient()
+    if (client) {
+      client.showReportDialog(options)
     }
   }
   function startSessionTracking() {
@@ -32541,13 +32558,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   addExtensionMethods()
 
   // src/pages/config.tsx
-  var React3 = __toModule(require_react())
+  var React4 = __toModule(require_react())
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
-  var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
+  var TwitchContext = (0, import_react.createContext)({
+    ctx: {},
+    auth: {},
+    config: { broadcaster: {} },
+    setConfig: () => void 0,
+  })
   var defaultConfig =
-    '{"phase":"204945","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
+    '{"phase":"204945","apiKey":"","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -32582,32 +32604,51 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         setCtx(e)
       })
     }, [])
+    const wrappedSetConfig = (0, import_react.useCallback)(
+      (updateFn) => {
+        setConfig((c) => {
+          const updated = updateFn(c.broadcaster || {})
+          if (twitch) {
+            twitch.configuration.set('broadcaster', '1.0', JSON.stringify(updated))
+          }
+          return { broadcaster: updated }
+        })
+      },
+      [setConfig, twitch]
+    )
     return /* @__PURE__ */ import_react.default.createElement(
       TwitchContext.Provider,
       {
-        value: { ctx, auth, config, twitch },
+        value: { ctx, auth, config, twitch, setConfig: wrappedSetConfig },
       },
       children
     )
   }
   var Twitch_default = TwitchContextWrapper
 
-  // src/util/gqlClient.ts
+  // src/components/hooks/useClient.ts
+  var React3 = __toModule(require_react())
   var import_graphql_request = __toModule(require_dist())
-  var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
-    headers: {
-      Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
-    },
-  })
-  var gqlClient_default = client
+  function useClient(apiKey) {
+    return React3.useMemo(
+      () =>
+        new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        }),
+      [apiKey]
+    )
+  }
 
   // src/util/getEvent.ts
-  async function getEvent(link) {
+  var import_graphql_request2 = __toModule(require_dist())
+  async function getEvent(client, link) {
     var _a, _b
     const match = link.match(/https:\/\/smash.gg\/tournament\/(?<t>.+?)\/event\/(?<e>.+?)\/.*/)
     const tournament = (_a = match == null ? void 0 : match.groups) == null ? void 0 : _a.t
     const event = (_b = match == null ? void 0 : match.groups) == null ? void 0 : _b.e
-    const query = import_graphql_request.gql`
+    const query = import_graphql_request2.gql`
     query TournamentQuery($slug: String) {
       tournament(slug: $slug) {
         id
@@ -32627,7 +32668,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     if (!tournament || !event) {
       return void 0
     }
-    const result = await gqlClient_default.request(query, { slug: tournament })
+    const result = await client.request(query, { slug: tournament }).catch((e) => console.error(e))
     const foundEvent = result.tournament.events.find((e) => e.slug === `tournament/${tournament}/event/${event}`)
     return {
       name: result.tournament.name,
@@ -32637,107 +32678,154 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
 
   // src/pages/config.tsx
   function Index() {
-    var _a, _b, _c, _d, _e
-    const { twitch, config } = React3.useContext(TwitchContext)
-    const [tournamentData, setTournamentData] = React3.useState()
-    const [link, setLink] = React3.useState(() => {
-      var _a2
-      return ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.link) || ''
-    })
-    React3.useEffect(() => {
-      var _a2, _b2
-      if ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.link) {
-        setLink((_b2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b2.link)
-      }
-    }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.link])
-    const [saved, setSaved] = React3.useState(false)
-    return /* @__PURE__ */ React3.createElement(
+    var _a, _b, _c, _d, _e, _f, _g, _h
+    const { twitch, config, setConfig } = React4.useContext(TwitchContext)
+    const [tournamentData, setTournamentData] = React4.useState()
+    const [saved, setSaved] = React4.useState(false)
+    const client = useClient(((_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.apiKey) || '')
+    return /* @__PURE__ */ React4.createElement(
       'div',
       null,
-      /* @__PURE__ */ React3.createElement('h2', null, 'Config'),
-      /* @__PURE__ */ React3.createElement(
+      /* @__PURE__ */ React4.createElement('h2', null, 'Config'),
+      /* @__PURE__ */ React4.createElement(
         'form',
         {
           onSubmit: async (e) => {
             e.preventDefault()
-            const link2 = e.currentTarget.elements.eventLink.value.trim()
-            const data = await getEvent(link2)
-            setTournamentData(data)
-            setLink(link2)
+            const apiKey = e.currentTarget.elements.apiKey.value.trim()
+            setConfig((c) => __spreadProps(__spreadValues({}, c), { apiKey }))
           },
+          style: { marginBottom: '1em' },
         },
-        /* @__PURE__ */ React3.createElement(
+        /* @__PURE__ */ React4.createElement(
           'div',
           null,
-          /* @__PURE__ */ React3.createElement('input', {
+          /* @__PURE__ */ React4.createElement('input', {
+            style: { padding: '0.1em 0.5em', marginRight: '0.5em', borderRadius: '0.3em' },
             type: 'text',
-            placeholder: 'Event link...',
-            name: 'eventLink',
-            defaultValue: link,
+            placeholder: 'API Key...',
+            name: 'apiKey',
+            defaultValue: ((_b = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b.apiKey) || '',
           }),
-          /* @__PURE__ */ React3.createElement(
+          /* @__PURE__ */ React4.createElement(
             'button',
             {
+              type: 'submit',
+            },
+            'Save'
+          )
+        ),
+        /* @__PURE__ */ React4.createElement(
+          'small',
+          null,
+          'Get an API key from the',
+          ' ',
+          /* @__PURE__ */ React4.createElement(
+            'a',
+            {
+              style: { textDecoration: 'underline', color: '#008ce0' },
+              target: '_blank',
+              rel: 'noreferrer',
+              href: 'https://smash.gg/admin/profile/developer',
+            },
+            'Developer Settings'
+          )
+        )
+      ),
+      /* @__PURE__ */ React4.createElement(
+        'form',
+        {
+          onSubmit: async (e) => {
+            e.preventDefault()
+            const link = e.currentTarget.elements.link.value.trim()
+            const data = await getEvent(client, link)
+            setTournamentData(data)
+            setConfig((c) => __spreadProps(__spreadValues({}, c), { link }))
+          },
+        },
+        /* @__PURE__ */ React4.createElement(
+          'div',
+          null,
+          /* @__PURE__ */ React4.createElement('input', {
+            style: { padding: '0.1em 0.5em', marginRight: '0.5em', borderRadius: '0.3em' },
+            type: 'text',
+            placeholder: 'Event link...',
+            name: 'link',
+            defaultValue: (_c = config == null ? void 0 : config.broadcaster) == null ? void 0 : _c.link,
+          }),
+          /* @__PURE__ */ React4.createElement(
+            'button',
+            {
+              disabled: !((_d = config == null ? void 0 : config.broadcaster) == null ? void 0 : _d.apiKey),
               type: 'submit',
             },
             'Fetch Brackets'
           )
         ),
-        /* @__PURE__ */ React3.createElement(
+        /* @__PURE__ */ React4.createElement(
           'small',
           null,
-          'Please enter a link to an event or bracket on ',
-          /* @__PURE__ */ React3.createElement(
+          'Please enter a link to an event or bracket on',
+          ' ',
+          /* @__PURE__ */ React4.createElement(
             'a',
             {
+              style: { textDecoration: 'underline', color: '#008ce0' },
+              target: '_blank',
+              rel: 'noreferrer',
               href: 'https://smash.gg',
             },
             'https://smash.gg'
           )
         )
       ),
-      /* @__PURE__ */ React3.createElement(
+      /* @__PURE__ */ React4.createElement(
         'h1',
         null,
         'Tournament: ',
         (tournamentData == null ? void 0 : tournamentData.name) || 'Please fetch brackets'
       ),
-      /* @__PURE__ */ React3.createElement(
+      /* @__PURE__ */ React4.createElement(
         'h2',
         null,
         'Event: ',
-        ((_b = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _b.name) ||
+        ((_e = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _e.name) ||
           'Please fetch brackets'
       ),
-      /* @__PURE__ */ React3.createElement(
+      /* @__PURE__ */ React4.createElement(
         'form',
         {
           onSubmit: (e) => {
             setSaved(false)
             e.preventDefault()
             const phase = e.currentTarget.elements.phase.value
-            twitch.configuration.set('broadcaster', '1.0', JSON.stringify({ phase, link }))
-            twitch == null ? void 0 : twitch.rig.log('saved', { phase, link })
+            setConfig((c) => __spreadProps(__spreadValues({}, c), { phase }))
+            twitch == null
+              ? void 0
+              : twitch.rig.log(
+                  'saved',
+                  __spreadProps(__spreadValues({}, config == null ? void 0 : config.broadcaster), { phase })
+                )
             setSaved(true)
           },
         },
-        ((_c = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _c.phases)
-          ? /* @__PURE__ */ React3.createElement(
+        ((_f = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _f.phases)
+          ? /* @__PURE__ */ React4.createElement(
               'div',
               {
                 style: { display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' },
               },
               'Choose the default phase to show:',
-              /* @__PURE__ */ React3.createElement(
+              /* @__PURE__ */ React4.createElement(
                 'select',
                 {
                   name: 'phase',
                   className: 'select-css',
                 },
                 (
-                  ((_d = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _d.phases) || []
+                  ((_g = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _g.phases) || []
                 ).map((p) =>
-                  /* @__PURE__ */ React3.createElement(
+                  /* @__PURE__ */ React4.createElement(
                     'option',
                     {
                       key: p.id,
@@ -32749,30 +32837,30 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               )
             )
           : null,
-        /* @__PURE__ */ React3.createElement(
+        /* @__PURE__ */ React4.createElement(
           'div',
           {
             style: { marginBottom: '0.5em' },
           },
-          /* @__PURE__ */ React3.createElement(
+          /* @__PURE__ */ React4.createElement(
             'small',
             null,
             "To see changes, you'll need to refresh the page after saving."
           )
         ),
-        /* @__PURE__ */ React3.createElement(
+        /* @__PURE__ */ React4.createElement(
           'button',
           {
-            disabled: !((_e = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _e.phases),
+            disabled: !((_h = tournamentData == null ? void 0 : tournamentData.event) == null ? void 0 : _h.phases),
             type: 'submit',
           },
           'Save Config'
         ),
-        /* @__PURE__ */ React3.createElement(
+        /* @__PURE__ */ React4.createElement(
           'div',
           null,
           saved
-            ? /* @__PURE__ */ React3.createElement(
+            ? /* @__PURE__ */ React4.createElement(
                 'div',
                 {
                   style: {
