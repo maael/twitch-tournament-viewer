@@ -1185,7 +1185,7 @@
             }
             return dispatcher
           }
-          function useContext3(Context, unstable_observedBits) {
+          function useContext5(Context, unstable_observedBits) {
             var dispatcher = resolveDispatcher()
             {
               if (unstable_observedBits !== void 0) {
@@ -1232,11 +1232,11 @@
             var dispatcher = resolveDispatcher()
             return dispatcher.useLayoutEffect(create, deps)
           }
-          function useCallback(callback, deps) {
+          function useCallback2(callback, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useCallback(callback, deps)
           }
-          function useMemo2(create, deps) {
+          function useMemo3(create, deps) {
             var dispatcher = resolveDispatcher()
             return dispatcher.useMemo(create, deps)
           }
@@ -1840,13 +1840,13 @@
           exports.isValidElement = isValidElement2
           exports.lazy = lazy
           exports.memo = memo
-          exports.useCallback = useCallback
-          exports.useContext = useContext3
+          exports.useCallback = useCallback2
+          exports.useContext = useContext5
           exports.useDebugValue = useDebugValue
           exports.useEffect = useEffect5
           exports.useImperativeHandle = useImperativeHandle
           exports.useLayoutEffect = useLayoutEffect
-          exports.useMemo = useMemo2
+          exports.useMemo = useMemo3
           exports.useReducer = useReducer
           exports.useRef = useRef
           exports.useState = useState5
@@ -2659,11 +2659,11 @@
       if (true) {
         ;(function () {
           'use strict'
-          var React11 = require_react()
+          var React12 = require_react()
           var _assign = require_object_assign()
           var Scheduler = require_scheduler()
           var tracing = require_tracing()
-          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+          var ReactSharedInternals = React12.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
           function warn(format) {
             {
               for (
@@ -2703,7 +2703,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat)
             }
           }
-          if (!React11) {
+          if (!React12) {
             {
               throw Error(
                 'ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.'
@@ -4010,7 +4010,7 @@
           var didWarnInvalidChild = false
           function flattenChildren(children) {
             var content = ''
-            React11.Children.forEach(children, function (child) {
+            React12.Children.forEach(children, function (child) {
               if (child == null) {
                 return
               }
@@ -4021,7 +4021,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === 'object' && props.children !== null) {
-                React11.Children.forEach(props.children, function (child) {
+                React12.Children.forEach(props.children, function (child) {
                   if (child == null) {
                     return
                   }
@@ -12149,7 +12149,7 @@
           }
           var fakeInternalInstance = {}
           var isArray = Array.isArray
-          var emptyRefsObject = new React11.Component().refs
+          var emptyRefsObject = new React12.Component().refs
           var didWarnAboutStateAssignmentForComponent
           var didWarnAboutUninitializedState
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate
@@ -25325,20 +25325,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       exports.GraphQLClient = GraphQLClient2
       function rawRequest(url, query, variables) {
         return __awaiter2(this, void 0, void 0, function () {
-          var client2
+          var client
           return __generator2(this, function (_a) {
-            client2 = new GraphQLClient2(url)
-            return [2, client2.rawRequest(query, variables)]
+            client = new GraphQLClient2(url)
+            return [2, client.rawRequest(query, variables)]
           })
         })
       }
       exports.rawRequest = rawRequest
       function request(url, document2, variables) {
         return __awaiter2(this, void 0, void 0, function () {
-          var client2
+          var client
           return __generator2(this, function (_a) {
-            client2 = new GraphQLClient2(url)
-            return [2, client2.request(document2, variables)]
+            client = new GraphQLClient2(url)
+            return [2, client.request(document2, variables)]
           })
         })
       }
@@ -35840,7 +35840,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   var API_VERSION = 4
   var DEFAULT_BREADCRUMBS = 100
   var Hub = (function () {
-    function Hub2(client2, scope, _version) {
+    function Hub2(client, scope, _version) {
       if (scope === void 0) {
         scope = new Scope()
       }
@@ -35850,16 +35850,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       this._version = _version
       this._stack = [{}]
       this.getStackTop().scope = scope
-      this.bindClient(client2)
+      this.bindClient(client)
     }
     Hub2.prototype.isOlderThan = function (version2) {
       return this._version < version2
     }
-    Hub2.prototype.bindClient = function (client2) {
+    Hub2.prototype.bindClient = function (client) {
       var top = this.getStackTop()
-      top.client = client2
-      if (client2 && client2.setupIntegrations) {
-        client2.setupIntegrations()
+      top.client = client
+      if (client && client.setupIntegrations) {
+        client.setupIntegrations()
       }
     }
     Hub2.prototype.pushScope = function () {
@@ -35941,9 +35941,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.addBreadcrumb = function (breadcrumb, hint) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      if (!scope || !client2) return
-      var _b = (client2.getOptions && client2.getOptions()) || {},
+        client = _a.client
+      if (!scope || !client) return
+      var _b = (client.getOptions && client.getOptions()) || {},
         _c = _b.beforeBreadcrumb,
         beforeBreadcrumb = _c === void 0 ? null : _c,
         _d = _b.maxBreadcrumbs,
@@ -35986,8 +35986,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.configureScope = function (callback) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      if (scope && client2) {
+        client = _a.client
+      if (scope && client) {
         callback(scope)
       }
     }
@@ -36000,10 +36000,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       }
     }
     Hub2.prototype.getIntegration = function (integration) {
-      var client2 = this.getClient()
-      if (!client2) return null
+      var client = this.getClient()
+      if (!client) return null
       try {
-        return client2.getIntegration(integration)
+        return client.getIntegration(integration)
       } catch (_oO) {
         logger.warn('Cannot retrieve integration ' + integration.id + ' from the current Hub')
         return null
@@ -36043,8 +36043,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype.startSession = function (context) {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
-      var _b = (client2 && client2.getOptions()) || {},
+        client = _a.client
+      var _b = (client && client.getOptions()) || {},
         release = _b.release,
         environment = _b.environment
       var global8 = getGlobalObject()
@@ -36077,12 +36077,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     Hub2.prototype._sendSessionUpdate = function () {
       var _a = this.getStackTop(),
         scope = _a.scope,
-        client2 = _a.client
+        client = _a.client
       if (!scope) return
       var session = scope.getSession && scope.getSession()
       if (session) {
-        if (client2 && client2.captureSession) {
-          client2.captureSession(session)
+        if (client && client.captureSession) {
+          client.captureSession(session)
         }
       }
     }
@@ -36094,9 +36094,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       }
       var _b = this.getStackTop(),
         scope = _b.scope,
-        client2 = _b.client
-      if (client2 && client2[method]) {
-        ;(_a = client2)[method].apply(_a, __spread(args, [scope]))
+        client = _b.client
+      if (client && client[method]) {
+        ;(_a = client)[method].apply(_a, __spread(args, [scope]))
       }
     }
     Hub2.prototype._callExtensionMethod = function (method) {
@@ -36884,8 +36884,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     }
     var hub = getCurrentHub()
     ;(_a = hub.getScope()) === null || _a === void 0 ? void 0 : _a.update(options.initialScope)
-    var client2 = new clientClass(options)
-    hub.bindClient(client2)
+    var client = new clientClass(options)
+    hub.bindClient(client)
   }
 
   // node_modules/@sentry/core/esm/version.js
@@ -36937,8 +36937,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         }
         var self2 = hub.getIntegration(InboundFilters2)
         if (self2) {
-          var client2 = hub.getClient()
-          var clientOptions = client2 ? client2.getOptions() : {}
+          var client = hub.getClient()
+          var clientOptions = client ? client.getOptions() : {}
           var options = typeof self2._mergeOptions === 'function' ? self2._mergeOptions(clientOptions) : {}
           if (typeof self2._shouldDropEvent !== 'function') {
             return event
@@ -37859,13 +37859,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           if (!hasIntegration || shouldIgnoreOnError() || isFailedOwnDelivery) {
             return
           }
-          var client2 = currentHub.getClient()
+          var client = currentHub.getClient()
           var event =
             error === void 0 && isString(data.msg)
               ? _this._eventFromIncompleteOnError(data.msg, data.url, data.line, data.column)
               : _this._enhanceEventWithInitialFrame(
                   eventFromUnknownInput(error || data.msg, void 0, {
-                    attachStacktrace: client2 && client2.getOptions().attachStacktrace,
+                    attachStacktrace: client && client.getOptions().attachStacktrace,
                     rejection: false,
                   }),
                   data.url,
@@ -37905,11 +37905,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           if (!hasIntegration || shouldIgnoreOnError() || isFailedOwnDelivery) {
             return true
           }
-          var client2 = currentHub.getClient()
+          var client = currentHub.getClient()
           var event = isPrimitive(error)
             ? _this._eventFromRejectionWithPrimitive(error)
             : eventFromUnknownInput(error, void 0, {
-                attachStacktrace: client2 && client2.getOptions().attachStacktrace,
+                attachStacktrace: client && client.getOptions().attachStacktrace,
                 rejection: true,
               })
           event.level = Severity.Error
@@ -38700,9 +38700,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     if (!options.eventId) {
       options.eventId = getCurrentHub().lastEventId()
     }
-    var client2 = getCurrentHub().getClient()
-    if (client2) {
-      client2.showReportDialog(options)
+    var client = getCurrentHub().getClient()
+    if (client) {
+      client.showReportDialog(options)
     }
   }
   function startSessionTracking() {
@@ -40907,77 +40907,24 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   addExtensionMethods()
 
   // src/pages/video_component.tsx
-  var React8 = __toModule(require_react())
+  var React9 = __toModule(require_react())
 
   // src/components/context/ProgressionInfo.tsx
-  var React3 = __toModule(require_react())
+  var React5 = __toModule(require_react())
 
   // src/components/hooks/useProgressionInfo/index.ts
-  var React2 = __toModule(require_react())
-
-  // src/util/gqlClient.ts
-  var import_graphql_request = __toModule(require_dist())
-  var client = new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
-    headers: {
-      Authorization: `Bearer ${'b1f353f0e50e3fe31a8d5c874b4d6475'}`,
-    },
-  })
-  var gqlClient_default = client
-
-  // src/components/hooks/useProgressionInfo/index.ts
-  function useProgressionInfo(progressionSeeds) {
-    const [progData, setProgData] = React2.useState([])
-    React2.useEffect(() => {
-      ;(async () => {
-        if (!progressionSeeds || progressionSeeds.length === 0) {
-          setProgData([])
-          return
-        }
-        const query = `query {
-        ${progressionSeeds
-          .map(
-            (s2) => `seed_${s2}: seed(id: ${s2}) {
-          id
-          progressionSeedId
-          phase {
-            id
-            name
-          }
-          phaseGroup {
-            id
-            displayIdentifier
-          }
-        }`
-          )
-          .join('\n')}
-      }`
-        const result = await gqlClient_default.request(import_graphql_request.gql`
-          ${query}
-        `)
-        setProgData(Object.values(result))
-      })()
-    }, [progressionSeeds])
-    return progData
-  }
-
-  // src/components/context/ProgressionInfo.tsx
-  var ProgressionInfoContext = React3.createContext([])
-  var ProgressionInfoProvider = ({ progressionSeeds, children }) => {
-    const progData = useProgressionInfo(progressionSeeds)
-    return /* @__PURE__ */ React3.createElement(
-      ProgressionInfoContext.Provider,
-      {
-        value: progData,
-      },
-      children
-    )
-  }
+  var React4 = __toModule(require_react())
 
   // src/components/context/Twitch.tsx
   var import_react = __toModule(require_react())
-  var TwitchContext = (0, import_react.createContext)({ ctx: {}, auth: {}, config: { broadcaster: {} } })
+  var TwitchContext = (0, import_react.createContext)({
+    ctx: {},
+    auth: {},
+    config: { broadcaster: {} },
+    setConfig: () => void 0,
+  })
   var defaultConfig =
-    '{"phase":"204945","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
+    '{"phase":"204945","apiKey":"","link":"https://smash.gg/tournament/evo-2018/event/evo-2018-1/brackets/329220/663128?fbclid=IwAR0CXWoeO0InfeoOpFnG8mf0M0H0HhTCo5_MQT4x3z01JF2_PAU3pr1Ki_8"}'
   var TwitchContextWrapper = ({ children }) => {
     const [ctx, setCtx] = (0, import_react.useState)({})
     const [auth, setAuth] = (0, import_react.useState)({})
@@ -41012,18 +40959,101 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         setCtx(e2)
       })
     }, [])
+    const wrappedSetConfig = (0, import_react.useCallback)(
+      (updateFn) => {
+        setConfig((c2) => {
+          const updated = updateFn(c2.broadcaster || {})
+          if (twitch) {
+            twitch.configuration.set('broadcaster', '1.0', JSON.stringify(updated))
+          }
+          return { broadcaster: updated }
+        })
+      },
+      [setConfig, twitch]
+    )
     return /* @__PURE__ */ import_react.default.createElement(
       TwitchContext.Provider,
       {
-        value: { ctx, auth, config, twitch },
+        value: { ctx, auth, config, twitch, setConfig: wrappedSetConfig },
       },
       children
     )
   }
   var Twitch_default = TwitchContextWrapper
 
+  // src/components/hooks/useClient.ts
+  var React3 = __toModule(require_react())
+  var import_graphql_request = __toModule(require_dist())
+  function useClient(apiKey) {
+    return React3.useMemo(
+      () =>
+        new import_graphql_request.GraphQLClient('https://api.smash.gg/gql/alpha', {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        }),
+      [apiKey]
+    )
+  }
+
+  // src/components/hooks/useProgressionInfo/index.ts
+  function useProgressionInfo(progressionSeeds) {
+    var _a
+    const { config } = React4.useContext(TwitchContext)
+    const client = useClient(((_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.apiKey) || '')
+    const [progData, setProgData] = React4.useState([])
+    React4.useEffect(() => {
+      ;(async () => {
+        if (!progressionSeeds || progressionSeeds.length === 0) {
+          setProgData([])
+          return
+        }
+        const query = `query {
+        ${progressionSeeds
+          .map(
+            (s2) => `seed_${s2}: seed(id: ${s2}) {
+          id
+          progressionSeedId
+          phase {
+            id
+            name
+          }
+          phaseGroup {
+            id
+            displayIdentifier
+          }
+        }`
+          )
+          .join('\n')}
+      }`
+        const result = await client
+          .request(
+            import_graphql_request.gql`
+            ${query}
+          `
+          )
+          .catch((e2) => console.error(e2))
+        setProgData(Object.values(result || {}))
+      })()
+    }, [progressionSeeds, client])
+    return progData
+  }
+
+  // src/components/context/ProgressionInfo.tsx
+  var ProgressionInfoContext = React5.createContext([])
+  var ProgressionInfoProvider = ({ progressionSeeds, children }) => {
+    const progData = useProgressionInfo(progressionSeeds)
+    return /* @__PURE__ */ React5.createElement(
+      ProgressionInfoContext.Provider,
+      {
+        value: progData,
+      },
+      children
+    )
+  }
+
   // src/components/hooks/usePhaseData/index.ts
-  var React5 = __toModule(require_react())
+  var React6 = __toModule(require_react())
 
   // src/components/hooks/usePhaseData/queries.ts
   var import_graphql_request2 = __toModule(require_dist())
@@ -41131,12 +41161,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
   function usePhaseData(phase, phaseGroupId) {
-    const [phaseGroupOptions, setPhaseGroupOptions] = React5.useState([])
-    const [pool, setPool] = React5.useState(void 0)
-    const [dataState, setDataState] = React5.useState(DataState.Default)
-    React5.useEffect(() => {
+    var _a
+    const { config } = React6.useContext(TwitchContext)
+    const client = useClient(((_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.apiKey) || '')
+    const [phaseGroupOptions, setPhaseGroupOptions] = React6.useState([])
+    const [pool, setPool] = React6.useState(void 0)
+    const [dataState, setDataState] = React6.useState(DataState.Default)
+    React6.useEffect(() => {
       ;(async () => {
-        var _a
+        var _a2
         if (!phase) {
           console.warn('No phase set, please configure the extension', phase)
           return
@@ -41144,9 +41177,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         try {
           setDataState(DataState.Loading)
           console.info('1', phase)
-          const result = await gqlClient_default.request(PHASE_INFO, { phaseId: phase })
+          const result = await client.request(PHASE_INFO, { phaseId: phase }).catch((e2) => console.error(e2))
           const options = (
-            ((_a = result == null ? void 0 : result.phase) == null ? void 0 : _a.phaseGroups.nodes) || []
+            ((_a2 = result == null ? void 0 : result.phase) == null ? void 0 : _a2.phaseGroups.nodes) || []
           ).map((n2) => ({
             id: n2.id,
             displayIdentifier: n2.displayIdentifier,
@@ -41158,14 +41191,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           throw e2
         }
       })()
-    }, [phase])
-    React5.useEffect(() => {
+    }, [phase, client])
+    React6.useEffect(() => {
       ;(async () => {
+        var _a2, _b
         if (!phaseGroupId) return
         console.info('2', phaseGroupId)
         try {
           setDataState(DataState.Loading)
-          const result = await gqlClient_default.request(PHASE_GROUP_INFO, { phaseGroupId })
+          const result = await client.request(PHASE_GROUP_INFO, { phaseGroupId }).catch((e2) => console.error(e2))
           let page = 0
           let lastPage = 0
           let sets = []
@@ -41176,23 +41210,29 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             if (page > lastPage) {
               lastPage = 0
             }
-            const setsResult = await gqlClient_default.request(PHASE_GROUP_SETS, {
-              phaseGroupId,
-              page,
-            })
-            sets = sets.concat(setsResult.phaseGroup.sets.nodes)
-            lastPage = setsResult.phaseGroup.sets.pageInfo.totalPages
+            const setsResult = await client
+              .request(PHASE_GROUP_SETS, {
+                phaseGroupId,
+                page,
+              })
+              .catch((e2) => console.error(e2))
+            sets = sets.concat((setsResult == null ? void 0 : setsResult.phaseGroup.sets.nodes) || [])
+            lastPage =
+              (_b = (_a2 = setsResult == null ? void 0 : setsResult.phaseGroup.sets) == null ? void 0 : _a2.pageInfo) ==
+              null
+                ? void 0
+                : _b.totalPages
           } while (lastPage && lastPage > page)
           sets = sets.map((s2) => {
             s2.slots = s2.slots.map((slot) => {
-              var _a, _b
+              var _a3, _b2
               slot.score =
-                (_b =
-                  (_a = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
+                (_b2 =
+                  (_a3 = s2.displayScore.match(new RegExp(`${escapeRegExp(slot.entrant.name)} (?<score>\\d+)`))) == null
                     ? void 0
-                    : _a.groups) == null
+                    : _a3.groups) == null
                   ? void 0
-                  : _b.score
+                  : _b2.score
               if (!slot.score && s2.displayScore === 'DQ' && slot.entrant.id !== s2.winnerId) {
                 slot.score = 'DQ'
               }
@@ -41200,6 +41240,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             })
             return s2
           })
+          if (!result) return
           result.phaseGroup.sets = { nodes: sets }
           console.info('phase data', { result })
           setPool(result)
@@ -41209,7 +41250,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           throw e2
         }
       })()
-    }, [phaseGroupId])
+    }, [phaseGroupId, client])
     return {
       phaseGroupOptions,
       pool,
@@ -41218,7 +41259,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
 
   // src/components/primitives/CustomBracket.tsx
-  var React6 = __toModule(require_react())
+  var React7 = __toModule(require_react())
   var import_react_xarrows = __toModule(require_lib())
 
   // node_modules/react-indiana-drag-scroll/dist/index.es.js
@@ -41545,12 +41586,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         ? void 0
         : _d.filter((n2) => n2.round < 0).reduce(reduceRounds, {})) || {}
     return data
-      ? /* @__PURE__ */ React6.createElement(
+      ? /* @__PURE__ */ React7.createElement(
           'div',
           {
             style: { position: 'relative', flex: 1 },
           },
-          /* @__PURE__ */ React6.createElement(
+          /* @__PURE__ */ React7.createElement(
             index_es_default,
             {
               style: {
@@ -41563,16 +41604,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                 bottom: 0,
               },
             },
-            /* @__PURE__ */ React6.createElement(
+            /* @__PURE__ */ React7.createElement(
               'div',
               {
                 style: { display: 'flex', flexDirection: 'column', position: 'relative', userSelect: 'none' },
               },
-              /* @__PURE__ */ React6.createElement(Rounds, {
+              /* @__PURE__ */ React7.createElement(Rounds, {
                 rounds: winnerRounds,
                 onClickRound,
               }),
-              /* @__PURE__ */ React6.createElement(Rounds, {
+              /* @__PURE__ */ React7.createElement(Rounds, {
                 rounds: loserRounds,
                 onClickRound,
                 reverse: true,
@@ -41598,27 +41639,27 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         })
       )
       .filter(Boolean)
-    const progData = React6.useContext(ProgressionInfoContext)
-    return /* @__PURE__ */ React6.createElement(
+    const progData = React7.useContext(ProgressionInfoContext)
+    return /* @__PURE__ */ React7.createElement(
       'div',
       {
         style: { display: 'flex', flexDirection: 'row', gap: 100, paddingBottom: '3rem' },
       },
       entries.map(([k, roundItems], i2) =>
-        /* @__PURE__ */ React6.createElement(
+        /* @__PURE__ */ React7.createElement(
           'div',
           {
             key: k,
             style: { display: 'flex', flexDirection: 'column', gap: 10 },
           },
-          /* @__PURE__ */ React6.createElement(
+          /* @__PURE__ */ React7.createElement(
             'div',
             {
               style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' },
             },
             roundItems[0].fullRoundText
           ),
-          /* @__PURE__ */ React6.createElement(
+          /* @__PURE__ */ React7.createElement(
             'div',
             {
               style: {
@@ -41632,7 +41673,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             roundItems
               .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
               .map((item) =>
-                /* @__PURE__ */ React6.createElement(Match, {
+                /* @__PURE__ */ React7.createElement(Match, {
                   key: item.identifier,
                   allowedSlots,
                   item,
@@ -41642,7 +41683,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         )
       ),
       progData.length > 0
-        ? /* @__PURE__ */ React6.createElement(NextBracketColumn, {
+        ? /* @__PURE__ */ React7.createElement(NextBracketColumn, {
             entries,
             onClickRound,
           })
@@ -41652,20 +41693,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   function NextBracketColumn({ entries, onClickRound }) {
     const i2 = entries.length - 1
     const roundItems = (entries[i2] || [])[1]
-    const progData = React6.useContext(ProgressionInfoContext)
-    return /* @__PURE__ */ React6.createElement(
+    const progData = React7.useContext(ProgressionInfoContext)
+    return /* @__PURE__ */ React7.createElement(
       'div',
       {
         style: { display: 'flex', flexDirection: 'column', gap: 10 },
       },
-      /* @__PURE__ */ React6.createElement(
+      /* @__PURE__ */ React7.createElement(
         'div',
         {
           style: { marginBottom: '0.1em', fontWeight: 'bold', fontSize: '1.2em', whiteSpace: 'nowrap' },
         },
         'Next Bracket'
       ),
-      /* @__PURE__ */ React6.createElement(
+      /* @__PURE__ */ React7.createElement(
         'div',
         {
           style: {
@@ -41680,7 +41721,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           .sort((a2, b) => a2.identifier.localeCompare(b.identifier) && a2.identifier.length - b.identifier.length)
           .map((item) => {
             var _a
-            return /* @__PURE__ */ React6.createElement(
+            return /* @__PURE__ */ React7.createElement(
               'div',
               {
                 key: item.identifier,
@@ -41697,18 +41738,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                         })
                       : void 0
                     return progSeed
-                      ? /* @__PURE__ */ React6.createElement(
+                      ? /* @__PURE__ */ React7.createElement(
                           'div',
                           {
                             key: slot.id,
                             id: `next-${slot.id}`,
                           },
-                          /* @__PURE__ */ React6.createElement(
+                          /* @__PURE__ */ React7.createElement(
                             'div',
                             {
                               style: { zIndex: -1, position: 'relative' },
                             },
-                            /* @__PURE__ */ React6.createElement(import_react_xarrows.default, {
+                            /* @__PURE__ */ React7.createElement(import_react_xarrows.default, {
                               start: `next-${slot.id}`,
                               end: `slot-${slot.id}`,
                               path: 'grid',
@@ -41719,7 +41760,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                               dashness: true,
                             })
                           ),
-                          /* @__PURE__ */ React6.createElement(
+                          /* @__PURE__ */ React7.createElement(
                             'div',
                             {
                               style: {
@@ -41744,22 +41785,22 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
   function Match({ item, allowedSlots }) {
     var _a
-    return /* @__PURE__ */ React6.createElement(
+    return /* @__PURE__ */ React7.createElement(
       'div',
       {
         id: (item.slots || [])[0].id,
       },
-      /* @__PURE__ */ React6.createElement(
+      /* @__PURE__ */ React7.createElement(
         'div',
         {
           id: (item.slots || [])[1].id,
         },
-        /* @__PURE__ */ React6.createElement(
+        /* @__PURE__ */ React7.createElement(
           'div',
           {
             style: { display: 'flex', flexDirection: 'row', alignItems: 'center', zIndex: 9, position: 'relative' },
           },
-          /* @__PURE__ */ React6.createElement(
+          /* @__PURE__ */ React7.createElement(
             'div',
             {
               style: {
@@ -41775,7 +41816,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             },
             item.identifier
           ),
-          /* @__PURE__ */ React6.createElement(
+          /* @__PURE__ */ React7.createElement(
             'div',
             {
               style: { display: 'flex', flexDirection: 'column', borderRadius: '0.3em', flex: 1 },
@@ -41784,7 +41825,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               ? void 0
               : _a.map((s2, i2) => {
                   var _a2
-                  return /* @__PURE__ */ React6.createElement(Slot, {
+                  return /* @__PURE__ */ React7.createElement(Slot, {
                     key: s2.id,
                     slot: s2,
                     winner: item.winnerId || void 0,
@@ -41805,7 +41846,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
     const name =
       (_d = (((_c = slot.entrant) == null ? void 0 : _c.participants) || [])[0]) == null ? void 0 : _d.gamerTag
     const isWinner = winner === ((_e = slot.entrant) == null ? void 0 : _e.id)
-    return /* @__PURE__ */ React6.createElement(
+    return /* @__PURE__ */ React7.createElement(
       'div',
       {
         style: {
@@ -41824,12 +41865,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         id: `slot-${slot.id}`,
       },
       prefix
-        ? /* @__PURE__ */ React6.createElement(
+        ? /* @__PURE__ */ React7.createElement(
             'span',
             {
               style: { opacity: '0.7', whiteSpace: 'nowrap', display: 'flex', flexDirection: 'row' },
             },
-            /* @__PURE__ */ React6.createElement(
+            /* @__PURE__ */ React7.createElement(
               'span',
               {
                 style: {
@@ -41842,7 +41883,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
               },
               prefix
             ),
-            /* @__PURE__ */ React6.createElement(
+            /* @__PURE__ */ React7.createElement(
               'span',
               {
                 style: { display: 'inline-block', marginLeft: '0.4em' },
@@ -41851,7 +41892,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             )
           )
         : null,
-      /* @__PURE__ */ React6.createElement(
+      /* @__PURE__ */ React7.createElement(
         'span',
         {
           style: { flex: 1, whiteSpace: 'nowrap' },
@@ -41859,20 +41900,20 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         name
       ),
       slot.score
-        ? /* @__PURE__ */ React6.createElement('span', null, slot.score)
+        ? /* @__PURE__ */ React7.createElement('span', null, slot.score)
         : isWinner
-        ? /* @__PURE__ */ React6.createElement('span', null, '\u2713')
+        ? /* @__PURE__ */ React7.createElement('span', null, '\u2713')
         : null,
       ((_f = slot.entrant) == null ? void 0 : _f.isDisqualified)
-        ? /* @__PURE__ */ React6.createElement('span', null, 'DQ')
+        ? /* @__PURE__ */ React7.createElement('span', null, 'DQ')
         : null,
       allowedSlots.includes(`${slot.prereqId}-${slot.prereqPlacement}`)
-        ? /* @__PURE__ */ React6.createElement(
+        ? /* @__PURE__ */ React7.createElement(
             'div',
             {
               style: { zIndex: -1, position: 'relative' },
             },
-            /* @__PURE__ */ React6.createElement(import_react_xarrows.default, {
+            /* @__PURE__ */ React7.createElement(import_react_xarrows.default, {
               start: `${slot.prereqId}-${slot.prereqPlacement}`,
               end: slot.id,
               path: 'grid',
@@ -41887,9 +41928,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   }
 
   // src/components/primitives/Loading.tsx
-  var React7 = __toModule(require_react())
+  var React8 = __toModule(require_react())
   function Loading(props) {
-    return /* @__PURE__ */ React7.createElement(
+    return /* @__PURE__ */ React8.createElement(
       'svg',
       __spreadValues(
         {
@@ -41901,14 +41942,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
         },
         props
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 12.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '0s',
           dur: '1s',
@@ -41917,7 +41958,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 12.5,
@@ -41925,7 +41966,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           r: 12.5,
           fillOpacity: 0.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '100ms',
           dur: '1s',
@@ -41934,14 +41975,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '300ms',
           dur: '1s',
@@ -41950,14 +41991,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 52.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '600ms',
           dur: '1s',
@@ -41966,14 +42007,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 12.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '800ms',
           dur: '1s',
@@ -41982,14 +42023,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 52.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '400ms',
           dur: '1s',
@@ -41998,14 +42039,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 12.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '700ms',
           dur: '1s',
@@ -42014,14 +42055,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 52.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '500ms',
           dur: '1s',
@@ -42030,14 +42071,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           repeatCount: 'indefinite',
         })
       ),
-      /* @__PURE__ */ React7.createElement(
+      /* @__PURE__ */ React8.createElement(
         'circle',
         {
           cx: 92.5,
           cy: 92.5,
           r: 12.5,
         },
-        /* @__PURE__ */ React7.createElement('animate', {
+        /* @__PURE__ */ React8.createElement('animate', {
           attributeName: 'fill-opacity',
           begin: '200ms',
           dur: '1s',
@@ -42052,26 +42093,26 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
   // src/pages/video_component.tsx
   function VideoComponent() {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n
-    const { config } = React8.useContext(TwitchContext)
-    const [phaseGroupId, setPhaseGroupId] = React8.useState()
-    const [phaseId, setPhaseId] = React8.useState(() => {
+    const { config } = React9.useContext(TwitchContext)
+    const [phaseGroupId, setPhaseGroupId] = React9.useState()
+    const [phaseId, setPhaseId] = React9.useState(() => {
       var _a2
       return ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) || void 0
     })
     const { phaseGroupOptions, pool, dataState } = usePhaseData(phaseId, phaseGroupId)
     console.info({ phaseId, phaseGroupId, config })
-    React8.useEffect(() => {
+    React9.useEffect(() => {
       var _a2, _b2
       if ((_a2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a2.phase) {
         setPhaseId((_b2 = config == null ? void 0 : config.broadcaster) == null ? void 0 : _b2.phase)
       }
     }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.phase])
-    React8.useEffect(() => {
+    React9.useEffect(() => {
       if (phaseGroupOptions.length > 0) {
         setPhaseGroupId(phaseGroupOptions[0].id)
       }
     }, [phaseGroupOptions])
-    const progressionSeeds = React8.useMemo(() => {
+    const progressionSeeds = React9.useMemo(() => {
       var _a2
       return (_a2 = pool == null ? void 0 : pool.phaseGroup.sets.nodes) == null
         ? void 0
@@ -42087,38 +42128,38 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
             })
             .filter(Boolean)
     }, [pool])
-    return /* @__PURE__ */ React8.createElement(
+    return /* @__PURE__ */ React9.createElement(
       ProgressionInfoProvider,
       {
         progressionSeeds,
       },
-      /* @__PURE__ */ React8.createElement(
+      /* @__PURE__ */ React9.createElement(
         'div',
         {
           style: { paddingTop: '1em', display: 'flex', flexDirection: 'column', height: '100vh', maxHeight: '100vh' },
         },
-        /* @__PURE__ */ React8.createElement(
+        /* @__PURE__ */ React9.createElement(
           'style',
           null,
           `:root { --color-background: rgba(24,24,27, 0.5); --color-text: #ffffff; }`
         ),
         dataState === DataState.Loading
-          ? /* @__PURE__ */ React8.createElement(
+          ? /* @__PURE__ */ React9.createElement(
               'div',
               {
                 style: { flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' },
               },
-              /* @__PURE__ */ React8.createElement(Loading, null)
+              /* @__PURE__ */ React9.createElement(Loading, null)
             )
-          : /* @__PURE__ */ React8.createElement(
-              React8.Fragment,
+          : /* @__PURE__ */ React9.createElement(
+              React9.Fragment,
               null,
-              /* @__PURE__ */ React8.createElement(
+              /* @__PURE__ */ React9.createElement(
                 'div',
                 {
                   style: { marginBottom: '0.2em' },
                 },
-                /* @__PURE__ */ React8.createElement(
+                /* @__PURE__ */ React9.createElement(
                   'div',
                   {
                     style: {
@@ -42129,7 +42170,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                       marginLeft: '-0.5em',
                     },
                   },
-                  /* @__PURE__ */ React8.createElement(
+                  /* @__PURE__ */ React9.createElement(
                     'h2',
                     null,
                     (_e =
@@ -42142,7 +42183,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                       ? void 0
                       : _e.name
                   ),
-                  /* @__PURE__ */ React8.createElement(
+                  /* @__PURE__ */ React9.createElement(
                     'h3',
                     null,
                     (_h =
@@ -42153,7 +42194,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                       : _h.name
                   )
                 ),
-                /* @__PURE__ */ React8.createElement(
+                /* @__PURE__ */ React9.createElement(
                   'div',
                   {
                     style: {
@@ -42172,7 +42213,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                       ? void 0
                       : _k.phases) || []
                   ).length > 1
-                    ? /* @__PURE__ */ React8.createElement(
+                    ? /* @__PURE__ */ React9.createElement(
                         'div',
                         {
                           style: {
@@ -42183,7 +42224,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                             marginBottom: '1em',
                           },
                         },
-                        /* @__PURE__ */ React8.createElement(
+                        /* @__PURE__ */ React9.createElement(
                           'select',
                           {
                             onChange: (e2) => setPhaseId(Number(e2.target.value)),
@@ -42196,7 +42237,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                               : _m.event) == null
                             ? void 0
                             : _n.phases.map((o2) =>
-                                /* @__PURE__ */ React8.createElement(
+                                /* @__PURE__ */ React9.createElement(
                                   'option',
                                   {
                                     key: o2.id,
@@ -42209,7 +42250,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                       )
                     : null,
                   phaseGroupOptions.length > 0
-                    ? /* @__PURE__ */ React8.createElement(
+                    ? /* @__PURE__ */ React9.createElement(
                         'div',
                         {
                           style: {
@@ -42220,7 +42261,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                             marginBottom: '1em',
                           },
                         },
-                        /* @__PURE__ */ React8.createElement(
+                        /* @__PURE__ */ React9.createElement(
                           'select',
                           {
                             onChange: (e2) => setPhaseGroupId(Number(e2.target.value)),
@@ -42228,7 +42269,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                             className: 'select-css',
                           },
                           phaseGroupOptions.map((o2) =>
-                            /* @__PURE__ */ React8.createElement(
+                            /* @__PURE__ */ React9.createElement(
                               'option',
                               {
                                 key: o2.id,
@@ -42243,7 +42284,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
                     : null
                 )
               ),
-              /* @__PURE__ */ React8.createElement(CustomBracket, {
+              /* @__PURE__ */ React9.createElement(CustomBracket, {
                 data: pool,
                 onClickRound: (newPhaseId, newPhaseGroupId) => {
                   setPhaseGroupId(newPhaseGroupId)
