@@ -30,8 +30,12 @@ For Viewer:
 2. See loading message and then tournament information
 
 For broadcaster:
-1. Set up extension configuration, making sure to link the correct tournament
-2. Save configuration
+1. Set up extension configuration, making sure to link the correct tournament and provide a valid API Key
+  - Test API Key: <API KEY>
+  - Test Tournament Link: https://smash.gg/tournament/smash-summit-11/event/olympic-doubles/brackets/966950/1533148/
+2. Save API Key
+3. Fetch bracket information from link
+4. Choose default bracket and press save
 3. Refresh page
 4. View extension panel, see loading message and then tournament information
 ```
