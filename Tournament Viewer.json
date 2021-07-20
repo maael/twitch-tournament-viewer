@@ -77,16 +77,20 @@
     "authorName": "Matt Elphick",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "http://localhost:3000/config.html",
+    "configUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/config.html",
     "configurationLocation": "hosted",
-    "description": "Show tournament information from smash.gg without leaving the twitch stream.",
+    "description": "Show tournament information from smash.gg without leaving the stream. The extension allows the streamer to set a tournament event, and a default bracket to show. Viewers will get a view of the bracket that they can drag around to see, and can also easily view other brackets in the same event too, all without leaving the stream!",
     "eulaTosUrl": "",
     "hasChatSupport": false,
-    "iconUrl": "",
-    "iconUrls": {},
+    "iconUrl": "https://extensions-discovery-images.twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/logoc4e4482b-3ddc-43a2-afa3-5f96325bae82",
+    "iconUrls": {
+      "100x100": "https://extensions-discovery-images.twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/logoc4e4482b-3ddc-43a2-afa3-5f96325bae82",
+      "24x24": "https://extensions-discovery-images.twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/taskbar47f61eaa-e8a3-42f1-8947-344d00e1a0c5",
+      "300x200": "https://extensions-discovery-images.twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/discovery6ba9e7cb-c5d7-456c-916c-4776930cb72a"
+    },
     "id": "jv9fzturqt8rb3y5a84w19n4has36t",
     "installationCount": -42,
-    "liveConfigUrl": "http://localhost:3000/config.html",
+    "liveConfigUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/config.html",
     "name": "Tournament Viewer",
     "panelHeight": 300,
     "privacyPolicyUrl": "",
@@ -94,35 +98,26 @@
     "requiredBroadcasterAbilities": [],
     "screenshotUrls": [],
     "sku": "",
-    "state": "Testing",
+    "state": "Assets Uploaded",
     "subscriptionsSupportLevel": "none",
-    "summary": "Show tournament information from smash.gg without leaving the twitch stream.",
+    "summary": "Show tournament information from smash.gg without leaving the stream.",
     "supportEmail": "odialo.help@gmail.com",
     "vendorCode": "",
     "version": "0.0.1",
-    "viewerSummary": "",
-    "viewerUrl": "http://localhost:3000/panel.html",
+    "viewerSummary": "Shows a view of smash.gg tournament information directly in the stream.",
+    "viewerUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/panel.html",
     "viewerUrls": {
-      "mobile": "http://localhost:3000/mobile.html",
-      "panel": "http://localhost:3000/panel.html",
-      "videoOverlay": "http://localhost:3000/video_overlay.html",
-      "component": "http://localhost:3000/video_component.html"
+      "panel": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/panel.html",
+      "component": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/video_component.html"
     },
     "views": {
-      "mobile": {
-        "viewerUrl": "http://localhost:3000/mobile.html"
-      },
       "panel": {
-        "viewerUrl": "http://localhost:3000/panel.html",
+        "viewerUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/panel.html",
         "height": 300,
         "canLinkExternalContent": false
       },
-      "videoOverlay": {
-        "viewerUrl": "http://localhost:3000/video_overlay.html",
-        "canLinkExternalContent": false
-      },
       "component": {
-        "viewerUrl": "http://localhost:3000/video_component.html",
+        "viewerUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/video_component.html",
         "aspectWidth": 0,
         "aspectHeight": 0,
         "aspectRatioX": 300,
@@ -136,11 +131,11 @@
         "autoScale": true
       },
       "config": {
-        "viewerUrl": "http://localhost:3000/config.html",
+        "viewerUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/config.html",
         "canLinkExternalContent": false
       },
       "liveConfig": {
-        "viewerUrl": "http://localhost:3000/config.html",
+        "viewerUrl": "https://jv9fzturqt8rb3y5a84w19n4has36t.ext-twitch.tv/jv9fzturqt8rb3y5a84w19n4has36t/0.0.1/e51e680aa92422593566c29fabe21123/config.html",
         "canLinkExternalContent": false
       }
     },

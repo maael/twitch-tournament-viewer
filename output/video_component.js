@@ -40951,7 +40951,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
           )
           .join('\n')}
       }`
-        const result = await gqlClient_default.request(import_graphql_request.gql`${query}`)
+        const result = await gqlClient_default.request(import_graphql_request.gql`
+          ${query}
+        `)
         setProgData(Object.values(result))
       })()
     }, [progressionSeeds])
@@ -42065,7 +42067,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`)
       }
     }, [(_a = config == null ? void 0 : config.broadcaster) == null ? void 0 : _a.phase])
     React8.useEffect(() => {
-      if (phaseGroupOptions.length === 1) {
+      if (phaseGroupOptions.length > 0) {
         setPhaseGroupId(phaseGroupOptions[0].id)
       }
     }, [phaseGroupOptions])

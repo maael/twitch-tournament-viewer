@@ -17,7 +17,7 @@ export default function VideoComponent() {
     }
   }, [config?.broadcaster?.phase])
   React.useEffect(() => {
-    if (phaseGroupOptions.length === 1) {
+    if (phaseGroupOptions.length > 0) {
       setPhaseGroupId(phaseGroupOptions[0].id)
     }
   }, [phaseGroupOptions])
